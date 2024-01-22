@@ -21,6 +21,13 @@ type User {
     petsSeen: [pet]
 }
 
+input petArgs {
+    species: String,
+    sex: String,
+    breed: String,
+    colours: [String]
+}
+
 type Pet {
     _id: ID,
     species: String,
