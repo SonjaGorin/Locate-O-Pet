@@ -43,6 +43,8 @@ type Mutation {
     addOwner(username: String!, name: String!, email: String!, password: String!, address: String!, phoneNumber: String!): Auth
 
     login(email: String!, password: String!): Auth
+
+    addPet(species: String!, sex: String!, breed: String!, colours: [String!])
 }
 
 `;
