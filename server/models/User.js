@@ -9,29 +9,24 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      default: () => "default-username",
     },
     name: {
       type: String,
       required: true,
-      default: () => "default-username",
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      default: () => "default-username",
       match: [/.+@.+\..+/, "Must use a valid email address"],
     },
     password: {
       type: String,
       required: true,
-      default: () => "default-username"
     },
     phoneNumber: {
       type: String,
       required: true,
-      default: () => "default-username"
     },
     petsSeen: [petSchema]
   },
