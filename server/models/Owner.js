@@ -24,11 +24,6 @@ const ownerSchema = new Schema(
       type: String,
       required: true,
     },
-    address: {
-      type: String,
-      unique: true,
-      required: true,
-    },
     phoneNumber: {
       type: String,
       required: true,
