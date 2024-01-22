@@ -18,14 +18,7 @@ type User {
     email: String,
     password: String,
     phoneNumber: String,
-    petsSeen: [pet]
-}
-
-input petArgs {
-    species: String,
-    sex: String,
-    breed: String,
-    colours: [String]
+    petsSeen: [Pet]
 }
 
 type Pet {
@@ -36,24 +29,35 @@ type Pet {
     colours: [String]
 }
 
+input petArgs {
+    species: String,
+    sex: String,
+    breed: String,
+    colours: [String]
+}
+
 type Auth {
     token: ID!
-    user: User
+    user: UserOrOwner
   }
 
   type Query {
-    me: User
+    me: UserOrOwner
 }
+
+
 
 type Mutation {
     addUser(userName: String!, name: String!, email: String!, password: String!, phoneNumber: String!): Auth
-    addOwner(username: String!, name: String!, email: String!, password: String!, address: String!, phoneNumber: String!): Auth
 
     login(email: String!, password: String!): Auth
 
-    addPet(species: String!, sex: String!, breed: String!, colours: [String!])
-    removePet(species: String!, sex: String!, breed: String!, colours: [String!])
+    addPet(input: petArgs): UserOrOwner
+    removePet(input: petArgs): UserOrOwner
 }
+
+union UserOrOwner = User | Owner
+
 
 `;
 
