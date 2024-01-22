@@ -27,6 +27,7 @@ const ownerSchema = new Schema(
     phoneNumber: {
       type: String,
       required: true,
+      match: [/^\d{3}-\d{3}-\d{4}$/, "Please enter a valid phone number"],
     },
     petsLost: [petSchema],
   },
