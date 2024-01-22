@@ -45,6 +45,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
 
     addPet(species: String!, sex: String!, breed: String!, colours: [String!])
+    removePet(species: String!, sex: String!, breed: String!, colours: [String!])
 }
 
 `;
