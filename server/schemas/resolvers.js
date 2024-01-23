@@ -5,7 +5,7 @@ const resolvers = {
     Query: {
 
     },
-    Mutations: {
+    Mutation: {
 
     }
 }
