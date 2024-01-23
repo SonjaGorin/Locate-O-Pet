@@ -9,7 +9,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      default: () => "default-username",
     },
     name: {
       type: String,
