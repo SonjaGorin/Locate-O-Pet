@@ -10,7 +10,7 @@
 import './App.css';
 import { Outlet } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import NavigationBar from './components/Navigator/index';
+import NavigationBar from './components/Navigator/navigation';
 import { setContext } from '@apollo/client/link/context';
 
 // import { useRef, useEffect, useState } from 'react';
@@ -32,8 +32,12 @@ const client = new ApolloClient({ link: authLink.concat(httpLink), cache: new In
 export default function App() {
     return (
         <ApolloProvider client={client}>
-             <NavigationBar />
-             <Outlet />
+            <div>
+            <NavigationBar />
+                <main>
+                    <Outlet />
+                </main>
+            </div>
         </ApolloProvider>
    );
 }

@@ -30,6 +30,12 @@ export default function Map() {
             zoom: zoom
         });
 
+        map.current.on('move', () => {
+          setLng(map.current.getCenter().lng.toFixed(4));
+          setLat(map.current.getCenter().lat.toFixed(4));
+          setZoom(map.current.getZoom().toFixed(2));
+      });
+
         new mapboxgl.Marker({
             color: "#FF0000",
             draggable: true
@@ -57,11 +63,7 @@ export default function Map() {
 
         map.current.on('click', add_marker);
 
-        map.current.on('move', () => {
-            setLng(map.current.getCenter().lng.toFixed(4));
-            setLat(map.current.getCenter().lat.toFixed(4));
-            setZoom(map.current.getZoom().toFixed(2));
-        });
+        
     });
 
      return (

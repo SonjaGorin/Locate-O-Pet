@@ -46,12 +46,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-     <div>
      <RouterProvider router={router} />
-     <React.StrictMode>
-        <Map />
-    </React.StrictMode>
-    </div>
 );
 
 // ReactDOM.createRoot(document.getElementById('map-root')).render(
