@@ -30,3 +30,31 @@ query me {
   }
 }
 `
+
+export const QUERY_OWNER = gql`
+query Query {
+  owners {
+    petsLost {
+      _id
+      species
+      sex
+      breed
+      colours
+    }
+  }
+}
+`
+
+export const QUERY_USER = gql`
+query Users {
+  users {
+    petsSeen {
+      _id
+      species
+      sex
+      breed
+      colours
+    }
+  }
+}
+`
