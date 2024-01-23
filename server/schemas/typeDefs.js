@@ -6,18 +6,19 @@ type Owner {
     name: String,
     email: String,
     password: String,
-    address: String,
     phoneNumber: String,
+    role: String!
     petsLost: [Pet]
 }
 
 type User {
     _id: ID,
-    username: String,
+    userName: String,
     name: String, 
     email: String,
     password: String,
     phoneNumber: String,
+    role: String!,
     petsSeen: [Pet]
 }
 
@@ -36,27 +37,28 @@ input petArgs {
     colours: [String]
 }
 
+union UserOrOwner = User | Owner
+
+
 type Auth {
     token: ID!
     user: UserOrOwner
   }
 
+  
   type Query {
     me: UserOrOwner
 }
 
 
-
 type Mutation {
     addUser(userName: String!, name: String!, email: String!, password: String!, phoneNumber: String!): Auth
-
     login(email: String!, password: String!): Auth
 
     addPet(input: petArgs): UserOrOwner
     removePet(input: petArgs): UserOrOwner
 }
 
-union UserOrOwner = User | Owner
 
 
 `;
