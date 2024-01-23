@@ -20,6 +20,11 @@ const petSchema = new Schema({
     type: String,
   }
 ]
-});
+},
+ {
+    toJSON: {
+      virtuals: true,
+    },
+  });
 
 module.exports = petSchema;
