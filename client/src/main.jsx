@@ -22,7 +22,7 @@ import Contact from './pages/contact.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import './index.css'
+import './main.css'
 
 // Define the accessible routes, and which components respond to which URL
 const router = createBrowserRouter([
@@ -48,9 +48,3 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
      <RouterProvider router={router} />
 );
-
-// ReactDOM.createRoot(document.getElementById('map-root')).render(
-//      <React.StrictMode>
-//          <App />
-//      </React.StrictMode>
-//  )
