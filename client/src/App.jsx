@@ -43,9 +43,9 @@ export default function App() {
                 coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
                 }
                 var popup = new mapboxgl.Popup({ offset: 35 })
-                .setLngLat(coordinates)
-                        .setHTML('MapBox Coordinate<br/>' + coordinates)
-                        .addTo(map.current)
+                    .setLngLat(coordinates)
+                    .setHTML('MapBox Coordinate<br/>' + coordinates)
+                    .addTo(map.current)
 
                         
         }
