@@ -29,6 +29,10 @@ const userSchema = new Schema(
       required: true,
       match: [/^\d{3}-\d{3}-\d{4}$/, "Please enter a valid phone number"],
     },
+    role: {
+      type: String,
+      default: "user"
+    },
     petsSeen: [petSchema]
   },
   {
