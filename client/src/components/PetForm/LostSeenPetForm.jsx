@@ -1,8 +1,12 @@
 import { useState } from "react";
 // import "./LostSeenPetForm.css"
 
+import { useMutation } from "@apollo/client";
+import { ADD_PET } from "../../utils/mutations";
+
+
+
 export default function LostSeenPetForm({open, hideForm}) {
-    console.log("LostSeenPetForm started with " + open);
     if (!open) {
         return (<div></div>);
     }
@@ -11,6 +15,8 @@ export default function LostSeenPetForm({open, hideForm}) {
     const [sex, setSex] = useState("");
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
+
+    const [ addPet ] = useMutation(ADD_PET);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
@@ -23,20 +29,29 @@ export default function LostSeenPetForm({open, hideForm}) {
             return setSex(value)
         }  else if (name === "breed") {
             return setBreed(value)
+
         } else {
             return setColours(value)
         }
     }
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        const form = e.target
+        try {
+            await addPet({
+                variables: { input: {species, sex, breed, colours }}
+            })
+        } catch (error) {
+            console.log(error)
+        }
+
         hideForm();
         setSpecies("");
         setSex("");
         setBreed("");
         setColours("");
+
     };
 
     return (
@@ -83,6 +98,7 @@ export default function LostSeenPetForm({open, hideForm}) {
                     type="text"
                 />
             </div>
+
             <div>
                 <button type="submit" className="submit-bttn">
                     Submit
