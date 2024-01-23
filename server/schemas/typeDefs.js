@@ -1,6 +1,5 @@
 const typeDefs = `
 
-
 scalar Date
 
 type Owner {
@@ -38,6 +37,7 @@ input petArgs {
     species: String,
     sex: String,
     breed: String,
+    createdAt: Date,
     colours: [String]
 }
 
