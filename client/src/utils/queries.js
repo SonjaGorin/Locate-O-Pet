@@ -39,6 +39,7 @@ query Query {
       species
       sex
       breed
+      createdAt
       colours
     }
   }
@@ -46,13 +47,14 @@ query Query {
 `
 
 export const QUERY_USER = gql`
-query Users {
+query Query {
   users {
     petsSeen {
       _id
       species
       sex
       breed
+      createdAt
       colours
     }
   }

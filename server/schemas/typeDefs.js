@@ -1,5 +1,8 @@
 const typeDefs = `
 
+
+scalar Date
+
 type Owner {
     _id: ID,
     userName: String,
@@ -27,6 +30,7 @@ type Pet {
     species: String,
     sex: String,
     breed: String,
+    createdAt: Date,
     colours: [String]
 }
 
