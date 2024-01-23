@@ -73,7 +73,7 @@ export default function Map() {
 
      return (
           <div>
-               <LostSeenPetForm open={showLostPetForm}/>
+               <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)}/>
                <div className="sidebar">
                     Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
                </div>

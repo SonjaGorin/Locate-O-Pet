@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import "./LostSeenPetForm.css"
 
-export default function LostSeenPetForm({open}) {
+export default function LostSeenPetForm({open, hideForm}) {
     console.log("LostSeenPetForm started with " + open);
     if (!open) {
         return (<div></div>);
@@ -11,8 +11,6 @@ export default function LostSeenPetForm({open}) {
     const [sex, setSex] = useState("");
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
@@ -34,12 +32,11 @@ export default function LostSeenPetForm({open}) {
         e.preventDefault();
 
         const form = e.target
-
+        hideForm();
         setSpecies("");
         setSex("");
         setBreed("");
         setColours("");
-        setErrorMessage("Form successfully submitted!");
     };
 
     return (
@@ -86,11 +83,6 @@ export default function LostSeenPetForm({open}) {
                     type="text"
                 />
             </div>
-            {errorMessage && (
-                <div>
-                    <p className="error-text">{errorMessage}</p>
-                </div>
-            )}
             <div>
                 <button type="submit" className="submit-bttn">
                     Submit
