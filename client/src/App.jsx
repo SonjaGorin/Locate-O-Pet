@@ -1,30 +1,43 @@
-import { useRef, useEffect, useState } from 'react';
-import mapboxgl from '!mapbox-gl';
- 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
+/*******************************************************************
+ * Carleton Bootcamp - 2024
+ * Copyright 2024 Sonja Gorin, Jacob Martin, Gustavo Miller
+ * License: free and unencumbered software
+ * Assignment # 20 - React Portfolio
+ * 
+ * Filename: app.jsx
+ * Date : 1/22/2024 9:05:01 PM
+ *******************************************************************/
+import './App.css';
+import { Outlet } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import NavigationBar from './components/Navigator/navigation';
+import { setContext } from '@apollo/client/link/context';
 
-// import './App.css'
+// import { useRef, useEffect, useState } from 'react';
+// import mapboxgl from '!mapbox-gl';
+
+// mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
+
+const httpLink = createHttpLink({ uri: '/graphql', });
+
+const authLink = setContext((_, { headers }) => {
+     const token = localStorage.getItem('id_token');
+     return {
+          headers: { ...headers, authorization: token ? `Bearer ${token}` : '', },
+     };
+});
+
+const client = new ApolloClient({ link: authLink.concat(httpLink), cache: new InMemoryCache(), });
 
 export default function App() {
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    const [lng] = useState(-75.695);
-    const [lat] = useState(45.4215);
-    const [zoom] = useState(9);
-
-    useEffect(() => {
-        if (map.current) return; // initialize map only once
-        map.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v12',
-            center: [lng, lat],
-            zoom: zoom
-        });
-    });
-
     return (
-        <div>
-        <div ref={mapContainer} className="map-container" />
-        </div>
-    );
+        <ApolloProvider client={client}>
+            <div>
+            <NavigationBar />
+                <main>
+                    <Outlet />
+                </main>
+            </div>
+        </ApolloProvider>
+   );
 }

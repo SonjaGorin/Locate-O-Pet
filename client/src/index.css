@@ -1,7 +1,8 @@
 
 .map-container {
-    height: 400px;
-    width: 400px;
+    height: 700px;
+    width: 800px;
+    margin: 20px;
 }
 
 .sidebar {
@@ -11,8 +12,6 @@
     font-family: monospace;
     z-index: 1;
     position: absolute;
-    top: 0;
-    left: 0;
-    margin: 12px;
+    margin: 12px 30px;
     border-radius: 4px;
 }
