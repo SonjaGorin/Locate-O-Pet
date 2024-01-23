@@ -57,7 +57,7 @@ type Mutation {
     login(email: String!, password: String!, role: String!): Auth
 
     addPet(input: petArgs): UserOrOwner
-    removePet(input: petArgs): UserOrOwner
+    removePet(_id: ID!): UserOrOwner
 }
 
 
