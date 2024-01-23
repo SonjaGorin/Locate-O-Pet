@@ -10,6 +10,7 @@
 // import '../App.css';
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import LostSeenPetForm from "../components/PetForm/LostSeenPetForm"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -54,9 +55,11 @@ function initializeMap(mapContainer, map, lat, lng, zoom) {
 export default function Map() {
      const mapContainer = useRef(null);
      const map = useRef(null);
-     const [lng, setLng] = useState(-75.695);
-     const [lat, setLat] = useState(45.4215);
+     const [lng, setLng] = useState(-75.7135);
+     const [lat, setLat] = useState(45.3844);
      const [zoom, setZoom] = useState(10);
+     const [showLostPetForm, setShowLostPetForm] = useState(false);
+
 
      useEffect(() => {
           var currentMap = initializeMap(mapContainer, map, lat, lng, zoom);
@@ -70,10 +73,13 @@ export default function Map() {
 
      return (
           <div>
+               <LostSeenPetForm open={showLostPetForm}/>
                <div className="sidebar">
                     Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
                </div>
                <div ref={mapContainer} className="map-container" />
+               <button onClick={() => setShowLostPetForm(true)}>I lost a pet</button>
+               <button>I saw a pet</button>
           </div>
      );
 }
