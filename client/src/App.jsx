@@ -13,18 +13,13 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 import NavigationBar from './components/Navigator/navigation';
 import { setContext } from '@apollo/client/link/context';
 
-// import { useRef, useEffect, useState } from 'react';
-// import mapboxgl from '!mapbox-gl';
-
-// mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
-
 const httpLink = createHttpLink({ uri: '/graphql', });
 
 const authLink = setContext((_, { headers }) => {
-     const token = localStorage.getItem('id_token');
-     return {
-          headers: { ...headers, authorization: token ? `Bearer ${token}` : '', },
-     };
+    const token = localStorage.getItem('id_token');
+    return {
+        headers: { ...headers, authorization: token ? `Bearer ${token}` : '', },
+    };
 });
 
 const client = new ApolloClient({ link: authLink.concat(httpLink), cache: new InMemoryCache(), });
