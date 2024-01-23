@@ -27,4 +27,9 @@ const petSchema = new Schema({
     },
   });
 
+petSchema.virtual("formattedCreationDate").get(function () {
+    const formattedDate = this.createdAt.toLocaleString();
+    return formattedDate;
+  });
+
 module.exports = petSchema;
