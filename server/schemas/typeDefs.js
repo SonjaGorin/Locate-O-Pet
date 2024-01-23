@@ -47,7 +47,9 @@ type Auth {
 
   
   type Query {
-    me: UserOrOwner
+    me: UserOrOwner,
+    owners: [Owner],
+    users: [User]
 }
 
 
