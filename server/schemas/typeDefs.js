@@ -49,7 +49,7 @@ type Auth {
 
 type Mutation {
    
-    addUser(userName: String!, name: String!, email: String!, password: String!, phoneNumber: String!): Auth
+    addUser(userName: String!, name: String!, email: String!, password: String!, role: String!, phoneNumber: String!): Auth
     login(email: String!, password: String!): Auth
 
     addPet(input: petArgs): UserOrOwner
