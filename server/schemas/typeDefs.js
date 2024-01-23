@@ -29,6 +29,7 @@ type Pet {
     species: String,
     sex: String,
     breed: String,
+    createdAt: Date,
     colours: [String]
 }
 
