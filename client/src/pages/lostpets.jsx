@@ -7,6 +7,10 @@
  * Filename: lostpets.jsx
  * Date : 1/22/2024 9:05:01 PM
  *******************************************************************/
+import { useQuery } from "@apollo/client";
+import { QUERY_OWNER } from "../utils/queries";
+
+
 export default function LostPets() {
      return (
           <div>
