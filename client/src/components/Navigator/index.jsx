@@ -7,8 +7,8 @@
  * Filename: index.js
  * Date : 1/22/2024 7:31:15 PM 
  *******************************************************************/
-import Navigation from './navigation';
+// import Navigation from './navigation';
 
-export default function Navtabs() {
-     return ( <Navigation /> );
-}
+// export default function Navtabs() {
+//      return ( <Navigation /> );
+// }
