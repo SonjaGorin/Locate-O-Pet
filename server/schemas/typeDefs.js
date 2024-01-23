@@ -7,7 +7,7 @@ type Owner {
     email: String,
     password: String,
     phoneNumber: String,
-    role: String!
+    role: String!,
     petsLost: [Pet]
 }
 

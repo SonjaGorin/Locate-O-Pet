@@ -2,7 +2,19 @@ const { User, Owner } = require("../models/index");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
-  Query: {
+  
+    UserOrOwner: {
+        __resolveType(obj, contextValue, info){
+          if(obj.role === "User"){
+            return 'User';
+          }
+          if(obj.role === "Owner"){
+            return 'Owner';
+          }
+          return null; 
+        },},
+
+    Query: {
     me: async (parent, args, context) => {
       if (!context.user) {
         throw AuthenticationError;
@@ -29,6 +41,7 @@ const resolvers = {
           role,
           phoneNumber,
         });
+        console.log(user)
         const token = signToken(user);
         return { token, user };
       } else {
@@ -40,6 +53,7 @@ const resolvers = {
           role,
           phoneNumber,
         });
+        console.log(user)
         const token = signToken(user);
         return { token, user };
       }
