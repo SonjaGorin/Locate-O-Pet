@@ -7,6 +7,7 @@ type Owner {
     email: String,
     password: String,
     phoneNumber: String,
+    role: String!,
     petsLost: [Pet]
 }
 
@@ -17,6 +18,7 @@ type User {
     email: String,
     password: String,
     phoneNumber: String,
+    role: String!,
     petsSeen: [Pet]
 }
 
@@ -43,18 +45,24 @@ type Auth {
     user: UserOrOwner
   }
 
+  
   type Query {
     me: UserOrOwner
 }
+
 
 type Mutation {
    
     addUser(userName: String!, name: String!, email: String!, password: String!, role: String!, phoneNumber: String!): Auth
     login(email: String!, password: String!, role: String!): Auth
+    addUser(userName: String!, name: String!, email: String!, password: String!, role: String!, phoneNumber: String!): Auth
+    login(email: String!, password: String!, role: String!): Auth
 
     addPet(input: petArgs): UserOrOwner
-    removePet(input: petArgs): UserOrOwner
+    removePet(_id: ID!): UserOrOwner
 }
+
+
 
 `;
 
