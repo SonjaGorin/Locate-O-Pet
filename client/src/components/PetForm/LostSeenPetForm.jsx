@@ -38,7 +38,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(userMarker.getLngLat());
+        console.log(userMarker?.getLngLat());
         try {
             await addPet({
                 variables: { input: {species, sex, breed, colours }}
