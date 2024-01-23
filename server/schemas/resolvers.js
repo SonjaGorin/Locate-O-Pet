@@ -15,7 +15,7 @@ const resolvers = {
       }
     },
   },
-  Mutations: {
+  Mutation: {
     addUser: async (
       parent,
       { userName, name, email, password, role, phoneNumber }
