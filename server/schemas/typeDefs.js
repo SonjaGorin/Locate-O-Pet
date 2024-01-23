@@ -17,7 +17,7 @@ type User {
     email: String,
     password: String,
     phoneNumber: String,
-    petsSeen: [pet]
+    petsSeen: [Pet]
 }
 
 type Pet {
