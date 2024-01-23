@@ -14,14 +14,19 @@ import LostSeenPetForm from "../components/PetForm/LostSeenPetForm"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
-function addMarkerOnClick (currentMap, event) {
+function addMarkerOnClick (map, event) {
      var coordinates = event.lngLat;
-     addMarker(coordinates, currentMap);
-     addPopup(coordinates, currentMap);
+     if (map.userMarker) {
+          map.userMarker.setLngLat(coordinates);
+          addPopup(coordinates, map.current);
+          return;
+     }
+     var userMarker = addMarker(coordinates, map.current);
+     addPopup(coordinates, map.current);
+     map.userMarker = userMarker;
 };
 
-function initializeMarkers(currentMap) {
-     addMarker([-75.71697316450435, 45.35931696275756], currentMap);
+function initializeMarkers(map) {
 }
 
 function addPopup(coordinates, currentMap) {
@@ -32,8 +37,7 @@ function addPopup(coordinates, currentMap) {
 }
 
 function addMarker(coordinates, currentMap) {
-     console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat);
-     new mapboxgl.Marker({
+     return new mapboxgl.Marker({
           color: "#FF0000",
           draggable: true
      }).setLngLat(coordinates).addTo(currentMap);
@@ -48,7 +52,7 @@ function initializeMap(mapContainer, map, lat, lng, zoom) {
           zoom: zoom
      });
      
-     map.current.on('click', (event) => addMarkerOnClick(map.current, event));
+     map.current.on('click', (event) => addMarkerOnClick(map, event));
      return map.current;
 }
 
@@ -63,7 +67,7 @@ export default function Map() {
 
      useEffect(() => {
           var currentMap = initializeMap(mapContainer, map, lat, lng, zoom);
-          initializeMarkers(currentMap);
+          initializeMarkers(map);
           currentMap.on('move', () => {
                setLng(map.current.getCenter().lng.toFixed(4));
                setLat(map.current.getCenter().lat.toFixed(4));
@@ -73,7 +77,7 @@ export default function Map() {
 
      return (
           <div>
-               <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)}/>
+               <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={map.userMarker}/>
                <div className="sidebar">
                     Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
                </div>

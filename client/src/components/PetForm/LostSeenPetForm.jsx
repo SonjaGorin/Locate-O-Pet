@@ -6,7 +6,7 @@ import { ADD_PET } from "../../utils/mutations";
 
 
 
-export default function LostSeenPetForm({open, hideForm}) {
+export default function LostSeenPetForm({open, hideForm, userMarker}) {
     if (!open) {
         return (<div></div>);
     }
@@ -15,7 +15,7 @@ export default function LostSeenPetForm({open, hideForm}) {
     const [sex, setSex] = useState("");
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
-
+    const [message, setMessage] = useState("");
     const [ addPet ] = useMutation(ADD_PET);
 
     const handleInputChange = (e) => {
@@ -29,15 +29,16 @@ export default function LostSeenPetForm({open, hideForm}) {
             return setSex(value)
         }  else if (name === "breed") {
             return setBreed(value)
-
-        } else {
+        }  else if (name === "colours") {
             return setColours(value)
+        } else {
+            return setMessage(value)
         }
     }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
+        console.log(userMarker.getLngLat());
         try {
             await addPet({
                 variables: { input: {species, sex, breed, colours }}
@@ -51,7 +52,7 @@ export default function LostSeenPetForm({open, hideForm}) {
         setSex("");
         setBreed("");
         setColours("");
-
+        setMessage("");
     };
 
     return (
@@ -98,7 +99,17 @@ export default function LostSeenPetForm({open, hideForm}) {
                     type="text"
                 />
             </div>
-
+            <div className="message-input">
+                <label>Would you like to add anything else?</label>
+                <input
+                    value={message}
+                    name="message"
+                    onChange={handleInputChange}
+                    // onBlur={blurFunction}
+                    type="text"
+                    className="message-field"
+                />
+            </div>
             <div>
                 <button type="submit" className="submit-bttn">
                     Submit
