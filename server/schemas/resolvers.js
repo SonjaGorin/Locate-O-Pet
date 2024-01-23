@@ -26,7 +26,7 @@ const resolvers = {
         return User.findOne({ _id: context.user._id });
       }
     },
-    owners: async () => {
+      owners: async () => {
       return await Owner.find({}).populate('petsLost')
     },
     users: async () => {

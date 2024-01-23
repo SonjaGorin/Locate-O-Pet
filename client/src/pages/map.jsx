@@ -13,58 +13,60 @@ import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
+function addMarkerOnClick (currentMap, event) {
+     var coordinates = event.lngLat;
+     addMarker(coordinates, currentMap);
+     addPopup(coordinates, currentMap);
+};
+
+function initializeMarkers(currentMap) {
+     addMarker([-75.71697316450435, 45.35931696275756], currentMap);
+}
+
+function addPopup(coordinates, currentMap) {
+     return new mapboxgl.Popup({ offset: 35 })
+          .setLngLat(coordinates)
+          .setHTML('MapBox Coordinate<br/>' + coordinates)
+          .addTo(currentMap);
+}
+
+function addMarker(coordinates, currentMap) {
+     console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat);
+     new mapboxgl.Marker({
+          color: "#FF0000",
+          draggable: true
+     }).setLngLat(coordinates).addTo(currentMap);
+}
+
+function initializeMap(mapContainer, map, lat, lng, zoom) {
+     if (map.current) return map.current;
+     map.current = new mapboxgl.Map({
+          container: mapContainer.current,
+          style: 'mapbox://styles/mapbox/streets-v12',
+          center: [lng, lat],
+          zoom: zoom
+     });
+     
+     map.current.on('click', (event) => addMarkerOnClick(map.current, event));
+     return map.current;
+}
 
 export default function Map() {
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    const [lng, setLng] = useState(-75.695);
-    const [lat, setLat] = useState(45.4215);
-    const [zoom, setZoom] = useState(10);
+     const mapContainer = useRef(null);
+     const map = useRef(null);
+     const [lng, setLng] = useState(-75.695);
+     const [lat, setLat] = useState(45.4215);
+     const [zoom, setZoom] = useState(10);
 
-    useEffect(() => {
-        if (map.current) return; // initialize map only once
-        map.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v12',
-            center: [lng, lat],
-            zoom: zoom
-        });
-
-        map.current.on('move', () => {
-          setLng(map.current.getCenter().lng.toFixed(4));
-          setLat(map.current.getCenter().lat.toFixed(4));
-          setZoom(map.current.getZoom().toFixed(2));
-      });
-
-        new mapboxgl.Marker({
-            color: "#FF0000",
-            draggable: true
-        })
-            .setLngLat([-75.71697316450435, 45.35931696275756])
-            .addTo(map.current);
-
-
-        function add_marker (event) {
-            var coordinates = event.lngLat;
-            console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat);
-            new mapboxgl.Marker({
-                color: "#FF0000",
-                draggable: true
-            }).setLngLat(coordinates).addTo(map.current);
-
-            while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
-                }
-                new mapboxgl.Popup({ offset: 35 })
-                    .setLngLat(coordinates)
-                    .setHTML('MapBox Coordinate<br/>' + coordinates)
-                    .addTo(map.current)
-        }
-
-        map.current.on('click', add_marker);
-
-        
-    });
+     useEffect(() => {
+          var currentMap = initializeMap(mapContainer, map, lat, lng, zoom);
+          initializeMarkers(currentMap);
+          currentMap.on('move', () => {
+               setLng(map.current.getCenter().lng.toFixed(4));
+               setLat(map.current.getCenter().lat.toFixed(4));
+               setZoom(map.current.getZoom().toFixed(2));
+          });
+     });
 
      return (
           <div>
