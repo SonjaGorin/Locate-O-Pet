@@ -31,7 +31,7 @@ const ownerSchema = new Schema(
     },
     role: {
     type: String,
-    default: "owner"
+    required: true
     },
     petsLost: [petSchema],
   },
