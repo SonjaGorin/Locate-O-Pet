@@ -50,7 +50,7 @@ type Auth {
 type Mutation {
    
     addUser(userName: String!, name: String!, email: String!, password: String!, role: String!, phoneNumber: String!): Auth
-    login(email: String!, password: String!): Auth
+    login(email: String!, password: String!, role: String!): Auth
 
     addPet(input: petArgs): UserOrOwner
     removePet(input: petArgs): UserOrOwner
