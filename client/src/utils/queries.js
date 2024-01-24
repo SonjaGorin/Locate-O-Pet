@@ -1,11 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
-query me {
+query Query {
   me {
     ... on User {
       _id
-      userName
       name
       email
       password
@@ -13,18 +12,44 @@ query me {
       role
       petsSeen {
         _id
+        species
+        sex
+        breed
+        createdAt
+        message
+        colours
+        lng
+        lat
       }
     }
     ... on Owner {
       _id
-      userName
       name
       email
       password
       phoneNumber
       role
+      petsSeen {
+        _id
+        species
+        sex
+        breed
+        createdAt
+        colours
+        message
+        lng
+        lat
+      }
       petsLost {
         _id
+        species
+        sex
+        breed
+        createdAt
+        colours
+        message
+        lng
+        lat
       }
     }
   }
