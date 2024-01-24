@@ -28,8 +28,14 @@ const resolvers = {
     },
 
     petById: async (parent, { _id }, context)=> {
-      const yes = await Pet.findOne({_id}).populate("user")
+      const yes = await Pet.findOne({_id}).populate("user").populate("owner")
       return yes
+    },
+
+    allPets: async (parent, args, context) => {
+      const pets = await Pet.find().populate("user").populate("owner")
+      console.log(pets)
+      return pets
     }
   },
   Mutation: {
@@ -132,6 +138,7 @@ const resolvers = {
           message,
           lng,
           lat,
+          owner: context.user._id
         });
 
         const petAdded = await Owner.findOneAndUpdate(
@@ -164,6 +171,7 @@ const resolvers = {
           message,
           lng,
           lat,
+          owner: context.user._id
         });
 
         const petAdded = await Owner.findOneAndUpdate(
@@ -218,7 +226,7 @@ const resolvers = {
       if (context.user.role === "Owner") {
         const petRemoved = await Owner.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { petsSeen: _id } },
+          { $pull: { petsLost: _id } },
           { new: true }
         );
         const petDeleted = await Pet.findOneAndDelete({
