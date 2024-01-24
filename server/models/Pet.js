@@ -19,7 +19,15 @@ const petSchema = new Schema({
     {
     type: String,
   }
-]
+],
+longitude: {
+  type: Number,
+  require: true
+},
+latitude: {
+  type: Number,
+  required:true
+}
 },
  {
     toJSON: {
