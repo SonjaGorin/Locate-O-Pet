@@ -13,10 +13,11 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
+import {phone} from 'phone';
 
-export default function Registration(props) {
+export default function Registration() {     
      const [rolesList, setRolesList] = useState([{ name: 'User' }, { name: 'Owner' }]);
-     const [formState, setFormState] = useState({ email: '', password: '', phoneNumber: '', username: '', role: '' });
+     const [formState, setFormState] = useState({ email: 'Gustavo@miller-hs.com', password: 'password123456', phoneNumber: '613-600-2661', name: 'Gustavo Miller', role: 'User' });
      const [addUser] = useMutation(ADD_USER);
 
      /**
@@ -28,11 +29,11 @@ export default function Registration(props) {
           event.preventDefault();
           const mutationResponse = await addUser({
                variables: {
+                    name: formState.name,
                     email: formState.email,
                     password: formState.password,
-                    userName: formState.userName,
-                    phoneNumber: formState.phoneNumber,
                     role: formState.role,
+                    phoneNumber: formState.phoneNumber                    
                },
           });
           const token = mutationResponse.data.addUser.token;
@@ -52,66 +53,70 @@ export default function Registration(props) {
      return (
 
           <Form onSubmit={handleFormSubmit}>
-               <div class="row gy-3 overflow-hidden">
+               <div className="row gy-3 overflow-hidden">
                     <div className="flex-row space-between my-2">
-                         <div class="col-12">
-                              <div class="form-floating mb-3">
-                                   <input type="text" class="form-control" name="userName" id="userName" placeholder="First Name" onChange={handleChange} required />
-                                   <label htmlFor="userName" class="form-label">User Name</label>
+                         <div className="col-12">
+                              <div className="form-floating mb-3">
+                                   <input type="text" className="form-control" name="name" id="name" value="Gustavo Miller"
+                                        placeholder="First Name" onChange={handleChange} required />
+                                   <label htmlFor="name" className="form-label">Name</label>
                               </div>
                          </div>
 
                     </div>
                     <div className="flex-row space-between my-2">
-                         <div class="col-12">
-                              <div class="form-floating mb-3">
-                                   <input class="form-control" placeholder="youremail@lost-pets.com" name="email" type="text" id="email" onChange={handleChange} />
-                                   <label htmlFor="email" class="form-label">Email</label>
+                         <div className="col-12">
+                              <div className="form-floating mb-3">
+                                   <input className="form-control" placeholder="youremail@lost-pets.com" name="email" value="gustavo@miller-hs.com"
+                                        type="text" id="email" onChange={handleChange} />
+                                   <label htmlFor="email" className="form-label">Email</label>
                               </div>
                          </div>
 
                     </div>
                     <div className="flex-row space-between my-2">
-                         <div class="col-12">
-                              <div class="form-floating mb-3">
-                                   <input class="form-control" placeholder="(999)-999-9999" name="phoneNumber" type="text" id="phoneNumber" onChange={handleChange} />
-                                   <label htmlFor="phoneNumber" class="form-label">Phone Number:</label>
+                         <div className="col-12">
+                              <div className="form-floating mb-3">
+                                   <input className="form-control" placeholder="(999)-999-9999" name="phoneNumber" type="text" value="613-600-2661"
+                                        id="phoneNumber" onChange={handleChange} />
+                                   <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
                               </div>
                          </div>
                     </div>
                     <div className="flex-row space-between my-2">
-                         <div class="col-12">
-                              <div class="form-floating mb-3">
+                         <div className="col-12">
+                              <div className="form-floating mb-3">
 
-                                   <select class="form-control" id="role" name="role" onChange={handleChange}>
+                                   <select className="form-control" id="role" name="role" onChange={handleChange}>
                                         {rolesList.map((role) => {
                                              return (<option key={role.name} value={role.name}>{role.name}</option>);
                                         })}
                                    </select>
-                                   <label htmlFor="role" class="form-label">Role:</label>
+                                   <label htmlFor="role" className="form-label">Role:</label>
                               </div>
                          </div>
                     </div>
                     <div className="flex-row space-between my-2">
-                         <div class="col-12">
-                              <div class="form-floating mb-3">
-                                   <input class="form-control" placeholder="******" name="password" type="password" id="pwd" onChange={handleChange} />
-                                   <label htmlFor="pwd" class="form-label">Password:</label>
+                         <div className="col-12">
+                              <div className="form-floating mb-3">
+                                   <input className="form-control" placeholder="******" name="password" value="password123456" 
+                                        type="password" id="pwd" onChange={handleChange} />
+                                   <label htmlFor="pwd" className="form-label">Password:</label>
                               </div>
                          </div>
                     </div>
 
-                    <div class="col-12">
-                         <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="" name="iAgree" id="iAgree" required />
-                                   <label class="form-check-label text-secondary" for="iAgree">
-                                        I agree to the <a href="#!" class="link-primary text-decoration-none">terms and conditions</a>
+                    <div className="col-12">
+                         <div className="form-check">
+                              <input className="form-check-input" type="checkbox" value="" name="iAgree" id="iAgree" required />
+                                   <label className="form-check-label text-secondary" htmlFor="iAgree">
+                                        I agree to the <a href="#!" className="link-primary text-decoration-none">terms and conditions</a>
                                    </label>
                          </div>
                     </div>
-                    <div class="col-12">
-                         <div class="d-grid">
-                              <button class="btn btn-primary btn-lg" type="submit">Sign up</button>
+                    <div className="col-12">
+                         <div className="d-grid">
+                              <button className="btn btn-primary btn-lg" type="submit">Sign up</button>
                          </div>
                     </div>
 
