@@ -70,13 +70,11 @@ function initializeMap(mapContainer, map, lat, lng, zoom) {
           center: [lng, lat],
           zoom: zoom
      });
-     
-     map.current.on('click', (event) => addMarkerOnClick(map, event));
      return map.current;
 }
 
 export default function Map() {
-     const mapContainer = useRef(null);
+          const mapContainer = useRef(null);
      const map = useRef(null);
      const [lng, setLng] = useState(-75.6991);
      const [lat, setLat] = useState(45.3685);
@@ -87,10 +85,17 @@ export default function Map() {
      useEffect(() => {
           var currentMap = initializeMap(mapContainer, map, lat, lng, zoom);
           initializeMarkers(map);
-          currentMap.on('move', () => {
+          currentMap
+          .on('move', () => {
                setLng(map.current.getCenter().lng.toFixed(4));
                setLat(map.current.getCenter().lat.toFixed(4));
                setZoom(map.current.getZoom().toFixed(2));
+          })
+          .on('click', (event) => {
+               if (!showLostPetForm) {
+                    return
+               }
+               addMarkerOnClick(map, event)
           });
      });
 
