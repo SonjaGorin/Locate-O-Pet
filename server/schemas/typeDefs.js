@@ -60,7 +60,8 @@ type Auth {
 
   
   type Query {
-    me: UserOrOwner
+    me: UserOrOwner,
+    petById(_id: ID!): Pet
 }
 
 

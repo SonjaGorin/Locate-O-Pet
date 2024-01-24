@@ -26,6 +26,11 @@ const resolvers = {
         return User.findOne({ _id: context.user._id });
       }
     },
+
+    petById: async (parent, { _id }, context)=> {
+      const yes = await Pet.findOne({_id}).populate("user")
+      return yes
+    }
   },
   Mutation: {
     addUser: async (parent, { name, email, password, role, phoneNumber }) => {
@@ -104,6 +109,7 @@ const resolvers = {
           message,
           lng,
           lat,
+          user: context.user._id
         });
 
         const petAdded = await User.findOneAndUpdate(
@@ -116,7 +122,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-        return { petCreated };
+        return  petCreated ;
       } else {
         const petCreated = await Pet.create({
           species,
@@ -138,7 +144,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-        return { petCreated };
+        return  petCreated ;
       }
     },
 
@@ -170,7 +176,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-        return { petCreated };
+        return  petCreated ;
       }
     },
 
