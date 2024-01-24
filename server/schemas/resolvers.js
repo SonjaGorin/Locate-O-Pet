@@ -1,20 +1,20 @@
-const { User, Owner } = require("../models/index");
+const { User, Owner, Pet } = require("../models/index");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
-  
-    UserOrOwner: {
-        __resolveType(obj, contextValue, info){
-          if(obj.role === "User"){
-            return 'User';
-          }
-          if(obj.role === "Owner"){
-            return 'Owner';
-          }
-          return null; 
-        },},
+  UserOrOwner: {
+    __resolveType(obj, contextValue, info) {
+      if (obj.role === "User") {
+        return "User";
+      }
+      if (obj.role === "Owner") {
+        return "Owner";
+      }
+      return null;
+    },
+  },
 
-    Query: {
+  Query: {
     me: async (parent, args, context) => {
       if (!context.user) {
         throw AuthenticationError;
@@ -26,40 +26,40 @@ const resolvers = {
         return User.findOne({ _id: context.user._id });
       }
     },
-      owners: async () => {
-      return await Owner.find({}).populate('petsLost')
+
+    petById: async (parent, { _id }, context)=> {
+      const yes = await Pet.findOne({_id}).populate("user").populate("owner")
+      return yes
     },
-    users: async () => {
-      return await User.find({}).populate('petsSeen')
-    },
+
+    allPets: async (parent, args, context) => {
+      const pets = await Pet.find().populate("user").populate("owner")
+      // console.log(pets)
+      return pets
+    }
   },
   Mutation: {
-    addUser: async (
-      parent,
-      { userName, name, email, password, role, phoneNumber }
-    ) => {
+    addUser: async (parent, { name, email, password, role, phoneNumber }) => {
       if (role === "User") {
         const user = await User.create({
-          userName,
           name,
           email,
           password,
           role,
           phoneNumber,
         });
-        console.log(user)
+        console.log(user);
         const token = signToken(user);
         return { token, user };
       } else {
         const user = await Owner.create({
-          userName,
           name,
           email,
           password,
           role,
           phoneNumber,
         });
-        console.log(user)
+        console.log(user);
         const token = signToken(user);
         return { token, user };
       }
@@ -99,41 +99,99 @@ const resolvers = {
       }
     },
 
-    addPet: async (parent, { input }, context) => {
-      const { species, sex, breed, colours } = input;
+    addSeenPet: async (parent, { input }, context) => {
+      const { species, sex, breed, colours, message, status, lng, lat } = input;
 
       if (!context.user) {
         throw AuthenticationError;
       }
 
       if (context.user.role === "User") {
+        const petCreated = await Pet.create({
+          species,
+          sex,
+          breed,
+          colours,
+          message,
+          status,
+          lng,
+          lat,
+          user: context.user._id
+        });
+
         const petAdded = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $addToSet: { petsSeen: { species, sex, breed, colours } },
+            $addToSet: { petsSeen: petCreated },
           },
           {
             new: true,
             runValidators: true,
           }
         );
-        return petAdded;
+        return  petCreated ;
       } else {
+        const petCreated = await Pet.create({
+          species,
+          sex,
+          breed,
+          colours,
+          message,
+          status,
+          lng,
+          lat,
+          owner: context.user._id
+        });
+
         const petAdded = await Owner.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $addToSet: { petsLost: { species, sex, breed, colours } },
+            $addToSet: { petsSeen: petCreated },
           },
           {
             new: true,
             runValidators: true,
           }
         );
-        return petAdded;
+        return  petCreated ;
       }
     },
 
-    removePet: async (parent, { _id }, context) => {
+    addLostPet: async (parent, { input }, context) => {
+      const { species, sex, breed, colours, message, status, lng, lat } = input;
+
+      if (!context.user) {
+        throw AuthenticationError;
+      }
+
+      if (context.user.role === "Owner") {
+        const petCreated = await Pet.create({
+          species,
+          sex,
+          breed,
+          colours,
+          message,
+          status,
+          lng,
+          lat,
+          owner: context.user._id
+        });
+
+        const petAdded = await Owner.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: { petsLost: petCreated },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        return  petCreated ;
+      }
+    },
+
+    removeSeenPet: async (parent, { _id }, context) => {
       if (!context.user) {
         throw AuthenticationError;
       }
@@ -141,17 +199,44 @@ const resolvers = {
       if (context.user.role === "User") {
         const petRemoved = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { petsSeen: { _id } } },
+          { $pull: { petsSeen: _id } },
           { new: true }
         );
-        return petRemoved;
+        const petDeleted = await Pet.findOneAndDelete({
+          _id: _id,
+        });
+
+        return petDeleted;
       } else {
         const petRemoved = await Owner.findOneAndUpdate(
-            { _id: context.user._id },
-            { $pull: { petsLost: { _id } } },
-            { new: true }
-          );
-          return petRemoved;
+          { _id: context.user._id },
+          { $pull: { petsSeen: _id } },
+          { new: true }
+        );
+        const petDeleted = await Pet.findOneAndDelete({
+          _id: _id,
+        });
+
+        return petDeleted;
+      }
+    },
+
+    removeLostPet: async (parent, { _id }, context) => {
+      if (!context.user) {
+        throw AuthenticationError;
+      }
+
+      if (context.user.role === "Owner") {
+        const petRemoved = await Owner.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { petsLost: _id } },
+          { new: true }
+        );
+        const petDeleted = await Pet.findOneAndDelete({
+          _id: _id,
+        });
+
+        return petDeleted;
       }
     },
   },

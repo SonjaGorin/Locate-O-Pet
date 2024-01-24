@@ -1,11 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
-query me {
+query Query {
   me {
     ... on User {
       _id
-      userName
       name
       email
       password
@@ -13,49 +12,114 @@ query me {
       role
       petsSeen {
         _id
+        species
+        sex
+        breed
+        createdAt
+        message
+        status
+        colours
+        lng
+        lat
       }
     }
     ... on Owner {
       _id
-      userName
       name
       email
       password
       phoneNumber
       role
+      petsSeen {
+        _id
+        species
+        sex
+        breed
+        createdAt
+        colours
+        message
+        status
+        lng
+        lat
+      }
       petsLost {
         _id
+        species
+        sex
+        breed
+        createdAt
+        colours
+        message
+        status
+        lng
+        lat
       }
     }
   }
 }
 `
 
-export const QUERY_OWNER = gql`
-query Query {
-  owners {
-    petsLost {
+export const QUERY_PETID = gql`
+query Query($id: ID!) {
+  petById(_id: $id) {
+    _id
+    species
+    sex
+    breed
+    createdAt
+    colours
+    message
+    status
+    lat
+    lng
+    owner {
       _id
-      species
-      sex
-      breed
-      createdAt
-      colours
+      name
+      email
+      password
+      phoneNumber
+      role
+    }
+    user {
+      _id
+      name
+      email
+      password
+      phoneNumber
+      role
     }
   }
 }
 `
 
-export const QUERY_USER = gql`
+export const QUERY_ALLPETS = gql`
 query Query {
-  users {
-    petsSeen {
+  allPets {
+    _id
+    species
+    sex
+    breed
+    createdAt
+    colours
+    message
+    status
+    lng
+    lat
+    owner {
       _id
-      species
-      sex
-      breed
-      createdAt
-      colours
+      name
+      email
+      password
+      phoneNumber
+      role
+    }
+    user {
+      _id
+      name
+      email
+      password
+      phoneNumber
+      role
     }
   }
 }

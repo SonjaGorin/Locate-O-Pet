@@ -4,18 +4,17 @@ scalar Date
 
 type Owner {
     _id: ID,
-    userName: String,
     name: String,
     email: String,
     password: String,
     phoneNumber: String,
     role: String!,
-    petsLost: [Pet]
+    petsLost: [Pet],
+    petsSeen: [Pet]
 }
 
 type User {
     _id: ID,
-    userName: String,
     name: String, 
     email: String,
     password: String,
@@ -30,7 +29,14 @@ type Pet {
     sex: String,
     breed: String,
     createdAt: Date,
-    colours: [String]
+    colours: [String],
+    message: String,
+    status: String,
+    lng: Float,
+    lat: Float,
+    owner: Owner,
+    user: User
+
 }
 
 input petArgs {
@@ -38,7 +44,12 @@ input petArgs {
     sex: String,
     breed: String,
     createdAt: Date,
-    colours: [String]
+    colours: [String],
+    message: String,
+    status: String,
+    lng: Float,
+    lat: Float
+
 }
 
 union UserOrOwner = User | Owner
@@ -52,18 +63,21 @@ type Auth {
   
   type Query {
     me: UserOrOwner,
-    owners: [Owner],
-    users: [User]
+    petById(_id: ID!): Pet
+    allPets: [Pet]
 }
 
 
 type Mutation {
    
-    addUser(userName: String!, name: String!, email: String!, password: String!, role: String!, phoneNumber: String!): Auth
+    addUser(name: String!, email: String!, password: String!, role: String!, phoneNumber: String!): Auth
     login(email: String!, password: String!, role: String!): Auth
 
-    addPet(input: petArgs): UserOrOwner
-    removePet(_id: ID!): UserOrOwner
+
+    addSeenPet(input: petArgs): Pet
+    addLostPet(input: petArgs): Pet
+    removeSeenPet(_id: ID!): Pet
+    removeLostPet(_id: ID!): Pet
 }
 
 
