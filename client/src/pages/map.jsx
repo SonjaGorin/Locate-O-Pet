@@ -16,7 +16,7 @@ import "../pages/map.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
-function addMarkerOnClick (map, event) {
+function addMarkerOnClick (map, setUserMarker, event) {
      var coordinates = event.lngLat;
      console.log(coordinates)
      if (map.userMarker) {
@@ -27,7 +27,7 @@ function addMarkerOnClick (map, event) {
      }
      var userMarker = addMarker(coordinates, map.current);
      addPopup(coordinates, map.current);
-     map.userMarker = userMarker;
+     setUserMarker(userMarker);
 };
 
 function initializeMarkers(map) {
@@ -80,6 +80,7 @@ export default function Map() {
      const [lat, setLat] = useState(45.3685);
      const [zoom, setZoom] = useState(10);
      const [showLostPetForm, setShowLostPetForm] = useState(false);
+     const [ userMarker, setUserMarker ] = useState()
 
 
      useEffect(() => {
@@ -95,7 +96,7 @@ export default function Map() {
                if (!showLostPetForm) {
                     return
                }
-               addMarkerOnClick(map, event)
+               addMarkerOnClick(map, setUserMarker, event)
           });
      });
 
@@ -103,7 +104,7 @@ export default function Map() {
           <div>
                <div className='pet-form-map'>
                     <div>
-                         <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={map.userMarker}/>
+                         <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>
                     </div>
                     <div>
                          <div className="sidebar">

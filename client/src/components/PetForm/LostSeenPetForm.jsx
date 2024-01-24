@@ -8,6 +8,7 @@ import { REMOVE_PET } from "../../utils/mutations";
 
 
 export default function LostSeenPetForm({open, hideForm, userMarker}) {
+    console.log("Rendering LostSeenPetForm");
     if (!open) {
         return (<div></div>);
     }
