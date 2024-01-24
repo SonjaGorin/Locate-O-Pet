@@ -28,6 +28,10 @@ const petSchema = new Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      required: true
+    },
     lng: {
       type: Number,
       require: true,

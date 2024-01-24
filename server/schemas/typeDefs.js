@@ -31,6 +31,7 @@ type Pet {
     createdAt: Date,
     colours: [String],
     message: String,
+    status: String,
     lng: Float,
     lat: Float,
     owner: Owner,
@@ -45,6 +46,7 @@ input petArgs {
     createdAt: Date,
     colours: [String],
     message: String,
+    status: String,
     lng: Float,
     lat: Float
 

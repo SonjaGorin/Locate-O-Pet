@@ -34,7 +34,7 @@ const resolvers = {
 
     allPets: async (parent, args, context) => {
       const pets = await Pet.find().populate("user").populate("owner")
-      console.log(pets)
+      // console.log(pets)
       return pets
     }
   },
@@ -100,7 +100,7 @@ const resolvers = {
     },
 
     addSeenPet: async (parent, { input }, context) => {
-      const { species, sex, breed, colours, message, lng, lat } = input;
+      const { species, sex, breed, colours, message, status, lng, lat } = input;
 
       if (!context.user) {
         throw AuthenticationError;
@@ -113,6 +113,7 @@ const resolvers = {
           breed,
           colours,
           message,
+          status,
           lng,
           lat,
           user: context.user._id
@@ -136,6 +137,7 @@ const resolvers = {
           breed,
           colours,
           message,
+          status,
           lng,
           lat,
           owner: context.user._id
@@ -156,7 +158,7 @@ const resolvers = {
     },
 
     addLostPet: async (parent, { input }, context) => {
-      const { species, sex, breed, colours, message, lng, lat } = input;
+      const { species, sex, breed, colours, message, status, lng, lat } = input;
 
       if (!context.user) {
         throw AuthenticationError;
@@ -169,6 +171,7 @@ const resolvers = {
           breed,
           colours,
           message,
+          status,
           lng,
           lat,
           owner: context.user._id

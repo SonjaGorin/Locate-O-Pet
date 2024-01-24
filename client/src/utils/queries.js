@@ -17,6 +17,7 @@ query Query {
         breed
         createdAt
         message
+        status
         colours
         lng
         lat
@@ -37,6 +38,7 @@ query Query {
         createdAt
         colours
         message
+        status
         lng
         lat
       }
@@ -48,6 +50,7 @@ query Query {
         createdAt
         colours
         message
+        status
         lng
         lat
       }
@@ -66,6 +69,7 @@ query Query($id: ID!) {
     createdAt
     colours
     message
+    status
     lat
     lng
     owner {
@@ -98,6 +102,7 @@ query Query {
     createdAt
     colours
     message
+    status
     lng
     lat
     owner {
