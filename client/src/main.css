@@ -1,6 +1,6 @@
 
 .map-container {
-    height: 500px;
+    height: 600px;
     width: 800px;
     margin: 20px;
 }
@@ -14,4 +14,9 @@
     position: absolute;
     margin: 12px 30px;
     border-radius: 4px;
+}
+
+.pet-form-map {
+    display: flex;
+    /* flex-direction: row; */
 }

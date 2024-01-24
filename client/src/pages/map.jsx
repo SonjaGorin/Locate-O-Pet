@@ -59,8 +59,8 @@ function initializeMap(mapContainer, map, lat, lng, zoom) {
 export default function Map() {
      const mapContainer = useRef(null);
      const map = useRef(null);
-     const [lng, setLng] = useState(-75.7135);
-     const [lat, setLat] = useState(45.3844);
+     const [lng, setLng] = useState(-75.6991);
+     const [lat, setLat] = useState(45.3685);
      const [zoom, setZoom] = useState(10);
      const [showLostPetForm, setShowLostPetForm] = useState(false);
 
@@ -77,11 +77,17 @@ export default function Map() {
 
      return (
           <div>
-               <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={map.userMarker}/>
-               <div className="sidebar">
-                    Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+               <div className='pet-form-map'>
+                    <div>
+                         <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={map.userMarker}/>
+                    </div>
+                    <div>
+                         <div className="sidebar">
+                              Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                         </div>
+                         <div ref={mapContainer} className="map-container" />
+                    </div>
                </div>
-               <div ref={mapContainer} className="map-container" />
                <button onClick={() => setShowLostPetForm(true)}>I lost a pet</button>
                <button>I saw a pet</button>
           </div>
