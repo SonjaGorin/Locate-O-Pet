@@ -11,11 +11,14 @@
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import LostSeenPetForm from "../components/PetForm/LostSeenPetForm"
+import CatImage from "../../images/grey-cat.jpeg"
+import "../pages/map.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
 function addMarkerOnClick (map, event) {
      var coordinates = event.lngLat;
+     console.log(coordinates)
      if (map.userMarker) {
           map.userMarker.setLngLat(coordinates);
           console.log("Moved the marker to " + coordinates);
@@ -28,6 +31,20 @@ function addMarkerOnClick (map, event) {
 };
 
 function initializeMarkers(map) {
+     const pet = {species: "cat", sex: "male", breed: "house cat", colours: "grey", message: "friendly", lat: 45.412860, lng: -75.702441}
+     const classNam = "cat-img"
+     return new mapboxgl.Marker({
+          color: "#FF0000",
+          draggable: false
+     }).setLngLat({lng: pet.lng, lat: pet.lat})
+     .setPopup(
+          new mapboxgl.Popup({ offset: 25 }) // add popups
+          .setHTML(
+          `<h3>${pet.species}</h3>
+          <img class=${classNam} src=${CatImage} />`
+          )
+          )
+     .addTo(map.current);
 }
 
 function addPopup(coordinates, currentMap) {

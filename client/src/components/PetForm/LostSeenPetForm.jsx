@@ -1,9 +1,10 @@
 import { useState } from "react";
 // import "./LostSeenPetForm.css"
 
-import { useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { ADD_PET } from "../../utils/mutations";
-
+import { QUERY_OWNER } from "../../utils/queries";
+import { REMOVE_PET } from "../../utils/mutations";
 
 
 export default function LostSeenPetForm({open, hideForm, userMarker}) {
@@ -17,6 +18,8 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const [colours, setColours] = useState("");
     const [message, setMessage] = useState("");
     const [ addPet ] = useMutation(ADD_PET);
+    const { data, loading } = useQuery(QUERY_OWNER);
+    const [ removePet ] = useMutation(REMOVE_PET);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
