@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 
 
 export default function LostSeenPetForm({open, hideForm, userMarker}) {
+    // console.log("Rendering LostSeenPetForm");
     if (!open) {
         return (<div></div>);
     }
@@ -16,7 +17,9 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
     const [message, setMessage] = useState("");
-    const [ addPet ] = useMutation(ADD_PET);
+    // const [ addPet ] = useMutation(ADD_PET);
+    // const { data, loading } = useQuery(QUERY_OWNER);
+    // const [ removePet ] = useMutation(REMOVE_PET);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
@@ -38,10 +41,10 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(userMarker?.getLngLat());
+        console.log(userMarker.getLngLat());
         try {
             await addPet({
-                variables: { input: {species, sex, breed, colours }}
+                variables: { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng }}
             })
         } catch (error) {
             console.log(error)
