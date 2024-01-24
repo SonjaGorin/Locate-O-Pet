@@ -20,7 +20,7 @@ function addMarkerOnClick (map, userMarker, setUserMarker, event) {
 
 function addMarker(coordinates, currentMap) {
     let marker =  new mapboxgl.Marker({
-        color: "#FF0000",
+        color: "#0000FF",
         draggable: true
     }).setLngLat(coordinates).addTo(currentMap);
     return marker
