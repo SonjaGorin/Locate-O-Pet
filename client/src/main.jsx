@@ -19,6 +19,8 @@ import LostPets from './pages/lostpets.jsx'
 import Spotted from './pages/spotted.jsx'
 import Post from './pages/post.jsx'
 import Contact from './pages/contact.jsx'
+import Login from './pages/login.jsx'
+import Register from './pages/register.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
@@ -40,6 +42,8 @@ const router = createBrowserRouter([
                { path: '/Spotted', element: <Spotted />, },
                { path: '/Post', element: <Post />, },
                { path: '/Contact', element: <Contact />, },
+               { path: '/Login', element: <Login />, },
+               { path: '/Register', element: <Register />, },
                // { path: '/Logout', element: <Logout />, }
           ],
      },
