@@ -37,30 +37,7 @@ mutation Login($email: String!, $password: String!, $role: String!) {
 `
 
 export const ADD_PET = gql`
-mutation Mutation($input: petArgs) {
-  addPet(input: $input) {
-    ... on User {
-      petsSeen {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        colours
-      }
-    }
-    ... on Owner {
-      petsLost {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        colours
-      }
-    }
-  }
-}
+
 `
 
 export const REMOVE_PET = gql`

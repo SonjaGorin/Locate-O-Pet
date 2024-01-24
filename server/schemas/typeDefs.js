@@ -72,9 +72,9 @@ type Mutation {
     login(email: String!, password: String!, role: String!): Auth
 
 
-    addPet(input: petArgs): Pet
+    addSeenPet(input: petArgs): Pet
     addLostPet(input: petArgs): Pet
-    removePet(_id: ID!): Pet
+    removeSeenPet(_id: ID!): Pet
     removeLostPet(_id: ID!): Pet
 }
 

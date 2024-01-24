@@ -99,7 +99,7 @@ const resolvers = {
       }
     },
 
-    addPet: async (parent, { input }, context) => {
+    addSeenPet: async (parent, { input }, context) => {
       const { species, sex, breed, colours, message, lng, lat } = input;
 
       if (!context.user) {
@@ -188,7 +188,7 @@ const resolvers = {
       }
     },
 
-    removePet: async (parent, { _id }, context) => {
+    removeSeenPet: async (parent, { _id }, context) => {
       if (!context.user) {
         throw AuthenticationError;
       }
