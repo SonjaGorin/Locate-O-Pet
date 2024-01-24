@@ -36,55 +36,113 @@ mutation Login($email: String!, $password: String!, $role: String!) {
 }
 `
 
-export const ADD_PET = gql`
+export const ADD_SEENPET = gql`
 mutation Mutation($input: petArgs) {
-  addPet(input: $input) {
-    ... on User {
-      petsSeen {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        colours
-      }
+  addSeenPet(input: $input) {
+    _id
+    species
+    sex
+    breed
+    createdAt
+    message
+    colours
+    lng
+    lat
+    owner {
+      _id
+      name
+      email
+      password
+      phoneNumber
+      role
     }
-    ... on Owner {
-      petsLost {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        colours
-      }
+    user {
+      _id
+      name
+      email
+      password
+      phoneNumber
+      role
     }
   }
 }
 `
 
-export const REMOVE_PET = gql`
-mutation RemovePet($id: ID!) {
-  removePet(_id: $id) {
-    ... on User {
-      petsSeen {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        colours
-      }
+export const ADD_LOSTPET = gql`
+mutation AddLostPet($input: petArgs) {
+  addLostPet(input: $input) {
+    _id
+    species
+    sex
+    breed
+    createdAt
+    colours
+    message
+    lng
+    lat
+    owner {
+      _id
+      name
+      email
+      password
+      phoneNumber
+      role
     }
-    ... on Owner {
-      petsLost {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        colours
-      }
+    }
+  }
+`
+
+export const REMOVE_SEENPET = gql`
+mutation Mutation($id: ID!) {
+  removeSeenPet(_id: $id) {
+    _id
+    species
+    sex
+    breed
+    createdAt
+    colours
+    message
+    lng
+    lat
+    owner {
+      _id
+      name
+      email
+      password
+      phoneNumber
+      role
+    }
+    user {
+      _id
+      name
+      email
+      password
+      phoneNumber
+      role
+    }
+  }
+}
+`
+
+export const REMOVE_LOSTPET = gql`
+mutation RemoveLostPet($id: ID!) {
+  removeLostPet(_id: $id) {
+    _id
+    species
+    sex
+    breed
+    createdAt
+    colours
+    message
+    lng
+    lat
+    owner {
+      _id
+      name
+      email
+      password
+      phoneNumber
+      role
     }
   }
 }
