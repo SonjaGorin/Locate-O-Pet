@@ -90,7 +90,6 @@ mutation AddLostPet($input: petArgs) {
     }
     }
   }
-}
 `
 
 export const REMOVE_SEENPET = gql`
