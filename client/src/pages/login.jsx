@@ -7,61 +7,34 @@
  * Filename: login.jsx
  * Date : 1/23/2024 12:11:21 PM
  *******************************************************************/
-import { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { LOGIN_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
-import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
-import '../components/Login/index.css'
+import UserLogin from '../components/Login/index.jsx'
 
 function Login(props) {
-     const [formState, setFormState] = useState({ email: '', password: '' });
-     const [login, { error }] = useMutation(LOGIN_USER);
-
-     const handleFormSubmit = async (event) => {
-          event.preventDefault();
-          try {
-               const mutationResponse = await login({
-                    variables: { email: formState.email, password: formState.password },
-               });
-               const token = mutationResponse.data.login.token;
-               Auth.login(token);
-          } catch (e) {
-               console.log(e);
-          }
-     };
-
-     const handleChange = (event) => {
-          const { name, value } = event.target;
-          setFormState({
-               ...formState,
-               [name]: value,
-          });
-     };
 
      return (
-          <div className="container my-1">
-               <Link to="/register">← Go to Register</Link>
 
-               <h2>Locate-o-Pet Login</h2>
-               <Form onSubmit={handleFormSubmit}>
-                    <div className="flex-row space-between my-2">
-                         <label htmlFor="email">Email address:</label>
-                         <input placeholder="youremail@pets.com" name="email" type="email" id="email" onChange={handleChange} />
-                    </div>
-                    <div className="flex-row space-between my-2">
-                         <label htmlFor="pwd">Password:</label>
-                         <input placeholder="******" name="password" type="password" id="pwd" onChange={handleChange} />
-                    </div>
+          <section class="bg-light py-3 py-md-5 py-xl-8">
+               <div class="container">
+                    <div class="row justify-content-center">
+                         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                              <div class="mb-5">
+                                   <h4 class="text-center mb-4">Registration</h4>
+                              </div>
+                              <div class="card border border-light-subtle rounded-4">
+                                   <div class="card-body p-3 p-md-4 p-xl-5">
 
-                    {error ? ( <div><p className="error-text">The provided credentials are incorrect</p></div>) : null}
+                                        <UserLogin />
 
-                    <div className="flex-row flex-end">
-                         <button type="submit">Submit</button>
+                                   </div>
+                              </div>
+                              <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-4">
+                                   <p class="m-0 text-secondary text-center">Need an account? <a href="#!" class="link-primary text-decoration-none">Sign in</a></p>
+                              </div>
+                         </div>
                     </div>
-               </Form>
-          </div>
+               </div>
+          </section>
+
      );
 }
 

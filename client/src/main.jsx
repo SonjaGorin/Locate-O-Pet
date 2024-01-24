@@ -22,9 +22,9 @@ import Contact from './pages/contact.jsx'
 import Login from './pages/login.jsx'
 import Register from './pages/register.jsx'
 
+import './main.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import './main.css'
 
 // Define the accessible routes, and which components respond to which URL
 const router = createBrowserRouter([

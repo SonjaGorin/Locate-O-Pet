@@ -7,7 +7,7 @@
  * Filename: register.js
  * Date : 1/23/2024 11:30:54 AM
  *******************************************************************/
-import Login from '../components/Login/index'
+import Registration from '../components/Registration/index.jsx'
 
 function Register(props) {
 
@@ -23,9 +23,7 @@ function Register(props) {
                               <div class="card border border-light-subtle rounded-4">
                                    <div class="card-body p-3 p-md-4 p-xl-5">
 
-                                        <section className="bg-light py-3 py-md-5 py-xl-8">
-                                             <Login />
-                                        </section>
+                                        <Registration />
 
                                    </div>
                               </div>
