@@ -18,5 +18,6 @@
 
 .pet-form-map {
     display: flex;
+    margin-left: 20px;
     /* flex-direction: row; */
 }

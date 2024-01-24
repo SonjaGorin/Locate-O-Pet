@@ -8,7 +8,7 @@ import { REMOVE_PET } from "../../utils/mutations";
 
 
 export default function LostSeenPetForm({open, hideForm, userMarker}) {
-    console.log("Rendering LostSeenPetForm");
+    // console.log("Rendering LostSeenPetForm");
     if (!open) {
         return (<div></div>);
     }
@@ -42,7 +42,6 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(userMarker);
         console.log(userMarker.getLngLat());
         try {
             await addPet({
