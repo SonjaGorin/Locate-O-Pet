@@ -32,7 +32,10 @@ type Pet {
     colours: [String],
     message: String,
     lng: Float,
-    lat: Float
+    lat: Float,
+    owner: Owner,
+    user: User
+
 }
 
 input petArgs {
@@ -70,6 +73,7 @@ type Mutation {
     addPet(input: petArgs): Pet
     addLostPet(input: petArgs): Pet
     removePet(_id: ID!): Pet
+    removeLostPet(_id: ID!): Pet
 }
 
 
