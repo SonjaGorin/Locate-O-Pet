@@ -18,6 +18,7 @@ function addMarkerOnClick (map, event) {
      var coordinates = event.lngLat;
      if (map.userMarker) {
           map.userMarker.setLngLat(coordinates);
+          console.log("Moved the marker to " + coordinates);
           addPopup(coordinates, map.current);
           return;
      }
@@ -37,6 +38,7 @@ function addPopup(coordinates, currentMap) {
 }
 
 function addMarker(coordinates, currentMap) {
+     console.log("Adding a marker to " + coordinates);
      return new mapboxgl.Marker({
           color: "#FF0000",
           draggable: true
