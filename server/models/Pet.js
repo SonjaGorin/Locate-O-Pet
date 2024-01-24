@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const petSchema = new Schema({
   species: {
@@ -32,4 +32,7 @@ petSchema.virtual("formattedCreationDate").get(function () {
     return formattedDate;
   });
 
-module.exports = petSchema;
+const Pet = model("Pet", petSchema);
+
+
+module.exports = Pet;

@@ -12,6 +12,14 @@ import { QUERY_OWNER } from "../utils/queries";
 
 
 export default function LostPets() {
+     const { loading, data } = useQuery(QUERY_OWNER);
+     const userData = data?.owners || {};
+     const lostPets = []
+
+
+     console.log(userData)
+
+     
      return (
           <div>
                <h1>Lost Page</h1>
