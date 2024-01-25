@@ -12,10 +12,12 @@ import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import LostSeenPetForm from "../components/PetForm/LostSeenPetForm";
 import MapArea from "../components/MapArea";
+import AllLostPetsPosts from "../components/PostsDiv/PostsDiv";
 
 
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
+import "../components/PostsDiv/PostsDiv.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -90,6 +92,9 @@ export default function Map() {
      return (
           <div>
                <div className='pet-form-map'>
+                    <div className="all-pets-div">
+                         <AllLostPetsPosts />
+                    </div>
 
                     <div>
                          <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>

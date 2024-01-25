@@ -62,13 +62,6 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
 
     return (
         <div>
-            <div>
-                <h1>Lost Pet</h1>
-                <div>
-                    <PetPostCard species={"cat"} breed={"house cat"}/>
-                </div>
-            </div>
-
             <form className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
                     <label>Is your pet cat, dog or a bird?</label>
