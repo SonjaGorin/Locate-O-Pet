@@ -1,19 +1,17 @@
 const { Schema, model } = require("mongoose");
 
-const Owner = require('./Owner')
 const User = require('./User')
 
 const petSchema = new Schema(
   {
     species: {
-      type: String,
+      type: String
     },
     sex: {
-      type: String,
+      type: String
     },
     breed: {
-      type: String,
-      required: true,
+      type: String
     },
     createdAt: {
       type: Date,
@@ -39,10 +37,6 @@ const petSchema = new Schema(
     lat: {
       type: Number,
       required: true,
-    },
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "Owner"
     },
     user: {
       type: Schema.Types.ObjectId,

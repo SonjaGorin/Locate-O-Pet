@@ -1,18 +1,7 @@
-const { User, Owner, Pet } = require("../models/index");
+const { User, Pet } = require("../models/index");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
-  UserOrOwner: {
-    __resolveType(obj, contextValue, info) {
-      if (obj.role === "User") {
-        return "User";
-      }
-      if (obj.role === "Owner") {
-        return "Owner";
-      }
-      return null;
-    },
-  },
 
   Query: {
     me: async (parent, args, context) => {
