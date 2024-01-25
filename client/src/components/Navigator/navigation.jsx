@@ -53,7 +53,7 @@ function Navigation() {
 
           <nav className="navbar bg-primary navbar-dark navbar-expand-lg">
                <div className="container">
-                    <Link className="navbar-brand" to="/"><i className="fa fa-smile-o" aria-hidden="true"></i> Locate-o-Pet</Link>
+                    <Link className="navbar-brand nav-title" to="/"><i className="fa fa-smile-o" aria-hidden="true"></i> Locate-o-Pet</Link>
                     <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                          <span className="navbar-toggler-icon"></span>
