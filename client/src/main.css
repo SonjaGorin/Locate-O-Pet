@@ -1,7 +1,7 @@
 .map-container {
-    height: 600px;
-    width: 800px;
-    margin: 20px;
+     height: 600px;
+     width: 800px;
+     margin: 20px;
 }
 
 .sidebar {
@@ -16,7 +16,20 @@
 }
 
 .pet-form-map {
-    display: flex;
-    margin-left: 20px;
-    /* flex-direction: row; */
+     display: flex;
+     margin-left: 20px;
+     /* flex-direction: row; */
+}
+
+.profile-footer {
+     text-align: center;
+     position: fixed;
+     inset: auto 0 0 0;
+     padding: 1em;
+}
+
+.nav-title {
+     font-size: 36px !important;
+     font-weight: 700;
+     font-family: 'Josefin Sans', sans-serif;
 }
