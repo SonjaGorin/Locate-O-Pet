@@ -18,8 +18,9 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
     const [message, setMessage] = useState("");
+
     const [ addLostPet ] = useMutation(ADD_LOSTPET);
-    // const { data, loading } = useQuery(QUERY_OWNER);
+
     // const [ removePet ] = useMutation(REMOVE_PET);
 
     const handleInputChange = (e) => {
@@ -42,7 +43,6 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        // console.log(userMarker.getLngLat());
         console.log("submit");
         const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng }};
         console.log(variables);

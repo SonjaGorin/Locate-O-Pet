@@ -11,8 +11,8 @@
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import LostSeenPetForm from "../components/PetForm/LostSeenPetForm";
-import MapArea from "../components/MapArea";
-import ShowLostPetsData from "../components/PostsDiv/ShowLostPetsData";
+import MapArea from "../components/MapArea/MapArea";
+import LostPetsDiv from "../components/LostPetsDiv/LostPetsDiv";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
@@ -20,7 +20,7 @@ import { QUERY_ALLPETS } from "../utils/queries";
 
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
-import "../components/PostsDiv/ShowLostPetsData.css"
+import "../components/ShowLostPetsData/ShowLostPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -38,23 +38,9 @@ export default function Map() {
      return (
           <div>
                <div className='pet-form-map'>
-                    <div className="all-pets-div">
-                         <h1>Lost Pets</h1>
-                         {petData.map((pet) => {
-                              return (
-                                   <div >
-                                        <ShowLostPetsData 
-                                             key={pet._id} 
-                                             species={pet.species} 
-                                             breed={pet.breed}
-                                             colours={pet.colours} 
-                                             message={pet.message}
-                                             sex={pet.sex} />
-                                   </div>
-                              )
-                         })} 
+                    <div>
+                         <LostPetsDiv petData={petData}/>
                     </div>
-
                     <div>
                          <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>
                     </div>
@@ -66,8 +52,8 @@ export default function Map() {
                               petData={petData}/>
                     </div>
                </div>
-               <button onClick={() => setShowLostPetForm(true)}>I lost a pet</button>
-               <button>I saw a pet</button>
+               <button className='i-lost-pet-button' onClick={() => setShowLostPetForm(true)}>I lost a pet</button>
+               <button className='i-saw-pet-button'>I saw a pet</button>
           </div>
      );
 }
