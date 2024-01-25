@@ -27,7 +27,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiN
 
 export default function Map() {
      const [showLostPetForm, setShowLostPetForm] = useState(false);
-     const [ userMarker, setUserMarker ] = useState()
+     const [ userMarker, setUserMarker ] = useState();
 
      const { data, loading } = useQuery(QUERY_ALLPETS);
      if (loading) {
@@ -39,7 +39,7 @@ export default function Map() {
           <div>
                <div className='pet-form-map'>
                     <div>
-                         <LostPetsDiv petData={petData}/>
+                         <LostPetsDiv petData={petData} open={!showLostPetForm} />
                     </div>
                     <div>
                          <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>
@@ -52,7 +52,7 @@ export default function Map() {
                               petData={petData}/>
                     </div>
                </div>
-               <button className='i-lost-pet-button' onClick={() => setShowLostPetForm(true)}>I lost a pet</button>
+               <button className='i-lost-pet-button' onClick={() => {setShowLostPetForm(true); setShowLostPetsDiv(false)}} >I lost a pet</button>
                <button className='i-saw-pet-button'>I saw a pet</button>
           </div>
      );

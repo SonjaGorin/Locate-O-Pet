@@ -8,7 +8,6 @@ import { ADD_LOSTPET } from "../../utils/mutations";
 
 
 export default function LostSeenPetForm({open, hideForm, userMarker}) {
-    // console.log("Rendering LostSeenPetForm");
     if (!open) {
         return (<div></div>);
     }
@@ -65,25 +64,38 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
             <form className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
                     <label>Is your pet cat, dog or a bird?</label>
-                    <input
-                        value={species}
+                    {/* <input */}
+                        {/* value={species}
                         name="species"
                         // if user starts typing run handleInputChange function
                         onChange={handleInputChange}
                         // user moves cursor outside of the empty field run blurFunction
                         // onBlur={blurFunction}
-                        type="text"
-                    />
+                        type="text" */}
+
+                    <select>
+                        <option></option>
+                        <option onChange={handleInputChange} name="species" value={species}>Cat</option>
+                        <option onChange={handleInputChange} name="species" value={species}>Dog</option>
+                        <option onChange={handleInputChange} name="species" value={species}>Bird</option>
+                    </select>
+                    {/* /> */}
                 </div>
                 <div className="sex-input">
                     <label>Is your pet a girl or a boy?</label>
-                    <input
+                    {/* <input
                         value={sex}
                         name="sex"
                         onChange={handleInputChange}
                         // onBlur={blurFunction}
                         type="text"
-                    />
+                    /> */}
+
+                    <select>
+                        <option></option>
+                        <option onChange={handleInputChange} name="sex" value={sex}>Girl</option>
+                        <option onChange={handleInputChange} name="sex" value={sex}>Boy</option>
+                    </select>
                 </div>
                 <div className="breed-input">
                     <label>What breed is your pet?</label>
