@@ -1,34 +1,19 @@
 import PetPostCard from "../PetPostCard/PetPostCard";
-import { useQuery, useMutation } from "@apollo/client";
 
-import { QUERY_ALLPETS } from "../../utils/queries";
-
-
-export default function ShowLostPetsData() {
-    const { data, loading } = useQuery(QUERY_ALLPETS);
-    if (loading) {
-        return <h2>LOADING...</h2>;
-    }
-    const petData = data.allPets
-
+export default function ShowLostPetsData({key, species, breed, colours, message, sex}) {
     return (
         <div >
-            <h1>Lost Pets</h1>
-            {petData.map((pet) => {
-                return (
-                    <div className="PetInfoCard">
-                        <div>
-                            <PetPostCard 
-                                key={pet._id} 
-                                species={pet.species} 
-                                breed={pet.breed}
-                                colours={pet.colours} 
-                                message={pet.message}
-                                sex={pet.sex} />
-                        </div>
-                    </div>
-                )
-            })} 
+            <div className="PetInfoCard">
+                <div>
+                    <PetPostCard 
+                        key={key} 
+                        species={species} 
+                        breed={breed}
+                        colours={colours} 
+                        message={message}
+                        sex={sex} />
+                </div>
+            </div>
         </div>
     )
 }

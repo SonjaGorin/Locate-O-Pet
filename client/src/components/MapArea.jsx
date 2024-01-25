@@ -26,21 +26,21 @@ function addMarker(coordinates, currentMap) {
     return marker
 }
 
-function initializeMarkers(map) {
-    // const pet = {species: "cat", sex: "male", breed: "house cat", colours: "grey", message: "friendly", lat: 45.412860, lng: -75.702441}
-    // const classNam = "cat-img"
-    // return new mapboxgl.Marker({
-    //     color: "#FF0000",
-    //     draggable: false
-    // }).setLngLat({lng: pet.lng, lat: pet.lat})
-    // .setPopup(
-    //     new mapboxgl.Popup({ offset: 25 }) // add popups
-    //         .setHTML(
-    //         `<h3>${pet.species}</h3>
-    //         <img class=${classNam} src=${CatImage} />`
-    //         )
-    // )
-    // .addTo(map.current);
+function initializeMarkers(map, petData) {
+    {petData.map((pet) => {
+
+        return new mapboxgl.Marker({
+            color: "#FF0000",
+            draggable: false
+        }).setLngLat({lng: pet.lng, lat: pet.lat})
+        .setPopup(
+            new mapboxgl.Popup({ offset: 25 }) // add popups
+                .setHTML(
+                `<h3>${pet.species}</h3>`
+                )
+        )
+        .addTo(map.current);
+    })} 
 }
 
 function addPopup(coordinates, currentMap) {
@@ -50,7 +50,7 @@ function addPopup(coordinates, currentMap) {
             .addTo(currentMap);
 }
 
-function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, onClick) {
+function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, onClick, petData) {
     if (map.current) return map.current;
 
     map.current = new mapboxgl.Map({
@@ -66,7 +66,7 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
             setZoom(map.current.getZoom().toFixed(2));
         })
         .on('click', onClick);
-    initializeMarkers(map);
+    initializeMarkers(map, petData);
     return map.current;
 }
 
@@ -86,7 +86,7 @@ class ClickListener {
     }
 }
 
-export default function MapArea ({userMarker, showLostPetForm, setUserMarker}) {
+export default function MapArea ({userMarker, showLostPetForm, setUserMarker, petData}) {
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(-75.6991);
@@ -104,7 +104,7 @@ export default function MapArea ({userMarker, showLostPetForm, setUserMarker}) {
     }
 
     useEffect(() => {
-        initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current));
+        initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), petData);
     });
 
     return(
