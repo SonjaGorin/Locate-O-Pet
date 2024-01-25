@@ -11,7 +11,8 @@
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import LostSeenPetForm from "../components/PetForm/LostSeenPetForm"
-import MapArea from "../components/AddPetLocation"
+import MapArea from "../components/MapArea"
+
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
 
