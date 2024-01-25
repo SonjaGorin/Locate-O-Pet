@@ -158,7 +158,7 @@ const resolvers = {
     },
 
     addLostPet: async (parent, { input }, context) => {
-      const { species, sex, breed, colours, message, status, lng, lat } = input;
+            const { species, sex, breed, colours, message, status, lng, lat } = input;
 
       if (!context.user) {
         throw AuthenticationError;
@@ -176,18 +176,18 @@ const resolvers = {
           lat,
           owner: context.user._id
         });
-
+        
         const petAdded = await Owner.findOneAndUpdate(
-          { _id: context.user._id },
-          {
+        { _id: context.user._id },
+        {
             $addToSet: { petsLost: petCreated },
-          },
-          {
+        },
+        {
             new: true,
-            runValidators: true,
-          }
+        runValidators: true,
+        }
         );
-        return  petCreated ;
+        return petCreated ;
       }
     },
 

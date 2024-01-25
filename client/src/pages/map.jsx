@@ -10,96 +10,61 @@
 // import '../App.css';
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import LostSeenPetForm from "../components/PetForm/LostSeenPetForm"
-import MapArea from "../components/AddPetLocation"
+import LostSeenPetForm from "../components/PetForm/LostSeenPetForm";
+import MapArea from "../components/MapArea";
+import ShowLostPetsData from "../components/PostsDiv/ShowLostPetsData";
+
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_ALLPETS } from "../utils/queries";
+
+
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
+import "../components/PostsDiv/ShowLostPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
-// function addMarkerOnClick (map, userMarker, setUserMarker, event) {
-//      var coordinates = event.lngLat;
-//      console.log(coordinates)
-//      console.log(map)
-//      if (userMarker) {
-//           console.log("moving marker")
-//           userMarker.setLngLat(coordinates);
-//           console.log("Moved the marker to " + coordinates);
-//           addPopup(coordinates, map.current);
-//           return;
-//      }
-//      console.log("adding marker")
-//      var userMarker = addMarker(coordinates, map.current);
-//      console.log(userMarker)
-//      addPopup(coordinates, map.current);
-//      // setUserMarker(userMarker);
-// };
-
-// function addMarker(coordinates, currentMap) {
-//      // console.log("Adding a marker to " + coordinates);
-//      let marker =  new mapboxgl.Marker({
-//           color: "#FF0000",
-//           draggable: true
-//      }).setLngLat(coordinates).addTo(currentMap);
-//      return marker
-// }
-
-// function initializeMarkers(map) {
-//      const pet = {species: "cat", sex: "male", breed: "house cat", colours: "grey", message: "friendly", lat: 45.412860, lng: -75.702441}
-//      const classNam = "cat-img"
-//      return new mapboxgl.Marker({
-//           color: "#FF0000",
-//           draggable: false
-//      }).setLngLat({lng: pet.lng, lat: pet.lat})
-//      .setPopup(
-//           new mapboxgl.Popup({ offset: 25 }) // add popups
-//           .setHTML(
-//           `<h3>${pet.species}</h3>
-//           <img class=${classNam} src=${CatImage} />`
-//           )
-//           )
-//      .addTo(map.current);
-// }
-
-// function addPopup(coordinates, currentMap) {
-//      return new mapboxgl.Popup({ offset: 35 })
-//           .setLngLat(coordinates)
-//           .setHTML('MapBox Coordinate<br/>' + coordinates)
-//           .addTo(currentMap);
-// }
-
-
-
-// function initializeMap(mapContainer, map, lat, lng, zoom) {
-//      if (map.current) return map.current;
-//      map.current = new mapboxgl.Map({
-//           container: mapContainer.current,
-//           style: 'mapbox://styles/mapbox/streets-v12',
-//           center: [lng, lat],
-//           zoom: zoom
-//      });
-//      return map.current;
-// }
 
 export default function Map() {
      const [showLostPetForm, setShowLostPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState()
 
+     const { data, loading } = useQuery(QUERY_ALLPETS);
+     if (loading) {
+          return <h2>Loading...</h2>;
+     }
+     const petData = data.allPets
+
      return (
           <div>
                <div className='pet-form-map'>
+                    <div className="all-pets-div">
+                         <h1>Lost Pets</h1>
+                         {petData.map((pet) => {
+                              return (
+                                   <div >
+                                        <ShowLostPetsData 
+                                             key={pet._id} 
+                                             species={pet.species} 
+                                             breed={pet.breed}
+                                             colours={pet.colours} 
+                                             message={pet.message}
+                                             sex={pet.sex} />
+                                   </div>
+                              )
+                         })} 
+                    </div>
+
                     <div>
                          <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>
                     </div>
                     <div>
-                         <MapArea userMarker={userMarker} showLostPetForm={showLostPetForm} setUserMarker={setUserMarker}/>
+                         <MapArea 
+                              userMarker={userMarker} 
+                              showLostPetForm={showLostPetForm} 
+                              setUserMarker={setUserMarker} 
+                              petData={petData}/>
                     </div>
-                    {/* <div>
-                         <div className="sidebar">
-                              Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-                         </div>
-                         <div ref={mapContainer} className="map-container" />
-                    </div> */}
                </div>
                <button onClick={() => setShowLostPetForm(true)}>I lost a pet</button>
                <button>I saw a pet</button>
