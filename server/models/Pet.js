@@ -5,7 +5,8 @@ const User = require('./User')
 const petSchema = new Schema(
   {
     species: {
-      type: String
+      type: String,
+      required: true
     },
     sex: {
       type: String
@@ -20,11 +21,12 @@ const petSchema = new Schema(
     colours: [
       {
         type: String,
+        required: true
       },
     ],
     message: {
       type: String,
-      required: true,
+      required: true
     },
     status: {
       type: String,
