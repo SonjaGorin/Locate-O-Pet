@@ -4,13 +4,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../../utils/queries";
 
 
-export default function ShowLostPets() {
+export default function ShowLostPetsData() {
     const { data, loading } = useQuery(QUERY_ALLPETS);
     if (loading) {
         return <h2>LOADING...</h2>;
     }
     const petData = data.allPets
-    
+
     return (
         <div >
             <h1>Lost Pets</h1>

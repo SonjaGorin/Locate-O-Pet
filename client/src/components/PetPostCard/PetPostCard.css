@@ -1,6 +1,12 @@
 .pet-post-card {
     border-style: solid;
-    border-width: 0.5px;
-    border-color: grey;
+    border-width: 1px;
+    border-color: rgb(185, 185, 185);
     margin: 10px;
+    border-radius: 25px;
+    padding: 25px;
+}
+
+.card-text {
+    font-size: 20px;
 }
