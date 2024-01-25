@@ -50,6 +50,11 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
         e.preventDefault();
         const form = e.target
 
+        if (!userMarker) {
+            setErrorMessage("Please click on the map to chose pet's location.");
+            return;
+        }
+
         const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng }};
 
         if (!form.species || !form.sex || !form.breed || !form.colours || !form.message) {

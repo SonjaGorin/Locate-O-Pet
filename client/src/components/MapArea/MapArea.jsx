@@ -7,12 +7,10 @@ function addMarkerOnClick (map, userMarker, setUserMarker, event) {
     var coordinates = event.lngLat;
     if (userMarker) {
         userMarker.setLngLat(coordinates);
-        addPopup(coordinates, map.current);
         setUserMarker(userMarker);
         return;
     }
     var userMarker = addMarker(coordinates, map.current);
-    addPopup(coordinates, map.current);
     setUserMarker(userMarker);
 }
 
@@ -39,13 +37,6 @@ function initializeMarkers(map, petData) {
         )
         .addTo(map.current);
     })} 
-}
-
-function addPopup(coordinates, currentMap) {
-    return new mapboxgl.Popup({ offset: 35 })
-            .setLngLat(coordinates)
-            .setHTML('MapBox Coordinate<br/>' + coordinates)
-            .addTo(currentMap);
 }
 
 function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, onClick, petData) {
@@ -96,15 +87,21 @@ export default function MapArea ({userMarker, showLostPetForm, setUserMarker, pe
     if (!clickListener.current) {
         clickListener.current = new ClickListener(ignoreClick, map, userMarker, setUserMarker);
     } else {
+        if (clickListener.current.userMarker) {
+            clickListener.current.userMarker.remove();
+            initializeMarkers(map, petData);
+        };
         clickListener.current.ignore = ignoreClick;
         clickListener.current.userMarker = userMarker;
         clickListener.current.setUserMarker = setUserMarker;
     }
 
+    
+
     useEffect(() => {
         initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), petData);
     });
-
+    
     return(
         <div>
             <div className="sidebar">

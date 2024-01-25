@@ -42,7 +42,7 @@ export default function Map() {
                          <LostPetsDiv petData={petData} open={!showLostPetForm} />
                     </div>
                     <div>
-                         <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>
+                         <LostSeenPetForm open={showLostPetForm} hideForm={() => {setShowLostPetForm(false); setUserMarker(null);}} userMarker={userMarker}/>
                     </div>
                     <div>
                          <MapArea 
@@ -52,7 +52,7 @@ export default function Map() {
                               petData={petData}/>
                     </div>
                </div>
-               <button className='i-lost-pet-button' onClick={() => {setShowLostPetForm(true); setShowLostPetsDiv(false)}} >I lost a pet</button>
+               <button className='i-lost-pet-button' onClick={() => {setShowLostPetForm(true)}} >I lost a pet</button>
                <button className='i-saw-pet-button'>I saw a pet</button>
           </div>
      );
