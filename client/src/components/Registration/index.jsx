@@ -17,7 +17,7 @@ import {phone} from 'phone';
 
 export default function Registration() {     
      const [rolesList, setRolesList] = useState([{ name: 'User' }, { name: 'Owner' }]);
-     const [formState, setFormState] = useState({ email: 'Gustavo@miller-hs.com', password: 'password123456', phoneNumber: '613-600-2661', name: 'Gustavo Miller', role: 'User' });
+     const [formState, setFormState] = useState({ email: '', password: '', phoneNumber: '', name: '', role: '' });
      const [addUser] = useMutation(ADD_USER);
 
      /**

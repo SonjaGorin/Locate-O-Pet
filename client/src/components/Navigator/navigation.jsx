@@ -29,7 +29,9 @@ function Navigation() {
                          <li key={4} className="nav-item"><Link className={`nav-link fs-3 ${cp === '/Spotted' ? 'active' : ''}`} to="/Spotted" >Spotted Pets</Link></li>
                          <li key={5} className="nav-item"><Link className={`nav-link fs-3 ${cp === '/Post' ? 'active' : ''}`} to="/Post" >Post</Link></li> */}
                          <li key={6} className="nav-item"><Link className={`nav-link fs-3 ${cp === '/Contact' ? 'active' : ''}`} to="/Contact" >Contact Us</Link></li>
-                         <li key={7} className="nav-item"><Link className={`nav-link fs-3 ${cp === '/Logout' ? 'active' : ''}`} to="/Logout" >Logout</Link></li>
+                         <li key={7} className="nav-item">
+                              <a className={`nav-link fs-3 ${cp === '/Logout' ? 'active' : ''}`} href="/" onClick={() => Auth.logout()}>Logout</a>
+                         </li>
                     </ul>
                )
           } else {

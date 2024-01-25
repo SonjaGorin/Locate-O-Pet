@@ -12,16 +12,17 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { LOGIN_USER } from '../../utils/mutations';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 export default function UserLogin() {
      const [rolesList, setRolesList] = useState([{ name: 'User' }, { name: 'Owner' }]);
-     const [formState, setFormState] = useState({ email: 'Gustavo@miller-hs.com', password: 'password123456', role: 'User' });
+     const [formState, setFormState] = useState({ email: '', password: '', role: 'User' });
      const [login, { error }] = useMutation(LOGIN_USER);
 
      const handleFormSubmit = async (event) => {
           event.preventDefault();
-          debugger;
           try {
+
                const mutationResponse = await login({
                     variables: {
                          email: formState.email,
@@ -29,19 +30,21 @@ export default function UserLogin() {
                          role: formState.role
                     },
                });
+
                const token = mutationResponse.data.login.token;
                Auth.login(token);
+
           } catch (e) {
-               console.log(e);
+               Swal.fire({
+                    position: "top-end", icon: "error", title: "Authentication failed!",
+                    text: e.message, showConfirmButton: false, timer: 2500
+               });
           }
      };
 
      const handleChange = (event) => {
           const { name, value } = event.target;
-          setFormState({
-               ...formState,
-               [name]: value,
-          });
+          setFormState({ ...formState, [name]: value, });
      };
 
      return (
@@ -68,7 +71,7 @@ export default function UserLogin() {
                          <div className="col-12">
                               <div className="form-floating mb-3">
 
-                                   <select className="form-control" id="role" name="role" onChange={handleChange}>
+                                   <select className="form-control" id="role" name="role" value={formState.role} onChange={handleChange}>
                                         {rolesList.map((role) => {
                                              return (<option key={role.name} value={role.name}>{role.name}</option>);
                                         })}
