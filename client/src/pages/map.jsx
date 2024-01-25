@@ -10,8 +10,9 @@
 // import '../App.css';
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import LostSeenPetForm from "../components/PetForm/LostSeenPetForm"
-import MapArea from "../components/MapArea"
+import LostSeenPetForm from "../components/PetForm/LostSeenPetForm";
+import MapArea from "../components/MapArea";
+
 
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
@@ -89,6 +90,7 @@ export default function Map() {
      return (
           <div>
                <div className='pet-form-map'>
+
                     <div>
                          <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>
                     </div>

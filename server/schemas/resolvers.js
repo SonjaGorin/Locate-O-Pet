@@ -161,10 +161,12 @@ const resolvers = {
       const { species, sex, breed, colours, message, status, lng, lat } = input;
 
       if (!context.user) {
+        console.log("user exists")
         throw AuthenticationError;
       }
 
       if (context.user.role === "Owner") {
+        console.log("creating pet")
         const petCreated = await Pet.create({
           species,
           sex,
@@ -187,6 +189,7 @@ const resolvers = {
             runValidators: true,
           }
         );
+        console.log("adding pet")
         return  petCreated ;
       }
     },
