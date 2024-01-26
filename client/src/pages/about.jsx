@@ -9,6 +9,7 @@
  *******************************************************************/
 import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+import UploadWidget from '../components/UploadWidget.jsx';
 
 export default function About() {
      return (
@@ -31,6 +32,7 @@ export default function About() {
                                              <div className="d-grid">
                                                   <Link to="/Register"  className="btn btn-primary btn-lg" type="submit">Sign up</Link>
                                              </div>
+                                             <UploadWidget />
                                         </div>
 
                                    </div>

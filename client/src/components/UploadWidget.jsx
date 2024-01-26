@@ -8,6 +8,7 @@
  * Date : 1/25/2024 08:41:34 PM
  *******************************************************************/
 import { useEffect, useRef } from "react";
+import { Button } from 'react-bootstrap';
 
 const UploadWidget = () => {
 
@@ -15,7 +16,6 @@ const UploadWidget = () => {
      const widgetRef = useRef()
 
      useEffect(() => {
-
           cloudinaryRef.current = window.cloudinary;
           widgetRef.current = cloudinaryRef.current.createUploadWidget({
                cloudName: 'dbjovbbrj',
@@ -27,9 +27,7 @@ const UploadWidget = () => {
      }, [])
 
      return (
-          <button onClick={() => { widgetRef.current.open() }}>
-               Upload
-          </button>
+          <Button className="btn btn-primary btn-lg mt-5" onClick={() => { widgetRef.current.open() }}>Upload Image</Button>
      )
 
 }
