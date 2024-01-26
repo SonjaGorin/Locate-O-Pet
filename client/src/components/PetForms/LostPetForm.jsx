@@ -76,7 +76,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
         setMessage("");
         setErrorMessage("Form successfully submitted!");
     };
-
+    
     return (
         <div>
             <form className="form" onSubmit={handleFormSubmit}>
@@ -126,9 +126,11 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         className="message-field"
                     />
                 </div>
+                {!userMarker &&
                 <div>
                     <h2>Please choose a location on a map where the pet was last seen.<span>*</span></h2>
                 </div>
+                }
                 {errorMessage && (
                     <div>
                         <p className="error-text">{errorMessage}</p>

@@ -25,9 +25,14 @@ import "../components/ShowLostPetsData/ShowLostPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
+const LeftPanel = {
+	PetsList: 0,
+	LostPetForm: 1,
+	SeenPetForm: 2,
+}
 
 export default function Map() {
-     const [showLostPetForm, setShowLostPetForm] = useState(false);
+     const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
      const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
 
@@ -41,24 +46,24 @@ export default function Map() {
           <div>
                <div className='pet-form-map'>
                     <div>
-                         <LostPetsDiv petData={petData} open={!showLostPetForm} />
+                         <LostPetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
                     </div>
                     <div>
-                         <SeenPetForm open={showSeenPetForm} hideForm={() => {setShowSeenPetForm(false); setUserMarker(null);}} userMarker={userMarker}/>
+                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>
                     </div>
                     <div>
-                         <LostPetForm open={showLostPetForm} hideForm={() => {setShowLostPetForm(false); setUserMarker(null);}} userMarker={userMarker}/>
+                         <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>
                     </div>
                     <div>
                          <MapArea 
                               userMarker={userMarker} 
-                              showLostPetForm={showLostPetForm} 
+                              ignoreClick={leftPanel == LeftPanel.PetsList} 
                               setUserMarker={setUserMarker} 
                               petData={petData}/>
                     </div>
                </div>
-               <button className='i-lost-pet-button' onClick={() => {setShowLostPetForm(true)}} >I lost a pet</button>
-               <button className='i-saw-pet-button' onClick={() => {setShowSeenPetForm(true)}}>I saw a pet</button>
+               <button className='i-lost-pet-button' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>
+               <button className='i-saw-pet-button' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setUserMarker(null)}}>I saw a pet</button>
           </div>
      );
 }

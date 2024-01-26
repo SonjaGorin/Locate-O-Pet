@@ -75,14 +75,15 @@ class ClickListener {
     }
 }
 
-export default function MapArea ({userMarker, showLostPetForm, setUserMarker, petData}) {
+export default function MapArea ({userMarker, ignoreClick, setUserMarker, petData}) {
+    console.log("Rendering map with marker ");
+    console.log(userMarker);
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(-75.6991);
     const [lat, setLat] = useState(45.3685);
     const [zoom, setZoom] = useState(10);
     const clickListener = useRef(null);
-    const ignoreClick = showLostPetForm == false;
     
     if (!clickListener.current) {
         clickListener.current = new ClickListener(ignoreClick, map, userMarker, setUserMarker);

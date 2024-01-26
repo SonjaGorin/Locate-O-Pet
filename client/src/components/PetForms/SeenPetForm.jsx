@@ -124,9 +124,11 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         className="message-field"
                     />
                 </div>
+                {!userMarker &&
                 <div>
-                    <h2>Please choose a location on a map where you saw the pet.<span>*</span></h2>
+                    <h2>Please choose a location on a map where the pet was last seen.<span>*</span></h2>
                 </div>
+                }
                 {errorMessage && (
                     <div>
                         <p className="error-text">{errorMessage}</p>
