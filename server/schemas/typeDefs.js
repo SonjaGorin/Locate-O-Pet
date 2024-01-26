@@ -63,8 +63,7 @@ type Mutation {
 
     addSeenPet(input: petArgs): Pet
     addLostPet(input: petArgs): Pet
-    removeSeenPet(_id: ID!): Pet
-    removeLostPet(_id: ID!): Pet
+    removePet(_id: ID!): Pet
 }
 
 

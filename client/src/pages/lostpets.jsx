@@ -9,13 +9,13 @@
  *******************************************************************/
 import { useQuery } from "@apollo/client";
 
-import { QUERY_ALLPETS } from "../utils/queries";
+import { QUERY_ME } from "../utils/queries";
 
 
 export default function LostPets() {
-     const { loading, data } = useQuery(QUERY_ALLPETS);
+     const { loading, data } = useQuery(QUERY_ME);
 
-     const petData = data?.allPets || {};
+     const petData = data?.me || {};
      console.log(petData)
      return (
           <div>

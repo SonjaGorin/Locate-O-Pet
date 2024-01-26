@@ -8,7 +8,8 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      return User.findOne({ _id: context.user._id });
+      const user = User.findOne({ _id: context.user._id });
+      return user
     },
 
     petById: async (parent, { _id }, context) => {
@@ -18,7 +19,6 @@ const resolvers = {
 
     allPets: async (parent, args, context) => {
       const pets = await Pet.find().populate("user");
-      // console.log(pets)
       return pets;
     },
   },
@@ -30,7 +30,6 @@ const resolvers = {
         password,
         phoneNumber,
       });
-      console.log(user);
       const token = signToken(user);
       return { token, user };
     },
@@ -59,55 +58,29 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      if (context.user.role === "User") {
-        const petCreated = await Pet.create({
-          species,
-          sex,
-          breed,
-          colours,
-          message,
-          status,
-          lng,
-          lat,
-          user: context.user._id,
-        });
+      const petCreated = await Pet.create({
+        species,
+        sex,
+        breed,
+        colours,
+        message,
+        status,
+        lng,
+        lat,
+        user: context.user._id,
+      });
 
-        const petAdded = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          {
-            $addToSet: { petsSeen: petCreated },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-        return petCreated;
-      } else {
-        const petCreated = await Pet.create({
-          species,
-          sex,
-          breed,
-          colours,
-          message,
-          status,
-          lng,
-          lat,
-          owner: context.user._id,
-        });
-
-        const petAdded = await Owner.findOneAndUpdate(
-          { _id: context.user._id },
-          {
-            $addToSet: { petsSeen: petCreated },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-        return petCreated;
-      }
+      const petAdded = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        {
+          $addToSet: { petsSeen: petCreated },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      return petCreated;
     },
 
     addLostPet: async (parent, { input }, context) => {
@@ -117,80 +90,64 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      if (context.user.role === "Owner") {
-        const petCreated = await Pet.create({
-          species,
-          sex,
-          breed,
-          colours,
-          message,
-          status,
-          lng,
-          lat,
-          owner: context.user._id,
-        });
+      const petCreated = await Pet.create({
+        species,
+        sex,
+        breed,
+        colours,
+        message,
+        status,
+        lng,
+        lat,
+        owner: context.user._id,
+      });
 
-        const petAdded = await Owner.findOneAndUpdate(
-          { _id: context.user._id },
-          {
-            $addToSet: { petsLost: petCreated },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-        return petCreated;
-      }
+      const petAdded = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        {
+          $addToSet: { petsLost: petCreated },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      return petCreated;
     },
 
-    removeSeenPet: async (parent, { _id }, context) => {
+    removePet: async (parent, { _id }, context) => {
       if (!context.user) {
         throw AuthenticationError;
       }
 
-      if (context.user.role === "User") {
-        const petRemoved = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { petsSeen: _id } },
-          { new: true }
-        );
-        const petDeleted = await Pet.findOneAndDelete({
-          _id: _id,
-        });
+      const user = await User.findOne({ _id: context.user._id });
 
-        return petDeleted;
-      } else {
-        const petRemoved = await Owner.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { petsSeen: _id } },
-          { new: true }
-        );
-        const petDeleted = await Pet.findOneAndDelete({
-          _id: _id,
-        });
+       if (user.petsSeen.includes(_id)) {
 
-        return petDeleted;
-      }
-    },
+      const petRemoved = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $pull: { petsSeen: _id } },
+        { new: true }
+      );
+      const petDeleted = await Pet.findOneAndDelete({
+        _id: _id,
+      });
 
-    removeLostPet: async (parent, { _id }, context) => {
-      if (!context.user) {
-        throw AuthenticationError;
-      }
+      return petDeleted;
+    }
+    else {
 
-      if (context.user.role === "Owner") {
-        const petRemoved = await Owner.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { petsLost: _id } },
-          { new: true }
-        );
-        const petDeleted = await Pet.findOneAndDelete({
-          _id: _id,
-        });
+      const petRemoved = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $pull: { petsLost: _id } },
+        { new: true }
+      );
+      const petDeleted = await Pet.findOneAndDelete({
+        _id: _id,
+      });
 
-        return petDeleted;
-      }
+      return petDeleted;
+    }
     },
   },
 };
