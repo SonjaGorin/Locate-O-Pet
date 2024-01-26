@@ -38,7 +38,6 @@ export default function Map() {
      const [ userMarker, setUserMarker ] = useState();
 
      const { data, loading } = useQuery(QUERY_ALLPETS);
-     console.log(data)
      if (loading) {
           return <h2>Loading...</h2>;
      }

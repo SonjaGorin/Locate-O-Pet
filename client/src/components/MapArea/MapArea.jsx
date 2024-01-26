@@ -22,11 +22,19 @@ function addMarker(coordinates, currentMap) {
     return marker
 }
 
+function markerColor(pet) {
+    if (pet.status === "isLost") {
+        return "#FF0000"
+    } else {
+        return "#008000"
+    }
+}
+
 function initializeMarkers(map, petData) {
     {petData.map((pet) => {
 
         return new mapboxgl.Marker({
-            color: "#FF0000",
+            color: markerColor(pet),
             draggable: false
         }).setLngLat({lng: pet.lng, lat: pet.lat})
         .setPopup(
