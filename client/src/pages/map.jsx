@@ -14,6 +14,8 @@ import LostPetForm from "../components/PetForms/LostPetForm";
 import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
 import LostPetsDiv from "../components/LostPetsDiv/LostPetsDiv";
+import SeenPetsDiv from "../components/SeenPetsDiv/SeenPetsDiv";
+
 
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
@@ -33,7 +35,7 @@ const LeftPanel = {
 
 export default function Map() {
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
-     const [showSeenPetForm, setShowSeenPetForm] = useState(false);
+     // const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
 
      const { data, loading } = useQuery(QUERY_ALLPETS);
@@ -45,6 +47,9 @@ export default function Map() {
      return (
           <div>
                <div className='pet-form-map'>
+                    <div>
+                         <SeenPetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
+                    </div>
                     <div>
                          <LostPetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
                     </div>

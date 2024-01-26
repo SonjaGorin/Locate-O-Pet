@@ -76,8 +76,6 @@ class ClickListener {
 }
 
 export default function MapArea ({userMarker, ignoreClick, setUserMarker, petData}) {
-    console.log("Rendering map with marker ");
-    console.log(userMarker);
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(-75.6991);
