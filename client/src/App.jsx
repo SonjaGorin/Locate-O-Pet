@@ -12,6 +12,7 @@ import { Outlet } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import NavigationBar from './components/Navigator/navigation';
 import { setContext } from '@apollo/client/link/context';
+import UploadWidget from './components/UploadWidget';
 
 const httpLink = createHttpLink({ uri: '/graphql', });
 
@@ -31,6 +32,7 @@ export default function App() {
                     <NavigationBar />
                     <main>
                          <Outlet />
+                         <UploadWidget />
                     </main>
                     <footer className="profile-footer text-white footer mt-auto py-3 bg-primary fs-7">
                          Carleton University Coding Bootcamp © Copyright 2024
