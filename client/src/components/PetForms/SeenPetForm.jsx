@@ -1,24 +1,22 @@
 import { useState } from "react";
-// import "./LostSeenPetForm.css"
+// import "./SeenPetForm.css"
 
 import { useMutation } from "@apollo/client";
-import { ADD_LOSTPET } from "../../utils/mutations";
+import { ADD_SEENPET } from "../../utils/mutations";
 
-export default function LostSeenPetForm({open, hideForm, userMarker}) {
+export default function SeenPetForm({open, hideForm, userMarker}) {
     if (!open) {
         return (<div></div>);
     }
 
     const [species, setSpecies] = useState("Cat");
-    const [sex, setSex] = useState("Girl");
+    const [sex, setSex] = useState("I don't know");
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
     const [message, setMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [ addLostPet ] = useMutation(ADD_LOSTPET);
-
-    // const [ removePet ] = useMutation(REMOVE_PET);
+    const [ addSeenPet ] = useMutation(ADD_SEENPET);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
@@ -57,13 +55,13 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
 
         const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng }};
 
-        if (!species || !sex || !breed || !colours || !message) {
+        if (!species || !colours || !message) {
             setErrorMessage("Please fill up all fields.");
             return;
         }
 
         try {
-            await addLostPet({variables})
+            await addSeenPet({variables})
         } catch (error) {
             console.log(error)
         }
@@ -81,7 +79,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
         <div>
             <form className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
-                    <label>Is your pet cat, dog or a bird?</label>
+                    <label>Is the pet cat, dog or a bird?</label>
                     <select name="species" onChange={handleInputChange} value={species}>
                         <option onBlur={blurFunction}>Cat</option>
                         <option onBlur={blurFunction}>Dog</option>
@@ -89,24 +87,24 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     </select>
                 </div>
                 <div className="sex-input">
-                    <label>Is your pet a girl or a boy?</label>
+                    <label>Is the pet a girl or a boy?</label>
                     <select name="sex" onChange={handleInputChange} value={sex}>
-                        <option onBlur={blurFunction}>Girl</option>
-                        <option onBlur={blurFunction}>Boy</option>
+                        <option>I don't know</option>
+                        <option>Girl</option>
+                        <option>Boy</option>
                     </select>
                 </div>
                 <div className="breed-input">
-                    <label>What breed is your pet?</label>
+                    <label>What breed is the pet?</label>
                     <input
                         value={breed}
                         name="breed"
                         onChange={handleInputChange}
-                        onBlur={blurFunction}
                         type="text"
                     />
                 </div>
                 <div className="colours-input">
-                    <label>What colour is your pet?</label>
+                    <label>What colour is the pet?</label>
                     <input
                         value={colours}
                         name="colours"
@@ -127,7 +125,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div>
-                    <h2>Please choose a location on a map where the pet was last seen.</h2>
+                    <h2>Please choose a location on a map where you saw the pet.</h2>
                 </div>
                 {errorMessage && (
                     <div>
@@ -142,4 +140,4 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
             </form>
         </div>
     )
-};
+}

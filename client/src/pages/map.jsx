@@ -10,7 +10,8 @@
 // import '../App.css';
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import LostSeenPetForm from "../components/PetForm/LostSeenPetForm";
+import LostPetForm from "../components/PetForms/LostPetForm";
+import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
 import LostPetsDiv from "../components/LostPetsDiv/LostPetsDiv";
 
@@ -27,6 +28,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiN
 
 export default function Map() {
      const [showLostPetForm, setShowLostPetForm] = useState(false);
+     const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
 
      const { data, loading } = useQuery(QUERY_ALLPETS);
@@ -42,7 +44,10 @@ export default function Map() {
                          <LostPetsDiv petData={petData} open={!showLostPetForm} />
                     </div>
                     <div>
-                         <LostSeenPetForm open={showLostPetForm} hideForm={() => {setShowLostPetForm(false); setUserMarker(null);}} userMarker={userMarker}/>
+                         <SeenPetForm open={showSeenPetForm} hideForm={() => {setShowSeenPetForm(false); setUserMarker(null);}} userMarker={userMarker}/>
+                    </div>
+                    <div>
+                         <LostPetForm open={showLostPetForm} hideForm={() => {setShowLostPetForm(false); setUserMarker(null);}} userMarker={userMarker}/>
                     </div>
                     <div>
                          <MapArea 
@@ -53,7 +58,7 @@ export default function Map() {
                     </div>
                </div>
                <button className='i-lost-pet-button' onClick={() => {setShowLostPetForm(true)}} >I lost a pet</button>
-               <button className='i-saw-pet-button'>I saw a pet</button>
+               <button className='i-saw-pet-button' onClick={() => {setShowSeenPetForm(true)}}>I saw a pet</button>
           </div>
      );
 }
