@@ -56,7 +56,6 @@ query Query($id: ID!) {
       email
       password
       phoneNumber
-      role
     }
   }
 }
@@ -82,7 +81,6 @@ query AllPets {
       email
       password
       phoneNumber
-      role
     }
   }
 }
