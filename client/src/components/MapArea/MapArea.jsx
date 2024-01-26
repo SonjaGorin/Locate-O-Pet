@@ -76,6 +76,7 @@ class ClickListener {
 }
 
 export default function MapArea ({userMarker, ignoreClick, setUserMarker, petData}) {
+    if (userMarker) {console.log(userMarker.getLngLat())};
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(-75.6991);
@@ -87,15 +88,14 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, petDat
         clickListener.current = new ClickListener(ignoreClick, map, userMarker, setUserMarker);
     } else {
         if (clickListener.current.userMarker) {
-            clickListener.current.userMarker.remove();
-            initializeMarkers(map, petData);
+            if (!userMarker) {
+                clickListener.current.userMarker.remove();
+            }
         };
         clickListener.current.ignore = ignoreClick;
         clickListener.current.userMarker = userMarker;
         clickListener.current.setUserMarker = setUserMarker;
     }
-
-    
 
     useEffect(() => {
         initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), petData);
