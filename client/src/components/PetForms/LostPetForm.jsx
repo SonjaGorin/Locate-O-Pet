@@ -81,7 +81,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
         <div>
             <form className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
-                    <label>Is your pet cat, dog or a bird?</label>
+                    <label>Is your pet cat, dog or a bird?<span>*</span></label>
                     <select name="species" onChange={handleInputChange} value={species}>
                         <option onBlur={blurFunction}>Cat</option>
                         <option onBlur={blurFunction}>Dog</option>
@@ -89,14 +89,14 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     </select>
                 </div>
                 <div className="sex-input">
-                    <label>Is your pet a girl or a boy?</label>
+                    <label>Is your pet a girl or a boy?<span>*</span></label>
                     <select name="sex" onChange={handleInputChange} value={sex}>
                         <option onBlur={blurFunction}>Girl</option>
                         <option onBlur={blurFunction}>Boy</option>
                     </select>
                 </div>
                 <div className="breed-input">
-                    <label>What breed is your pet?</label>
+                    <label>What breed is your pet?<span>*</span></label>
                     <input
                         value={breed}
                         name="breed"
@@ -106,7 +106,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="colours-input">
-                    <label>What colour is your pet?</label>
+                    <label>What colour is your pet?<span>*</span></label>
                     <input
                         value={colours}
                         name="colours"
@@ -116,7 +116,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="message-input">
-                    <label>Would you like to add anything else?</label>
+                    <label>Would you like to add anything else?<span>*</span></label>
                     <input
                         value={message}
                         name="message"
@@ -127,7 +127,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div>
-                    <h2>Please choose a location on a map where the pet was last seen.</h2>
+                    <h2>Please choose a location on a map where the pet was last seen.<span>*</span></h2>
                 </div>
                 {errorMessage && (
                     <div>

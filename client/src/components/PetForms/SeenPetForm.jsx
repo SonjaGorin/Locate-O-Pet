@@ -79,7 +79,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
         <div>
             <form className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
-                    <label>Is the pet cat, dog or a bird?</label>
+                    <label>Is the pet cat, dog or a bird?<span>*</span></label>
                     <select name="species" onChange={handleInputChange} value={species}>
                         <option onBlur={blurFunction}>Cat</option>
                         <option onBlur={blurFunction}>Dog</option>
@@ -104,7 +104,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="colours-input">
-                    <label>What colour is the pet?</label>
+                    <label>What colour is the pet?<span>*</span></label>
                     <input
                         value={colours}
                         name="colours"
@@ -114,7 +114,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="message-input">
-                    <label>Would you like to add anything else?</label>
+                    <label>Would you like to add anything else?<span>*</span></label>
                     <input
                         value={message}
                         name="message"
@@ -125,7 +125,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div>
-                    <h2>Please choose a location on a map where you saw the pet.</h2>
+                    <h2>Please choose a location on a map where you saw the pet.<span>*</span></h2>
                 </div>
                 {errorMessage && (
                     <div>
