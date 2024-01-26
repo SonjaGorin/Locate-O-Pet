@@ -10,7 +10,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     }
 
     const [species, setSpecies] = useState("Cat");
-    const [sex, setSex] = useState("");
+    const [sex, setSex] = useState("Girl");
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
     const [message, setMessage] = useState("");
@@ -57,7 +57,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
 
         const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng }};
 
-        if (!form.species || !form.sex || !form.breed || !form.colours || !form.message) {
+        if (!species || !sex || !breed || !colours || !message) {
             setErrorMessage("Please fill up all fields.");
             return;
         }
