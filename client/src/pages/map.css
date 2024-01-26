@@ -7,3 +7,17 @@
 .i-saw-pet-button {
     margin: 0 20px 20px 20px;
 }
+
+.form-div {
+    width: 20%;
+}
+   
+.pet-form-map {
+    /* width: 100%; */
+    display: flex;
+    margin-left: 20px;
+}
+   
+.form-div-seen {
+    width: 20%;
+}

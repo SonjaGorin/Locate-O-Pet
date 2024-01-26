@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import "./SeenPetForm.css"
+import "./LostPetForm.css"
 
 import { useMutation } from "@apollo/client";
 import { ADD_SEENPET } from "../../utils/mutations";
@@ -77,11 +77,13 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
     };
 
     return (
-        <div>
-            <form className="form" onSubmit={handleFormSubmit}>
+        <div className="form-div2">
+            <h1  className="sorry-greeting">We are so glad you saw someone's pet!</h1>
+            <h2  className="under-greeting">Please dedscribe them as best as possible.</h2>
+            <form  className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
-                    <label>Is the pet cat, dog or a bird?<span>*</span></label>
-                    <select name="species" onChange={handleInputChange} value={species}>
+                    <label>Is the pet cat, dog or a bird?<span className="required-asterix">*</span></label>
+                    <select className="form-field" name="species" onChange={handleInputChange} value={species}>
                         <option onBlur={blurFunction}>Cat</option>
                         <option onBlur={blurFunction}>Dog</option>
                         <option onBlur={blurFunction}>Bird</option>
@@ -89,7 +91,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                 </div>
                 <div className="sex-input">
                     <label>Is the pet a girl or a boy?</label>
-                    <select name="sex" onChange={handleInputChange} value={sex}>
+                    <select className="form-field" name="sex" onChange={handleInputChange} value={sex}>
                         <option>I don't know</option>
                         <option>Girl</option>
                         <option>Boy</option>
@@ -98,6 +100,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                 <div className="breed-input">
                     <label>What breed is the pet?</label>
                     <input
+                        className="form-field"
                         value={breed}
                         name="breed"
                         onChange={handleInputChange}
@@ -105,8 +108,9 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="colours-input">
-                    <label>What colour is the pet?<span>*</span></label>
+                    <label>What colour is the pet?<span className="required-asterix">*</span></label>
                     <input
+                        className="form-field"
                         value={colours}
                         name="colours"
                         onChange={handleInputChange}
@@ -115,8 +119,8 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="message-input">
-                    <label>Would you like to add anything else?<span>*</span></label>
-                    <input
+                    <label>Would you like to add anything else?<span className="required-asterix">*</span></label>
+                    <textarea
                         value={message}
                         name="message"
                         onChange={handleInputChange}
@@ -127,7 +131,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                 </div>
                 {!userMarker &&
                 <div>
-                    <h2>Please choose a location on a map where the pet was last seen.<span>*</span></h2>
+                    <h2 className="choose-location-msg">Please choose a location on a map where the pet was last seen.<span className="required-asterix">*</span></h2>
                 </div>
                 }
                 {errorMessage && (

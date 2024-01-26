@@ -22,7 +22,7 @@ import { QUERY_ALLPETS } from "../utils/queries";
 
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
-import "../components/ShowPetsData/ShowPetsData.css"
+// import "../components/ShowPetsData/ShowPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -56,10 +56,10 @@ export default function Map() {
                     <div>
                          <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} />
                     </div>
-                    <div>
+                    <div className='form-div-seen'>
                          <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
-                    <div>
+                    <div className='form-div'>
                          <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
                     <div>
