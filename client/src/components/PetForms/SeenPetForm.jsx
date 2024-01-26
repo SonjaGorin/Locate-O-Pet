@@ -14,6 +14,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
     const [message, setMessage] = useState("");
+    const [status, setStatus] = useState("isSeen");
     const [errorMessage, setErrorMessage] = useState("");
 
     const [ addSeenPet ] = useMutation(ADD_SEENPET);
@@ -53,7 +54,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
             return;
         }
 
-        const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng }};
+        const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng, status }};
 
         if (!species || !colours || !message) {
             setErrorMessage("Please fill up all fields.");
