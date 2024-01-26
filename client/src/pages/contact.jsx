@@ -41,25 +41,25 @@ export default function Contact() {
                                    <Form action="#!">
                                         <Row className="gy-4 gy-xl-5 p-4 p-xl-5">
                                              <div className="col-12">
-                                                  <label for="fullname" className="form-label">Full Name <span className="text-danger">*</span></label>
+                                                  <label htmlfor="fullname" className="form-label">Full Name <span className="text-danger">*</span></label>
                                                   <input type="text" className="form-control" id="fullname" name="fullname" value="" required />
                                              </div>
                                              <div className="col-12 col-md-6">
-                                                  <label for="email" className="form-label">Email <span className="text-danger">*</span></label>
+                                                  <label htmlfor="email" className="form-label">Email <span className="text-danger">*</span></label>
                                                   <div className="input-group">
                                                        <span className="input-group-text"><GraphEnv /></span>
                                                        <input type="email" className="form-control" id="email" name="email" value="" required />
                                                   </div>
                                              </div>
                                              <div className="col-12 col-md-6">
-                                                  <label for="phone" className="form-label">Phone Number</label>
+                                                  <label htmlfor="phone" className="form-label">Phone Number</label>
                                                   <div className="input-group">
                                                        <span className="input-group-text"><GraphPhone /></span>
                                                        <input type="tel" className="form-control" id="phone" name="phone" value="" />
                                                   </div>
                                              </div>
                                              <div className="col-12">
-                                                  <label for="message" className="form-label">Message <span className="text-danger">*</span></label>
+                                                  <label htmlfor="message" className="form-label">Message <span className="text-danger">*</span></label>
                                                   <textarea className="form-control" id="message" name="message" rows="3" required></textarea>
                                              </div>
                                              <div className="col-12">
