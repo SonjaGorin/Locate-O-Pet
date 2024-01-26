@@ -15,14 +15,11 @@ import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
 import PetsDiv from "../components/PetsDiv/PetsDiv";
 
-
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
 
-
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
-// import "../components/ShowPetsData/ShowPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -53,13 +50,9 @@ export default function Map() {
      return (
           <div>
                <div className='pet-form-map'>
-                    <div>
-                         <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} />
-                    </div>
-                    <div className='form-div-seen'>
-                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
-                    </div>
                     <div className='form-div'>
+                         <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} />
+                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                          <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
                     <div>

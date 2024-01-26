@@ -10,7 +10,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     }
 
     const [species, setSpecies] = useState("Cat");
-    const [sex, setSex] = useState("Girl");
+    const [sex, setSex] = useState("girl");
     const [breed, setBreed] = useState("");
     const [colours, setColours] = useState("");
     const [message, setMessage] = useState("");
@@ -94,8 +94,8 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                 <div className="sex-input">
                     <label>Is your pet a girl or a boy?<span className="required-asterix">*</span></label>
                     <select className="form-field" name="sex" onChange={handleInputChange} value={sex}>
-                        <option onBlur={blurFunction}>Girl</option>
-                        <option onBlur={blurFunction}>Boy</option>
+                        <option onBlur={blurFunction}>girl</option>
+                        <option onBlur={blurFunction}>boy</option>
                     </select>
                 </div>
                 <div className="breed-input">

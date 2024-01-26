@@ -93,8 +93,8 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     <label>Is the pet a girl or a boy?</label>
                     <select className="form-field" name="sex" onChange={handleInputChange} value={sex}>
                         <option>I don't know</option>
-                        <option>Girl</option>
-                        <option>Boy</option>
+                        <option>A girl</option>
+                        <option>A boy</option>
                     </select>
                 </div>
                 <div className="breed-input">
