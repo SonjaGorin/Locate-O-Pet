@@ -13,8 +13,7 @@ import mapboxgl from 'mapbox-gl';
 import LostPetForm from "../components/PetForms/LostPetForm";
 import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
-import LostPetsDiv from "../components/LostPetsDiv/LostPetsDiv";
-import SeenPetsDiv from "../components/SeenPetsDiv/SeenPetsDiv";
+import PetsDiv from "../components/PetsDiv/PetsDiv";
 
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -23,7 +22,7 @@ import { QUERY_ALLPETS } from "../utils/queries";
 
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
-import "../components/ShowLostPetsData/ShowLostPetsData.css"
+import "../components/ShowPetsData/ShowPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -39,6 +38,7 @@ export default function Map() {
      const [ userMarker, setUserMarker ] = useState();
 
      const { data, loading } = useQuery(QUERY_ALLPETS);
+     console.log(data)
      if (loading) {
           return <h2>Loading...</h2>;
      }
@@ -48,10 +48,7 @@ export default function Map() {
           <div>
                <div className='pet-form-map'>
                     <div>
-                         <SeenPetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
-                    </div>
-                    <div>
-                         <LostPetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
+                         <PetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
                     </div>
                     <div>
                          <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>

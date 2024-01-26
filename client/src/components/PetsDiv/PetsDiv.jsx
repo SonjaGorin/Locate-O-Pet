@@ -1,22 +1,22 @@
-import ShowLostPetsData from "../ShowLostPetsData/ShowLostPetsData";
+import ShowPetsData from "../ShowPetsData/ShowPetsData";
 
-export default function LostPetsDiv({petData, open}) {
+export default function PetsDiv({petData, open}) {
     if (!open) {
         return (<div></div>);
     }
 
     return (
         <div className="all-pets-div">
-            <h1>Lost Pets</h1>
             {petData.map((pet) => {
                 return (
                     <div >
-                        <ShowLostPetsData 
+                        <ShowPetsData 
                         key={pet.key} 
                         species={pet.species} 
                         breed={pet.breed}
                         colours={pet.colours} 
                         message={pet.message}
+                        status={pet.status}
                         sex={pet.sex}/>
                     </div>
                 )
