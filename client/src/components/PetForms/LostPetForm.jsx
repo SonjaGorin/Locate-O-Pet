@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./LostPetForm.css"
+import "./PetForms.css"
 
 import { useMutation } from "@apollo/client";
 import { ADD_LOSTPET } from "../../utils/mutations";
