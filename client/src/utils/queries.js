@@ -3,57 +3,35 @@ import { gql } from '@apollo/client';
 export const QUERY_ME = gql`
 query Query {
   me {
-    ... on User {
+    _id
+    name
+    email
+    password
+    phoneNumber
+    role
+    petsSeen {
       _id
-      name
-      email
-      password
-      phoneNumber
-      role
-      petsSeen {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        message
-        status
-        colours
-        lng
-        lat
-      }
+      species
+      sex
+      breed
+      createdAt
+      colours
+      message
+      status
+      lng
+      lat
     }
-    ... on Owner {
+    petsLost {
       _id
-      name
-      email
-      password
-      phoneNumber
-      role
-      petsSeen {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        colours
-        message
-        status
-        lng
-        lat
-      }
-      petsLost {
-        _id
-        species
-        sex
-        breed
-        createdAt
-        colours
-        message
-        status
-        lng
-        lat
-      }
+      species
+      sex
+      breed
+      createdAt
+      colours
+      message
+      status
+      lng
+      lat
     }
   }
 }
@@ -70,16 +48,8 @@ query Query($id: ID!) {
     colours
     message
     status
-    lat
     lng
-    owner {
-      _id
-      name
-      email
-      password
-      phoneNumber
-      role
-    }
+    lat
     user {
       _id
       name
@@ -90,10 +60,11 @@ query Query($id: ID!) {
     }
   }
 }
+
 `
 
 export const QUERY_ALLPETS = gql`
-query Query {
+query AllPets {
   allPets {
     _id
     species
@@ -105,14 +76,6 @@ query Query {
     status
     lng
     lat
-    owner {
-      _id
-      name
-      email
-      password
-      phoneNumber
-      role
-    }
     user {
       _id
       name

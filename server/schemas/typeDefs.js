@@ -2,16 +2,6 @@ const typeDefs = `
 
 scalar Date
 
-type Owner {
-    _id: ID,
-    name: String,
-    email: String,
-    password: String,
-    phoneNumber: String,
-    role: String!,
-    petsLost: [Pet],
-    petsSeen: [Pet]
-}
 
 type User {
     _id: ID,
@@ -19,8 +9,8 @@ type User {
     email: String,
     password: String,
     phoneNumber: String,
-    role: String!,
-    petsSeen: [Pet]
+    petsSeen: [Pet],
+    petsLost: [Pet]
 }
 
 type Pet {
@@ -34,7 +24,6 @@ type Pet {
     status: String,
     lng: Float,
     lat: Float,
-    owner: Owner,
     user: User
 
 }
@@ -52,17 +41,14 @@ input petArgs {
 
 }
 
-union UserOrOwner = User | Owner
-
-
 type Auth {
     token: ID!
-    user: UserOrOwner
+    user: User
   }
 
   
   type Query {
-    me: UserOrOwner,
+    me: User
     petById(_id: ID!): Pet
     allPets: [Pet]
 }
@@ -70,14 +56,13 @@ type Auth {
 
 type Mutation {
    
-    addUser(name: String!, email: String!, password: String!, role: String!, phoneNumber: String!): Auth
-    login(email: String!, password: String!, role: String!): Auth
+    addUser(name: String!, email: String!, password: String!, phoneNumber: String!): Auth
+    login(email: String!, password: String!): Auth
 
 
     addSeenPet(input: petArgs): Pet
     addLostPet(input: petArgs): Pet
-    removeSeenPet(_id: ID!): Pet
-    removeLostPet(_id: ID!): Pet
+    removePet(_id: ID!): Pet
 }
 
 

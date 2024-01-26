@@ -3,68 +3,54 @@ import { gql } from '@apollo/client';
 //name, email, password, role, phoneNumber
 
 export const ADD_USER = gql`
-mutation addUser($name: String!, $email: String!, $password: String!, $role: String!, $phoneNumber: String!) {
-  addUser(name: $name, email: $email, password: $password, role: $role, phoneNumber: $phoneNumber) {
+mutation Mutation($name: String!, $email: String!, $password: String!, $phoneNumber: String!) {
+  addUser(name: $name, email: $email, password: $password, phoneNumber: $phoneNumber) {
     token
     user {
-      ... on User {
-        email
-        password
-      }
-      ... on Owner {
-        email
-        password
-      }
+      _id
+      name
+      email
+      password
+      phoneNumber
     }
   }
 }
 `
 
 export const LOGIN_USER = gql`
-mutation Login($email: String!, $password: String!, $role: String!) {
-  login(email: $email, password: $password, role: $role) {
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
     token
     user {
-      ... on User {
-        email
-        password
-      }
-      ... on Owner {
-        email
-        password
-      }
+      _id
+      name
+      email
+      password
+      phoneNumber
     }
   }
 }
 `
 
 export const ADD_SEENPET = gql`
-mutation Mutation($input: petArgs) {
+mutation AddSeenPet($input: petArgs) {
   addSeenPet(input: $input) {
     _id
     species
     sex
     breed
     createdAt
-    message
     colours
+    message
+    status
     lng
     lat
-    owner {
-      _id
-      name
-      email
-      password
-      phoneNumber
-      role
-    }
     user {
       _id
       name
       email
       password
       phoneNumber
-      role
     }
   }
 }
@@ -80,55 +66,23 @@ mutation AddLostPet($input: petArgs) {
     createdAt
     colours
     message
-    lng
+    status
     lat
-    owner {
-      _id
-      name
-      email
-      password
-      phoneNumber
-      role
-    }
-    }
-  }
-`
-
-export const REMOVE_SEENPET = gql`
-mutation Mutation($id: ID!) {
-  removeSeenPet(_id: $id) {
-    _id
-    species
-    sex
-    breed
-    createdAt
-    colours
-    message
     lng
-    lat
-    owner {
-      _id
-      name
-      email
-      password
-      phoneNumber
-      role
-    }
     user {
       _id
       name
       email
       password
       phoneNumber
-      role
     }
   }
 }
+
 `
 
-export const REMOVE_LOSTPET = gql`
-mutation RemoveLostPet($id: ID!) {
-  removeLostPet(_id: $id) {
+export const REMOVE_PET = gql`
+  removePet(_id: $id) {
     _id
     species
     sex
@@ -136,16 +90,18 @@ mutation RemoveLostPet($id: ID!) {
     createdAt
     colours
     message
+    status
     lng
     lat
-    owner {
+    user {
       _id
       name
       email
       password
       phoneNumber
-      role
     }
   }
 }
 `
+
+
