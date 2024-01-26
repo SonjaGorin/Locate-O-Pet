@@ -15,14 +15,11 @@ import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
 import PetsDiv from "../components/PetsDiv/PetsDiv";
 
-
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
 
-
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
-import "../components/ShowPetsData/ShowPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -33,34 +30,37 @@ const LeftPanel = {
 }
 
 export default function Map() {
+     // console.log("Rendering Map");
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
      // const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
-
-     const { data, loading } = useQuery(QUERY_ALLPETS);
+     const [ pets, setPets ] = useState([]);
+     const petsFetched = (data) => {
+          // console.log("Fetched pets");
+          // console.log(data.allPets);
+          setPets(data.allPets);
+     }
+     
+     const { loading, refetch } = useQuery(QUERY_ALLPETS, {onCompleted: petsFetched});
+     
      if (loading) {
           return <h2>Loading...</h2>;
      }
-     const petData = data.allPets
 
      return (
           <div>
                <div className='pet-form-map'>
-                    <div>
-                         <PetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
-                    </div>
-                    <div>
-                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>
-                    </div>
-                    <div>
-                         <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>
+                    <div className='form-div'>
+                         <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} />
+                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
+                         <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
                     <div>
                          <MapArea 
                               userMarker={userMarker} 
                               ignoreClick={leftPanel == LeftPanel.PetsList} 
                               setUserMarker={setUserMarker} 
-                              petData={petData}/>
+                              pets={pets}/>
                     </div>
                </div>
                <button className='i-lost-pet-button' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>
