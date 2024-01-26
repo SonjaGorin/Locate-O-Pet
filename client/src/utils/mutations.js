@@ -82,6 +82,7 @@ mutation AddLostPet($input: petArgs) {
 `
 
 export const REMOVE_PET = gql`
+ mutation Mutation($id: ID!) {
   removePet(_id: $id) {
     _id
     species
