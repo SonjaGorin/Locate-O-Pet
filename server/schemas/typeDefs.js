@@ -9,7 +9,6 @@ type User {
     email: String,
     password: String,
     phoneNumber: String,
-    role: String!,
     petsSeen: [Pet],
     petsLost: [Pet]
 }
