@@ -22,11 +22,19 @@ function addMarker(coordinates, currentMap) {
     return marker
 }
 
+function markerColor(pet) {
+    if (pet.status === "isLost") {
+        return "#FF0000"
+    } else {
+        return "#008000"
+    }
+}
+
 function initializeMarkers(map, petData) {
     {petData.map((pet) => {
 
         return new mapboxgl.Marker({
-            color: "#FF0000",
+            color: markerColor(pet),
             draggable: false
         }).setLngLat({lng: pet.lng, lat: pet.lat})
         .setPopup(
@@ -76,8 +84,7 @@ class ClickListener {
 }
 
 export default function MapArea ({userMarker, ignoreClick, setUserMarker, petData}) {
-    console.log("Rendering map with marker ");
-    console.log(userMarker);
+    if (userMarker) {console.log(userMarker.getLngLat())};
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(-75.6991);
@@ -89,15 +96,14 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, petDat
         clickListener.current = new ClickListener(ignoreClick, map, userMarker, setUserMarker);
     } else {
         if (clickListener.current.userMarker) {
-            clickListener.current.userMarker.remove();
-            initializeMarkers(map, petData);
+            if (!userMarker) {
+                clickListener.current.userMarker.remove();
+            }
         };
         clickListener.current.ignore = ignoreClick;
         clickListener.current.userMarker = userMarker;
         clickListener.current.setUserMarker = setUserMarker;
     }
-
-    
 
     useEffect(() => {
         initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), petData);

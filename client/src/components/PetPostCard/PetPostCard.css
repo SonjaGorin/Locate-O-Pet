@@ -10,3 +10,11 @@
 .card-text {
     font-size: 20px;
 }
+
+.background-red {
+    background: rgb(255, 214, 214);
+}
+
+.background-green {
+    background: rgb(192, 238, 192);
+}
