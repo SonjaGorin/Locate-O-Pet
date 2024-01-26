@@ -15,9 +15,8 @@ import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
 export default function UserLogin() {
-     const [rolesList, setRolesList] = useState([{ name: 'User' }, { name: 'Owner' }]);
-     const [formState, setFormState] = useState({ email: '', password: '', role: 'User' });
-     const [login, { error }] = useMutation(LOGIN_USER);
+     const [formState, setFormState] = useState({ email: '', password: '' });
+     const [login] = useMutation(LOGIN_USER);
 
      const handleFormSubmit = async (event) => {
           event.preventDefault();
@@ -27,7 +26,6 @@ export default function UserLogin() {
                     variables: {
                          email: formState.email,
                          password: formState.password,
-                         role: formState.role
                     },
                });
 
@@ -40,6 +38,11 @@ export default function UserLogin() {
                     text: e.message, showConfirmButton: false, timer: 2500
                });
           }
+
+          setFormState({
+               email: "",
+               password: "",
+          })
      };
 
      const handleChange = (event) => {
@@ -67,20 +70,6 @@ export default function UserLogin() {
                               </div>
                          </div>
                     </div>
-                    <div className="flex-row space-between my-2">
-                         <div className="col-12">
-                              <div className="form-floating mb-3">
-
-                                   <select className="form-control" id="role" name="role" value={formState.role} onChange={handleChange}>
-                                        {rolesList.map((role) => {
-                                             return (<option key={role.name} value={role.name}>{role.name}</option>);
-                                        })}
-                                   </select>
-                                   <label htmlFor="role" className="form-label">Role:</label>
-                              </div>
-                         </div>
-                    </div>
-
                     <div className="col-12">
                          <div className="d-grid">
                               <button className="btn btn-primary btn-lg" type="submit">Login In</button>
