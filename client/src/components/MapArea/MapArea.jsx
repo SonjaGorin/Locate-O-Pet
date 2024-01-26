@@ -1,7 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import "../pages/map.css";
-import CatImage from "../../images/grey-cat.jpeg"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -9,12 +7,10 @@ function addMarkerOnClick (map, userMarker, setUserMarker, event) {
     var coordinates = event.lngLat;
     if (userMarker) {
         userMarker.setLngLat(coordinates);
-        addPopup(coordinates, map.current);
         setUserMarker(userMarker);
         return;
     }
     var userMarker = addMarker(coordinates, map.current);
-    addPopup(coordinates, map.current);
     setUserMarker(userMarker);
 }
 
@@ -41,13 +37,6 @@ function initializeMarkers(map, petData) {
         )
         .addTo(map.current);
     })} 
-}
-
-function addPopup(coordinates, currentMap) {
-    return new mapboxgl.Popup({ offset: 35 })
-            .setLngLat(coordinates)
-            .setHTML('MapBox Coordinate<br/>' + coordinates)
-            .addTo(currentMap);
 }
 
 function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, onClick, petData) {
@@ -86,27 +75,34 @@ class ClickListener {
     }
 }
 
-export default function MapArea ({userMarker, showLostPetForm, setUserMarker, petData}) {
+export default function MapArea ({userMarker, ignoreClick, setUserMarker, petData}) {
+    console.log("Rendering map with marker ");
+    console.log(userMarker);
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lng, setLng] = useState(-75.6991);
     const [lat, setLat] = useState(45.3685);
     const [zoom, setZoom] = useState(10);
     const clickListener = useRef(null);
-    const ignoreClick = showLostPetForm == false;
     
     if (!clickListener.current) {
         clickListener.current = new ClickListener(ignoreClick, map, userMarker, setUserMarker);
     } else {
+        if (clickListener.current.userMarker) {
+            clickListener.current.userMarker.remove();
+            initializeMarkers(map, petData);
+        };
         clickListener.current.ignore = ignoreClick;
         clickListener.current.userMarker = userMarker;
         clickListener.current.setUserMarker = setUserMarker;
     }
 
+    
+
     useEffect(() => {
         initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), petData);
     });
-
+    
     return(
         <div>
             <div className="sidebar">

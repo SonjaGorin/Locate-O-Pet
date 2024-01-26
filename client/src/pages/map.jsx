@@ -10,9 +10,10 @@
 // import '../App.css';
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import LostSeenPetForm from "../components/PetForm/LostSeenPetForm";
-import MapArea from "../components/MapArea";
-import ShowLostPetsData from "../components/PostsDiv/ShowLostPetsData";
+import LostPetForm from "../components/PetForms/LostPetForm";
+import SeenPetForm from "../components/PetForms/SeenPetForm";
+import MapArea from "../components/MapArea/MapArea";
+import LostPetsDiv from "../components/LostPetsDiv/LostPetsDiv";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
@@ -20,14 +21,20 @@ import { QUERY_ALLPETS } from "../utils/queries";
 
 import CatImage from "../../images/grey-cat.jpeg"
 import "../pages/map.css"
-import "../components/PostsDiv/ShowLostPetsData.css"
+import "../components/ShowLostPetsData/ShowLostPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
+const LeftPanel = {
+	PetsList: 0,
+	LostPetForm: 1,
+	SeenPetForm: 2,
+}
 
 export default function Map() {
-     const [showLostPetForm, setShowLostPetForm] = useState(false);
-     const [ userMarker, setUserMarker ] = useState()
+     const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
+     const [showSeenPetForm, setShowSeenPetForm] = useState(false);
+     const [ userMarker, setUserMarker ] = useState();
 
      const { data, loading } = useQuery(QUERY_ALLPETS);
      if (loading) {
@@ -38,36 +45,25 @@ export default function Map() {
      return (
           <div>
                <div className='pet-form-map'>
-                    <div className="all-pets-div">
-                         <h1>Lost Pets</h1>
-                         {petData.map((pet) => {
-                              return (
-                                   <div >
-                                        <ShowLostPetsData 
-                                             key={pet._id} 
-                                             species={pet.species} 
-                                             breed={pet.breed}
-                                             colours={pet.colours} 
-                                             message={pet.message}
-                                             sex={pet.sex} />
-                                   </div>
-                              )
-                         })} 
-                    </div>
-
                     <div>
-                         <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>
+                         <LostPetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
+                    </div>
+                    <div>
+                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>
+                    </div>
+                    <div>
+                         <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>
                     </div>
                     <div>
                          <MapArea 
                               userMarker={userMarker} 
-                              showLostPetForm={showLostPetForm} 
+                              ignoreClick={leftPanel == LeftPanel.PetsList} 
                               setUserMarker={setUserMarker} 
                               petData={petData}/>
                     </div>
                </div>
-               <button onClick={() => setShowLostPetForm(true)}>I lost a pet</button>
-               <button>I saw a pet</button>
+               <button className='i-lost-pet-button' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>
+               <button className='i-saw-pet-button' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setUserMarker(null)}}>I saw a pet</button>
           </div>
      );
 }
