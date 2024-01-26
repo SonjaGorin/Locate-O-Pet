@@ -1,17 +1,35 @@
-
 .map-container {
-    height: 500px;
-    width: 800px;
-    margin: 20px;
+     height: 600px;
+     width: 800px;
+     margin: 20px;
 }
 
 .sidebar {
-    background-color: rgb(35 55 75 / 90%);
-    color: #fff;
-    padding: 6px 12px;
-    font-family: monospace;
-    z-index: 1;
-    position: absolute;
-    margin: 12px 30px;
-    border-radius: 4px;
+     background-color: rgb(35 55 75 / 90%);
+     color: #fff;
+     padding: 6px 12px;
+     font-family: monospace;
+     z-index: 1;
+     position: absolute;
+     margin: 12px 30px;
+     border-radius: 4px;
+}
+
+.pet-form-map {
+     display: flex;
+     margin-left: 20px;
+     /* flex-direction: row; */
+}
+
+.profile-footer {
+     text-align: center;
+     position: fixed;
+     inset: auto 0 0 0;
+     padding: 1em;
+}
+
+.nav-title {
+     font-size: 36px !important;
+     font-weight: 700;
+     font-family: 'Josefin Sans', sans-serif;
 }

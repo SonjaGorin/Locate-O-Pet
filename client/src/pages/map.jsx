@@ -10,78 +10,62 @@
 // import '../App.css';
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import LostSeenPetForm from "../components/PetForm/LostSeenPetForm"
+import LostSeenPetForm from "../components/PetForm/LostSeenPetForm";
+import MapArea from "../components/MapArea";
+import ShowLostPetsData from "../components/PostsDiv/ShowLostPetsData";
+
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_ALLPETS } from "../utils/queries";
+
+
+import CatImage from "../../images/grey-cat.jpeg"
+import "../pages/map.css"
+import "../components/PostsDiv/ShowLostPetsData.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
-function addMarkerOnClick (map, event) {
-     var coordinates = event.lngLat;
-     if (map.userMarker) {
-          map.userMarker.setLngLat(coordinates);
-          addPopup(coordinates, map.current);
-          return;
-     }
-     var userMarker = addMarker(coordinates, map.current);
-     addPopup(coordinates, map.current);
-     map.userMarker = userMarker;
-};
-
-function initializeMarkers(map) {
-}
-
-function addPopup(coordinates, currentMap) {
-     return new mapboxgl.Popup({ offset: 35 })
-          .setLngLat(coordinates)
-          .setHTML('MapBox Coordinate<br/>' + coordinates)
-          .addTo(currentMap);
-}
-
-function addMarker(coordinates, currentMap) {
-     return new mapboxgl.Marker({
-          color: "#FF0000",
-          draggable: true
-     }).setLngLat(coordinates).addTo(currentMap);
-}
-
-function initializeMap(mapContainer, map, lat, lng, zoom) {
-     if (map.current) return map.current;
-     map.current = new mapboxgl.Map({
-          container: mapContainer.current,
-          style: 'mapbox://styles/mapbox/streets-v12',
-          center: [lng, lat],
-          zoom: zoom
-     });
-     
-     map.current.on('click', (event) => addMarkerOnClick(map, event));
-     return map.current;
-}
 
 export default function Map() {
-     const mapContainer = useRef(null);
-     const map = useRef(null);
-     const [lng, setLng] = useState(-75.7135);
-     const [lat, setLat] = useState(45.3844);
-     const [zoom, setZoom] = useState(10);
      const [showLostPetForm, setShowLostPetForm] = useState(false);
+     const [ userMarker, setUserMarker ] = useState()
 
-
-     useEffect(() => {
-          var currentMap = initializeMap(mapContainer, map, lat, lng, zoom);
-          initializeMarkers(map);
-          currentMap.on('move', () => {
-               setLng(map.current.getCenter().lng.toFixed(4));
-               setLat(map.current.getCenter().lat.toFixed(4));
-               setZoom(map.current.getZoom().toFixed(2));
-          });
-     });
+     const { data, loading } = useQuery(QUERY_ALLPETS);
+     if (loading) {
+          return <h2>Loading...</h2>;
+     }
+     const petData = data.allPets
 
      return (
           <div>
-               <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={map.userMarker}/>
-               <div className="sidebar">
-                    Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+               <div className='pet-form-map'>
+                    <div className="all-pets-div">
+                         <h1>Lost Pets</h1>
+                         {petData.map((pet) => {
+                              return (
+                                   <div >
+                                        <ShowLostPetsData 
+                                             key={pet._id} 
+                                             species={pet.species} 
+                                             breed={pet.breed}
+                                             colours={pet.colours} 
+                                             message={pet.message}
+                                             sex={pet.sex} />
+                                   </div>
+                              )
+                         })} 
+                    </div>
+
+                    <div>
+                         <LostSeenPetForm open={showLostPetForm} hideForm={() => setShowLostPetForm(false)} userMarker={userMarker}/>
+                    </div>
+                    <div>
+                         <MapArea 
+                              userMarker={userMarker} 
+                              showLostPetForm={showLostPetForm} 
+                              setUserMarker={setUserMarker} 
+                              petData={petData}/>
+                    </div>
                </div>
-               <div ref={mapContainer} className="map-container" />
                <button onClick={() => setShowLostPetForm(true)}>I lost a pet</button>
                <button>I saw a pet</button>
           </div>
