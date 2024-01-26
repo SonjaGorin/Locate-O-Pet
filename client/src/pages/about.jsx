@@ -33,6 +33,7 @@ export default function About() {
                                                   <Link to="/Register"  className="btn btn-primary btn-lg" type="submit">Sign up</Link>
                                              </div>
                                              <UploadWidget />
+                                             <img id="uploadedimage" src="" alt="" />
                                         </div>
 
                                    </div>
