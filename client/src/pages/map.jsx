@@ -33,34 +33,41 @@ const LeftPanel = {
 }
 
 export default function Map() {
+     // console.log("Rendering Map");
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
      // const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
-
-     const { data, loading } = useQuery(QUERY_ALLPETS);
+     const [ pets, setPets ] = useState([]);
+     const petsFetched = (data) => {
+          // console.log("Fetched pets");
+          // console.log(data.allPets);
+          setPets(data.allPets);
+     }
+     
+     const { loading, refetch } = useQuery(QUERY_ALLPETS, {onCompleted: petsFetched});
+     
      if (loading) {
           return <h2>Loading...</h2>;
      }
-     const petData = data.allPets
 
      return (
           <div>
                <div className='pet-form-map'>
                     <div>
-                         <PetsDiv petData={petData} open={leftPanel == LeftPanel.PetsList} />
+                         <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} />
                     </div>
                     <div>
-                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>
+                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
                     <div>
-                         <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null);}} userMarker={userMarker}/>
+                         <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
                     <div>
                          <MapArea 
                               userMarker={userMarker} 
                               ignoreClick={leftPanel == LeftPanel.PetsList} 
                               setUserMarker={setUserMarker} 
-                              petData={petData}/>
+                              pets={pets}/>
                     </div>
                </div>
                <button className='i-lost-pet-button' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>

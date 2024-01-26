@@ -30,10 +30,16 @@ function markerColor(pet) {
     }
 }
 
-function initializeMarkers(map, petData) {
-    {petData.map((pet) => {
+function initializeMarkers(map, pets, markers) {
+    if (!pets) return;
+    // console.log(markers.current);
+    for (var marker of markers.current) {
+        marker.remove();
+    }
+    markers.current = [];
+    {pets.map((pet) => {
 
-        return new mapboxgl.Marker({
+        var marker = new mapboxgl.Marker({
             color: markerColor(pet),
             draggable: false
         }).setLngLat({lng: pet.lng, lat: pet.lat})
@@ -44,10 +50,12 @@ function initializeMarkers(map, petData) {
                 )
         )
         .addTo(map.current);
+        markers.current.push(marker);
+        return marker;
     })} 
 }
 
-function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, onClick, petData) {
+function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, onClick) {
     if (map.current) return map.current;
 
     map.current = new mapboxgl.Map({
@@ -63,7 +71,6 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
             setZoom(map.current.getZoom().toFixed(2));
         })
         .on('click', onClick);
-    initializeMarkers(map, petData);
     return map.current;
 }
 
@@ -83,7 +90,8 @@ class ClickListener {
     }
 }
 
-export default function MapArea ({userMarker, ignoreClick, setUserMarker, petData}) {
+export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets}) {
+    // console.log(`Rendering MapArea with ${pets}`);
     if (userMarker) {console.log(userMarker.getLngLat())};
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -91,6 +99,7 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, petDat
     const [lat, setLat] = useState(45.3685);
     const [zoom, setZoom] = useState(10);
     const clickListener = useRef(null);
+    const markers = useRef([]);
     
     if (!clickListener.current) {
         clickListener.current = new ClickListener(ignoreClick, map, userMarker, setUserMarker);
@@ -106,9 +115,10 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, petDat
     }
 
     useEffect(() => {
-        initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), petData);
+        initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), pets);
     });
     
+    initializeMarkers(map, pets, markers);
     return(
         <div>
             <div className="sidebar">

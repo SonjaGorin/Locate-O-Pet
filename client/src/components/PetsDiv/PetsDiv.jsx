@@ -1,13 +1,14 @@
 import ShowPetsData from "../ShowPetsData/ShowPetsData";
 
-export default function PetsDiv({petData, open}) {
+export default function PetsDiv({pets, open}) {
+    console.log("Rendering PetsDiv");
     if (!open) {
         return (<div></div>);
     }
 
     return (
         <div className="all-pets-div">
-            {petData.map((pet) => {
+            {pets && pets.map((pet) => {
                 return (
                     <div >
                         <ShowPetsData 

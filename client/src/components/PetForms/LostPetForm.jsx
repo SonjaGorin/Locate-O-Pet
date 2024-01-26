@@ -75,7 +75,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
         setBreed("");
         setColours("");
         setMessage("");
-        setErrorMessage("Form successfully submitted!");
+        console.log("Form successfully submitted!");
     };
     
     return (
