@@ -32,9 +32,9 @@ export default function App() {
                     <main>
                          <Outlet />
                     </main>
-                    <footer className="profile-footer text-white footer mt-auto py-3 bg-primary fs-7">
+                    {/* <footer className="profile-footer text-white footer mt-auto py-3 bg-primary fs-7">
                          Carleton University Coding Bootcamp © Copyright 2024
-                    </footer>
+                    </footer> */}
                </>
           </ApolloProvider>
      );

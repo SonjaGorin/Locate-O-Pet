@@ -8,16 +8,15 @@
  * Date : 1/23/2024 11:30:54 AM
  *******************************************************************/
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
-import {phone} from 'phone';
+// import {phone} from 'phone';
 
 export default function Registration() {     
-     const [rolesList, setRolesList] = useState([{ name: 'User' }, { name: 'Owner' }]);
-     const [formState, setFormState] = useState({ email: '', password: '', phoneNumber: '', name: '', role: '' });
+     const [formState, setFormState] = useState({ email: '', password: '', phoneNumber: '', name: '' });
      const [addUser] = useMutation(ADD_USER);
 
      /**
@@ -32,7 +31,6 @@ export default function Registration() {
                     name: formState.name,
                     email: formState.email,
                     password: formState.password,
-                    role: formState.role,
                     phoneNumber: formState.phoneNumber                    
                },
           });
@@ -57,7 +55,7 @@ export default function Registration() {
                     <div className="flex-row space-between my-2">
                          <div className="col-12">
                               <div className="form-floating mb-3">
-                                   <input type="text" className="form-control" name="name" id="name" value="Gustavo Miller"
+                                   <input type="text" className="form-control" name="name" id="name" value={formState.name}
                                         placeholder="First Name" onChange={handleChange} required />
                                    <label htmlFor="name" className="form-label">Name</label>
                               </div>
@@ -67,7 +65,7 @@ export default function Registration() {
                     <div className="flex-row space-between my-2">
                          <div className="col-12">
                               <div className="form-floating mb-3">
-                                   <input className="form-control" placeholder="youremail@lost-pets.com" name="email" value="gustavo@miller-hs.com"
+                                   <input className="form-control" placeholder="youremail@lost-pets.com" name="email" value={formState.email}
                                         type="text" id="email" onChange={handleChange} />
                                    <label htmlFor="email" className="form-label">Email</label>
                               </div>
@@ -77,7 +75,7 @@ export default function Registration() {
                     <div className="flex-row space-between my-2">
                          <div className="col-12">
                               <div className="form-floating mb-3">
-                                   <input className="form-control" placeholder="(999)-999-9999" name="phoneNumber" type="text" value="613-600-2661"
+                                   <input className="form-control" placeholder="(999)-999-9999" name="phoneNumber" type="text" value={formState.phoneNumber}
                                         id="phoneNumber" onChange={handleChange} />
                                    <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
                               </div>
@@ -86,20 +84,7 @@ export default function Registration() {
                     <div className="flex-row space-between my-2">
                          <div className="col-12">
                               <div className="form-floating mb-3">
-
-                                   <select className="form-control" id="role" name="role" onChange={handleChange}>
-                                        {rolesList.map((role) => {
-                                             return (<option key={role.name} value={role.name}>{role.name}</option>);
-                                        })}
-                                   </select>
-                                   <label htmlFor="role" className="form-label">Role:</label>
-                              </div>
-                         </div>
-                    </div>
-                    <div className="flex-row space-between my-2">
-                         <div className="col-12">
-                              <div className="form-floating mb-3">
-                                   <input className="form-control" placeholder="******" name="password" value="password123456" 
+                                   <input className="form-control" placeholder="******" name="password" value={formState.password}
                                         type="password" id="pwd" onChange={handleChange} />
                                    <label htmlFor="pwd" className="form-label">Password:</label>
                               </div>
