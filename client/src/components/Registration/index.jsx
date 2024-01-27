@@ -31,7 +31,6 @@ export default function Registration() {
                     name: formState.name,
                     email: formState.email,
                     password: formState.password,
-                    phoneNumber: formState.phoneNumber                    
                },
           });
           debugger;
@@ -72,15 +71,6 @@ export default function Registration() {
                               </div>
                          </div>
 
-                    </div>
-                    <div className="flex-row space-between my-2">
-                         <div className="col-12">
-                              <div className="form-floating mb-3">
-                                   <input className="form-control" placeholder="(999)-999-9999" name="phoneNumber" type="text" value={formState.phoneNumber}
-                                        id="phoneNumber" onChange={handleChange} />
-                                   <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
-                              </div>
-                         </div>
                     </div>
                     <div className="flex-row space-between my-2">
                          <div className="col-12">
