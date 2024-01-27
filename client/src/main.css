@@ -15,12 +15,6 @@
      border-radius: 4px;
 }
 
-.pet-form-map {
-     display: flex;
-     margin-left: 20px;
-     /* flex-direction: row; */
-}
-
 .profile-footer {
      text-align: center;
      position: fixed;

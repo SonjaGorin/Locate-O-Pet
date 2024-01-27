@@ -105,7 +105,7 @@ const resolvers = {
         status,
         lng,
         lat,
-        owner: context.user._id,
+        user: context.user._id,
       });
 
       const petAdded = await User.findOneAndUpdate(
