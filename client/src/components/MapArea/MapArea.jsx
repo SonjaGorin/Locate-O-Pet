@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import "./MapArea.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -46,7 +47,8 @@ function initializeMarkers(map, pets, markers) {
         .setPopup(
             new mapboxgl.Popup({ offset: 25 }) // add popups
                 .setHTML(
-                `<h3>${pet.species}</h3>`
+                `<h3>${pet.species}</h3>
+                <p><img class="pet-popup-img" src=${pet.img} ></img></p>`
                 )
         )
         .addTo(map.current);
