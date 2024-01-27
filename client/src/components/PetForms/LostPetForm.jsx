@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./PetForms.css"
 
 import { useMutation } from "@apollo/client";
+import UploadWidget from '../UploadWidget';
 import { ADD_LOSTPET } from "../../utils/mutations";
 
 export default function LostSeenPetForm({open, hideForm, userMarker}) {
@@ -130,6 +131,10 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         className="message-field"
                     />
+                </div>
+                <div className="upload-img-bttn">
+                    <UploadWidget />
+                    <img id="uploadedimage" src="" />
                 </div>
                 {!userMarker &&
                 <div>
