@@ -20,6 +20,7 @@ export default function PetPostCard(pet) {
             <h2 className="card-text">Colour: {pet.colours}</h2>
             <h2 className="card-text">{sexText} {pet.sex}</h2>
             <h2 className="card-text">Message: {pet.message}</h2>
+            <img className="card-img" src={pet.img}/>
         </div>
     )
 }

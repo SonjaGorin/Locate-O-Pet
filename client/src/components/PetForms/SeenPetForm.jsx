@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./PetForms.css"
 
 import { useMutation } from "@apollo/client";
+import UploadWidget from '../UploadWidget';
 import { ADD_SEENPET } from "../../utils/mutations";
 
 export default function SeenPetForm({open, hideForm, userMarker}) {
@@ -54,7 +55,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
             return;
         }
 
-        const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng, status }};
+        const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng, status, img }};
 
         if (!species || !colours || !message) {
             setErrorMessage("Please fill up all fields.");
@@ -128,6 +129,10 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         className="message-field"
                     />
+                </div>
+                <div className="upload-img-bttn">
+                    <UploadWidget />
+                    <img id="uploadedimage" src="" />
                 </div>
                 {!userMarker &&
                 <div>

@@ -2,10 +2,6 @@
     color: red;
 }
 
-.sorry-greeting {
-
-}
-
 .form {
     display: flex;
     flex-direction: column;
@@ -15,7 +11,8 @@
 .sex-input,
 .breed-input,
 .colours-input,
-.message-input {
+.message-input,
+.upload-img-bttn {
     display: flex;
     flex-direction: column;
 }
@@ -49,4 +46,9 @@
     font-size: 20px;
     text-align: left;
     margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.upload-img-bttn {
+    width: 200px;
 }
