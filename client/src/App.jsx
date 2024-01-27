@@ -39,7 +39,7 @@ export default function App() {
           <ApolloProvider client={client}>
                <>
                     <NavigationBar />
-                    <main className="overflow-auto">
+                    <main>
                          <Outlet />
                     </main>
                     <Footer/>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./PetForms.css"
+import { Container, Row, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 import { useMutation } from "@apollo/client";
 import UploadWidget from '../UploadWidget';
@@ -81,7 +83,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
     };
 
     return (
-        <div className="form-div2">
+        <div className="form-div2 back-color-seen">
             <h1  className="sorry-greeting">We are so glad you saw someone's pet!</h1>
             <h2  className="under-greeting">Please dedscribe them as best as possible.</h2>
             <form  className="form" onSubmit={handleFormSubmit}>
@@ -148,7 +150,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     </div>
                 )}
                 <div>
-                    <button type="submit" className="submit-bttn">
+                    <button type="submit" className="submit-bttn btn btn-primary btn-lg">
                         Submit
                     </button>
                 </div>
