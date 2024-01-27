@@ -8,7 +8,6 @@ type User {
     name: String, 
     email: String,
     password: String,
-    phoneNumber: String,
     petsSeen: [Pet],
     petsLost: [Pet]
 }
@@ -56,7 +55,7 @@ type Auth {
 
 type Mutation {
    
-    addUser(name: String!, email: String!, password: String!, phoneNumber: String!): Auth
+    addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
 

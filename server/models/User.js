@@ -19,11 +19,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    phoneNumber: {
-      type: String,
-      required: true,
-      match: [/^\d{3}-\d{3}-\d{4}$/, "Please enter a valid phone number"],
-    },
     petsSeen: [{
       type: Schema.Types.ObjectId,
       ref: "Pet"

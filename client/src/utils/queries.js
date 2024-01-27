@@ -7,7 +7,6 @@ query Query {
     name
     email
     password
-    phoneNumber
     role
     petsSeen {
       _id
@@ -55,7 +54,6 @@ query Query($id: ID!) {
       name
       email
       password
-      phoneNumber
     }
   }
 }
@@ -80,7 +78,6 @@ query AllPets {
       name
       email
       password
-      phoneNumber
     }
   }
 }
