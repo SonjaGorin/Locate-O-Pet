@@ -17,7 +17,7 @@ query Query {
       colours
       message
       status
-      image
+      img
       lng
       lat
     }
@@ -30,7 +30,7 @@ query Query {
       colours
       message
       status
-      image
+      img
       lng
       lat
     }
@@ -49,7 +49,7 @@ query Query($id: ID!) {
     colours
     message
     status
-    image
+    img
     lng
     lat
     user {
@@ -74,6 +74,7 @@ query AllPets {
     colours
     message
     status
+    img
     lng
     lat
     user {

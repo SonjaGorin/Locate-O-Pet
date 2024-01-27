@@ -38,8 +38,8 @@ export default function Map() {
      const [ pets, setPets ] = useState([]);
      const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
      const petsFetched = (data) => {
-          // console.log("Fetched pets");
-          // console.log(data.allPets);
+          console.log("Fetched pets");
+          console.log(data.allPets);
           setPets(data.allPets);
      }
 

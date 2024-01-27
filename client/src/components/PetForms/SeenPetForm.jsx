@@ -16,13 +16,14 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
     const [colours, setColours] = useState("");
     const [message, setMessage] = useState("");
     const [status, setStatus] = useState("isSeen");
+    const [img, setImg] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
 
     const [ addSeenPet ] = useMutation(ADD_SEENPET);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
-        const { name, value } = e.target;
+        const { name, value, src } = e.target;
         // making sure that the right set function is called depending on the input field user is typing in
         if (name === "species") {
             return setSpecies(value)
@@ -32,6 +33,8 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
             return setBreed(value)
         }  else if (name === "colours") {
             return setColours(value)
+        } else if (name === "image") {
+            return setImg(src)
         } else {
             return setMessage(value)
         }
@@ -131,8 +134,8 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="upload-img-bttn">
-                    <UploadWidget />
-                    <img id="uploadedimage" src="" />
+                    <UploadWidget onUpload={(src) => setImg(src)}/>
+                    <img id="uploadedimage" name="image" src={img} />
                 </div>
                 {!userMarker &&
                 <div>
