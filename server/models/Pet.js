@@ -32,6 +32,9 @@ const petSchema = new Schema(
       type: String,
       required: true
     },
+    image: {
+      type: String
+    },
     lng: {
       type: Number,
       require: true,

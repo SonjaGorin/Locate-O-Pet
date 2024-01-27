@@ -17,6 +17,7 @@ query Query {
       colours
       message
       status
+      image
       lng
       lat
     }
@@ -29,6 +30,7 @@ query Query {
       colours
       message
       status
+      image
       lng
       lat
     }
@@ -47,6 +49,7 @@ query Query($id: ID!) {
     colours
     message
     status
+    image
     lng
     lat
     user {
