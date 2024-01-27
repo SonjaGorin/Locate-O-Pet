@@ -58,7 +58,7 @@ const resolvers = {
     },
 
     addSeenPet: async (parent, { input }, context) => {
-      const { species, sex, breed, colours, message, status, image, lng, lat } = input;
+      const { species, sex, breed, colours, message, status, img, lng, lat } = input;
 
       if (!context.user) {
         throw AuthenticationError;
@@ -71,7 +71,7 @@ const resolvers = {
         colours,
         message,
         status,
-        image,
+        img,
         lng,
         lat,
         user: context.user._id,
@@ -91,7 +91,7 @@ const resolvers = {
     },
 
     addLostPet: async (parent, { input }, context) => {
-            const { species, sex, breed, colours, message, status, image, lng, lat } = input;
+            const { species, sex, breed, colours, message, status, img, lng, lat } = input;
 
       if (!context.user) {
         throw AuthenticationError;
@@ -104,7 +104,7 @@ const resolvers = {
         colours,
         message,
         status,
-        image,
+        img,
         lng,
         lat,
         user: context.user._id,

@@ -1,6 +1,7 @@
 import "./PetPostCard.css"
 
 export default function PetPostCard(pet) {
+    // console.log(pet.img)
     if (pet.status === "isLost") {
         var speciesText = "This is my lost";
         var subclass = "background-red";

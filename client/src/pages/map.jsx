@@ -36,8 +36,8 @@ export default function Map() {
      const [ userMarker, setUserMarker ] = useState();
      const [ pets, setPets ] = useState([]);
      const petsFetched = (data) => {
-          // console.log("Fetched pets");
-          // console.log(data.allPets);
+          console.log("Fetched pets");
+          console.log(data.allPets);
           setPets(data.allPets);
      }
      

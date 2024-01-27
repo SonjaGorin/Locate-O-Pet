@@ -21,7 +21,7 @@ type Pet {
     colours: [String],
     message: String,
     status: String,
-    image: String,
+    img: String,
     lng: Float,
     lat: Float,
     user: User
@@ -36,7 +36,7 @@ input petArgs {
     colours: [String],
     message: String,
     status: String,
-    image: String,
+    img: String,
     lng: Float,
     lat: Float
 
