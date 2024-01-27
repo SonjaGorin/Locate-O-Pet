@@ -1,0 +1,13 @@
+.pet-popup-img {
+    height: 100px;
+    width: 100px;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+    max-height: 200px;
+}
+  
+.mapboxgl-popup-content {
+    text-align: center;
+}
