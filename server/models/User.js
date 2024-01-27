@@ -18,6 +18,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+      match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Must contain at least one smallercase letter, one uppercase letter, one digit, and one special character. Must also be a minimum of 8 characters."]
     },
     petsSeen: [{
       type: Schema.Types.ObjectId,
