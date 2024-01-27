@@ -21,11 +21,23 @@ export default function Registration() {
      const [addUser] = useMutation(ADD_USER);
      const [isClicked, setIsClicked] = useState(false);
      const triggerRef = useRef(null);
+     const [pageName, setPageName] = useState("index.jsx");
 
 
 
      const emailValidation = /^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$/
      const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+
+     useEffect(() => {
+          document.title = "Locate-O-Pet"; 
+          if (pageName === "index.jsx") {
+            document.title = "Register";}
+     
+      
+          return () => {
+            document.title = "Locate-O-Pet";
+          };
+        }, [pageName]);
 
      useEffect(() => {
           const outsideClick = (event) => {
