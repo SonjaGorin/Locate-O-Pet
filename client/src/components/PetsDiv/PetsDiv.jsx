@@ -2,7 +2,7 @@ import ShowPetsData from "../ShowPetsData/ShowPetsData";
 import "./PetsDiv.css"
 
 export default function PetsDiv({pets, open}) {
-    console.log("Rendering PetsDiv");
+    // console.log("Rendering PetsDiv");
     if (!open) {
         return (<div></div>);
     }

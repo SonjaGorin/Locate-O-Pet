@@ -10,7 +10,7 @@
 import { useEffect, useRef } from "react";
 import { Button } from 'react-bootstrap';
 
-const UploadWidget = () => {
+const UploadWidget = ({onUpload}) => {
 
      const cloudinaryRef = useRef()
      const widgetRef = useRef()
@@ -24,9 +24,7 @@ const UploadWidget = () => {
                if (!error && result && result.event === "success") {
                     console.log("Done! Here is the image info: ", result.info);
                     console.log(result.info.secure_url);
-                    document
-                         .getElementById("uploadedimage")
-                         .setAttribute("src", result.info.secure_url);
+                    onUpload(result.info.secure_url);
                }
           })
 

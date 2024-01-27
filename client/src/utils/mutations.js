@@ -41,7 +41,7 @@ mutation AddSeenPet($input: petArgs) {
     colours
     message
     status
-    image
+    img
     lng
     lat
     user {
@@ -65,7 +65,7 @@ mutation AddLostPet($input: petArgs) {
     colours
     message
     status
-    image
+    img
     lat
     lng
     user {
@@ -90,7 +90,7 @@ export const REMOVE_PET = gql`
     colours
     message
     status
-    image
+    img
     lng
     lat
     user {

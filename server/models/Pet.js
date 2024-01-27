@@ -32,7 +32,7 @@ const petSchema = new Schema(
       type: String,
       required: true
     },
-    image: {
+    img: {
       type: String
     },
     lng: {
