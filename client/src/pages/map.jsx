@@ -19,8 +19,7 @@ import Auth from "../utils/auth";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
 
-import CatImage from "../../images/grey-cat.jpeg"
-import "../pages/map.css"
+import "./map.css"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
 
@@ -54,7 +53,7 @@ export default function Map() {
      }
 
      return (
-          <div>
+          <div className='page-height'>
                <div className='pet-form-map'>
                     <div className='form-div'>
                          <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} />
@@ -69,8 +68,8 @@ export default function Map() {
                               pets={pets}/>
                     </div>
                </div>
-               {isLoggedIn && <button className='i-lost-pet-button' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>}
-               {isLoggedIn && <button className='i-saw-pet-button' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setUserMarker(null)}}>I saw a pet</button>}
+               {isLoggedIn && <button className='i-lost-pet-button btn btn-primary bg-red btn-lg' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>}
+               {isLoggedIn && <button className='i-saw-pet-button btn btn-primary btn-lg' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setUserMarker(null)}}>I saw a pet</button>}
           </div>
      );
 }

@@ -15,9 +15,9 @@ import App from './App.jsx'
 
 import About from './pages/about.jsx'
 import Map from './pages/map.jsx'
-import LostPets from './pages/lostpets.jsx'
-import Spotted from './pages/spotted.jsx'
-import Post from './pages/post.jsx'
+// import LostPets from './pages/lostpets.jsx'
+// import Spotted from './pages/spotted.jsx'
+// import Post from './pages/post.jsx'
 import Contact from './pages/contact.jsx'
 import Login from './pages/login.jsx'
 import Register from './pages/register.jsx'
@@ -38,9 +38,9 @@ const router = createBrowserRouter([
                     element: <Map />,
                },
                { path: '/About', element: <About />, },
-               { path: '/LostPets', element: <LostPets />, },
-               { path: '/Spotted', element: <Spotted />, },
-               { path: '/Post', element: <Post />, },
+               // { path: '/LostPets', element: <LostPets />, },
+               // { path: '/Spotted', element: <Spotted />, },
+               // { path: '/Post', element: <Post />, },
                { path: '/Contact', element: <Contact />, },
                { path: '/Login', element: <Login />, },
                { path: '/Register', element: <Register />, },

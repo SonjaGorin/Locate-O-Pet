@@ -13,6 +13,7 @@ import GraphEnv from '../components/Contact/envelope.jsx';
 import GraphPhone from '../components/Contact/phoneicon.jsx';
 import { Container, Row, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import "./contact.css"
 
 export default function Contact() {
 
@@ -28,7 +29,7 @@ export default function Contact() {
 
      return (
 
-          <section className="bg-light py-3 py-md-5">
+          <section className="bg-light py-3 py-md-5 contact-height">
 
                <Container>
 
