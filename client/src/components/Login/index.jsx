@@ -7,7 +7,7 @@
  * Filename: register.js
  * Date : 1/23/2024 11:30:54 AM
  *******************************************************************/
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { LOGIN_USER } from "../../utils/mutations";
@@ -17,6 +17,19 @@ import Swal from "sweetalert2";
 export default function UserLogin() {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login] = useMutation(LOGIN_USER);
+  const [pageName, setPageName] = useState("index.jsx");
+
+
+  useEffect(() => {
+    document.title = "Locate-O-Pet"; 
+    if (pageName === "index.jsx") {
+      document.title = "Login";}
+
+
+    return () => {
+      document.title = "Locate-O-Pet";
+    };
+  }, [pageName]);
 
 
   const handleEmpty = (event) => {
