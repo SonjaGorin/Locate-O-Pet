@@ -20,6 +20,10 @@ export default function Registration() {
      const [formState, setFormState] = useState({ email: '', password: '', phoneNumber: '', name: '' });
      const [addUser] = useMutation(ADD_USER);
 
+     const emailValidation = /^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$/
+     const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+
+
      const handleEmpty = (event) => {
           const {name, value} = event.target;
           if (name === "name" && value === "") {
@@ -60,6 +64,17 @@ export default function Registration() {
       * @param {*} event 
       */
      const handleFormSubmit = async (event) => {
+          
+          if (validationEmail.test(!formState.email) && validationPassword.test(formState.password)) {
+               Swal.fire({
+                    position: "center-center",
+                    icon: "error",
+                    title: "Must provide a valid email",
+                    text: event.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
+          }
           event.preventDefault();
           debugger;
           
@@ -73,6 +88,8 @@ export default function Registration() {
           debugger;
           const token = mutationResponse.data.addUser.token;
           Auth.login(token);
+
+
      };
 
      /**

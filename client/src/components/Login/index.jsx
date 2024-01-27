@@ -30,7 +30,7 @@ export default function UserLogin() {
                showConfirmButton: false,
                timer: 2500,
              });
-     } else {
+     } else if (name === "password" && value === "") {
           Swal.fire({
                position: "center-center",
                icon: "error",
