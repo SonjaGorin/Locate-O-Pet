@@ -3,15 +3,14 @@ import { gql } from '@apollo/client';
 //name, email, password, role, phoneNumber
 
 export const ADD_USER = gql`
-mutation Mutation($name: String!, $email: String!, $password: String!, $phoneNumber: String!) {
-  addUser(name: $name, email: $email, password: $password, phoneNumber: $phoneNumber) {
+mutation Mutation($name: String!, $email: String!, $password: String!) {
+  addUser(name: $name, email: $email, password: $password) {
     token
     user {
       _id
       name
       email
       password
-      phoneNumber
     }
   }
 }
@@ -26,7 +25,6 @@ mutation Login($email: String!, $password: String!) {
       name
       email
       password
-      phoneNumber
     }
   }
 }
@@ -50,7 +48,6 @@ mutation AddSeenPet($input: petArgs) {
       name
       email
       password
-      phoneNumber
     }
   }
 }
@@ -74,7 +71,6 @@ mutation AddLostPet($input: petArgs) {
       name
       email
       password
-      phoneNumber
     }
   }
 }
@@ -99,7 +95,6 @@ export const REMOVE_PET = gql`
       name
       email
       password
-      phoneNumber
     }
   }
 }
