@@ -14,6 +14,7 @@ import LostPetForm from "../components/PetForms/LostPetForm";
 import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
 import PetsDiv from "../components/PetsDiv/PetsDiv";
+import Auth from "../utils/auth";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
@@ -35,11 +36,16 @@ export default function Map() {
      // const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
      const [ pets, setPets ] = useState([]);
+     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
      const petsFetched = (data) => {
           console.log("Fetched pets");
           console.log(data.allPets);
           setPets(data.allPets);
      }
+
+    console.log(isLoggedIn)
+
+     
      
      const { loading, refetch } = useQuery(QUERY_ALLPETS, {onCompleted: petsFetched});
      
@@ -63,8 +69,8 @@ export default function Map() {
                               pets={pets}/>
                     </div>
                </div>
-               <button className='i-lost-pet-button' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>
-               <button className='i-saw-pet-button' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setUserMarker(null)}}>I saw a pet</button>
+               {isLoggedIn && <button className='i-lost-pet-button' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>}
+               {isLoggedIn && <button className='i-saw-pet-button' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setUserMarker(null)}}>I saw a pet</button>}
           </div>
      );
 }
