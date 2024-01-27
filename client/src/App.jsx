@@ -11,6 +11,7 @@ import './App.css';
 import { Outlet } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import NavigationBar from './components/Navigator/navigation';
+import Footer from './components/Footer/Footer';
 import { setContext } from '@apollo/client/link/context';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedImage } from '@cloudinary/react';
@@ -38,12 +39,10 @@ export default function App() {
           <ApolloProvider client={client}>
                <>
                     <NavigationBar />
-                    <main>
+                    <main className="overflow-auto">
                          <Outlet />
                     </main>
-                    {/* <footer className="profile-footer text-white footer mt-auto py-3 bg-primary fs-7">
-                         Carleton University Coding Bootcamp © Copyright 2024
-                    </footer> */}
+                    <Footer/>
                </>
           </ApolloProvider>
      );
