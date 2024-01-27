@@ -1,6 +1,6 @@
 import PetPostCard from "../PetPostCard/PetPostCard";
 
-export default function ShowPetsData({key, species, breed, colours, message, status, sex}) {
+export default function ShowPetsData({key, species, breed, colours, message, status, img, sex}) {
     return (
         <div >
             <div className="PetInfoCard">
@@ -12,6 +12,7 @@ export default function ShowPetsData({key, species, breed, colours, message, sta
                         colours={colours} 
                         message={message}
                         status={status}
+                        img={img}
                         sex={sex} />
                 </div>
             </div>

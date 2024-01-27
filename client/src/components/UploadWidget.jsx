@@ -33,7 +33,7 @@ const UploadWidget = () => {
      }, [])
 
      return (
-          <Button className="btn btn-primary btn-lg mt-5" onClick={() => { widgetRef.current.open() }}>Upload Image</Button>
+          <Button className="btn btn-primary btn-lg" onClick={() => { widgetRef.current.open() }}>Upload Image</Button>
      )
 
 }
