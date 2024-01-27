@@ -2,6 +2,9 @@
      height: 700px;
      width: 950px;
      margin: 30px;
+     border: 1px;
+     border-style: solid;
+     border-color: rgb(212, 212, 212);
 }
 
 .sidebar {
