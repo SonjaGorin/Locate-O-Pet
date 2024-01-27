@@ -7,7 +7,7 @@
  * Filename: Regisration/index.js
  * Date : 1/23/2024 11:30:54 AM
  *******************************************************************/
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
@@ -19,10 +19,31 @@ import Swal from 'sweetalert2';
 export default function Registration() {     
      const [formState, setFormState] = useState({ email: '', password: '', phoneNumber: '', name: '' });
      const [addUser] = useMutation(ADD_USER);
+     const [isClicked, setIsClicked] = useState(false);
+     const triggerRef = useRef(null);
+
+
 
      const emailValidation = /^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$/
      const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
 
+     useEffect(() => {
+          const outsideClick = (event) => {
+            if (triggerRef.current && !triggerRef.current.contains(event.target)) {
+              setIsClicked(false);
+            }
+          };
+      
+          document.addEventListener('click', outsideClick);
+      
+          return () => {
+            document.removeEventListener('click', outsideClick);
+          };
+        }, []);
+
+     const handleClick = () => {
+          setIsClicked(true);
+        };
 
      const handleEmpty = (event) => {
           const {name, value} = event.target;
@@ -30,7 +51,7 @@ export default function Registration() {
                Swal.fire({
                     position: "center-center",
                     icon: "error",
-                    title: "Must fill name field",
+                    title: "Must fill name field.",
                     text: event.message,
                     showConfirmButton: false,
                     timer: 2500,
@@ -39,7 +60,7 @@ export default function Registration() {
                Swal.fire({
                     position: "center-center",
                     icon: "error",
-                    title: "Must fill email field",
+                    title: "Must fill email field.",
                     text: event.message,
                     showConfirmButton: false,
                     timer: 2500,
@@ -48,7 +69,7 @@ export default function Registration() {
                Swal.fire({
                     position: "center-center",
                     icon: "error",
-                    title: "Must fill password field",
+                    title: "Must fill password field.",
                     text: event.message,
                     showConfirmButton: false,
                     timer: 2500,
@@ -65,16 +86,39 @@ export default function Registration() {
       */
      const handleFormSubmit = async (event) => {
           
-          if (validationEmail.test(!formState.email) && validationPassword.test(formState.password)) {
+          if (!(emailValidation.test(formState.email)) && passwordValidation.test(formState.password)) {
                Swal.fire({
                     position: "center-center",
                     icon: "error",
-                    title: "Must provide a valid email",
+                    title: "Must provide a valid email.",
                     text: event.message,
                     showConfirmButton: false,
                     timer: 2500,
                   });
           }
+
+          if (emailValidation.test(formState.email) && !(passwordValidation.test(formState.password))) {
+               Swal.fire({
+                    position: "center-center",
+                    icon: "error",
+                    title: "Password must be of 8 characters minimum. Must contain one of each lowercase, uppercase, digit, and special character.",
+                    text: event.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
+          }
+
+          if (!(emailValidation.test(formState.email)) && !(passwordValidation.test(formState.password))) {
+               Swal.fire({
+                    position: "center-center",
+                    icon: "error",
+                    title: "Neither email nor password conform to the rules.",
+                    text: event.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
+          }
+
           event.preventDefault();
           debugger;
           
@@ -130,8 +174,11 @@ export default function Registration() {
                          <div className="col-12">
                               <div className="form-floating mb-3">
                                    <input className="form-control" placeholder="******" name="password" value={formState.password}
-                                        type="password" id="pwd" onChange={handleChange} onBlur={handleEmpty} />
+                                        type="password" id="pwd" onChange={handleChange} onBlur={handleEmpty} onClick={handleClick} ref={triggerRef}/>
                                    <label htmlFor="pwd" className="form-label">Password:</label>
+                                   <div>
+                                   {isClicked && <p className = "text-center">Password must have minimum of 8 characters, and one of each lower/upper/digit/special char.</p>}
+                                   </div>
                               </div>
                          </div>
                     </div>
