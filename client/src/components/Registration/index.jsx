@@ -13,6 +13,8 @@ import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations';
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+
 
 export default function Registration() {     
      const [formState, setFormState] = useState({ email: '', password: '', phoneNumber: '', name: '' });
@@ -26,6 +28,7 @@ export default function Registration() {
      const handleFormSubmit = async (event) => {
           event.preventDefault();
           debugger;
+          
           const mutationResponse = await addUser({
                variables: {
                     name: formState.name,
