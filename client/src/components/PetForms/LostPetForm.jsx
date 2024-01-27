@@ -57,7 +57,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
             return;
         }
 
-        const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng, status }};
+        const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng, status, img }};
 
         if (!species || !sex || !breed || !colours || !message) {
             setErrorMessage("Please fill up all fields.");
