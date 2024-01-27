@@ -9,12 +9,13 @@
  *******************************************************************/
 import { Link } from 'react-router-dom';
 import Registration from '../components/Registration/index.jsx'
+import "./register.css"
 
 function Register(props) {
 
      return (
 
-          <section className="bg-light py-3 py-md-5 py-xl-8">
+          <section className="bg-light py-3 py-md-5 py-xl-8 register-height">
                <div className="container">
                     <div className="row justify-content-center">
                          <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">

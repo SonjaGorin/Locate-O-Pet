@@ -138,7 +138,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="upload-img-bttn">
-                    <UploadWidget onUpload={(src) => setImg(src)} className="upload-lost-btn"/>
+                    <UploadWidget onUpload={(src) => setImg(src)} />
                     <img id="uploadedimage" name="image" src={img} />
                 </div>
                 {!userMarker &&

@@ -10,10 +10,11 @@
 import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import UploadWidget from '../components/UploadWidget.jsx';
+import "./about.css"
 
 export default function About() {
      return (
-          <div>
+          <div className='about-height'>
                <section className="py-3 py-md-5 py-xl-8">
                     <Container>
                          <div className="row gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
