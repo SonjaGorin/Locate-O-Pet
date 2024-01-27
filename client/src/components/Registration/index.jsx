@@ -20,6 +20,40 @@ export default function Registration() {
      const [formState, setFormState] = useState({ email: '', password: '', phoneNumber: '', name: '' });
      const [addUser] = useMutation(ADD_USER);
 
+     const handleEmpty = (event) => {
+          const {name, value} = event.target;
+          if (name === "name" && value === "") {
+               Swal.fire({
+                    position: "center-center",
+                    icon: "error",
+                    title: "Must fill name field",
+                    text: event.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
+          } else if (name === "email" && value === "") {
+               Swal.fire({
+                    position: "center-center",
+                    icon: "error",
+                    title: "Must fill email field",
+                    text: event.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
+          } else {
+               Swal.fire({
+                    position: "center-center",
+                    icon: "error",
+                    title: "Must fill password field",
+                    text: event.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
+               }
+     
+       };
+     
+
      /**
       * This will handle the form submit. It prevents the form to clear and addUser using the 
       * corresponding mutation. It also assigns the token.
@@ -59,7 +93,7 @@ export default function Registration() {
                          <div className="col-12">
                               <div className="form-floating mb-3">
                                    <input type="text" className="form-control" name="name" id="name" value={formState.name}
-                                        placeholder="First Name" onChange={handleChange} required />
+                                        placeholder="First Name" onChange={handleChange} onBlur={handleEmpty} required />
                                    <label htmlFor="name" className="form-label">Name</label>
                               </div>
                          </div>
@@ -69,7 +103,7 @@ export default function Registration() {
                          <div className="col-12">
                               <div className="form-floating mb-3">
                                    <input className="form-control" placeholder="youremail@lost-pets.com" name="email" value={formState.email}
-                                        type="text" id="email" onChange={handleChange} />
+                                        type="text" id="email" onChange={handleChange} onBlur={handleEmpty} />
                                    <label htmlFor="email" className="form-label">Email</label>
                               </div>
                          </div>
@@ -79,7 +113,7 @@ export default function Registration() {
                          <div className="col-12">
                               <div className="form-floating mb-3">
                                    <input className="form-control" placeholder="******" name="password" value={formState.password}
-                                        type="password" id="pwd" onChange={handleChange} />
+                                        type="password" id="pwd" onChange={handleChange} onBlur={handleEmpty} />
                                    <label htmlFor="pwd" className="form-label">Password:</label>
                               </div>
                          </div>
