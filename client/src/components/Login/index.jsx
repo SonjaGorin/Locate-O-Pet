@@ -25,16 +25,16 @@ export default function UserLogin() {
           Swal.fire({
                position: "center-center",
                icon: "error",
-               title: "Must fill email field",
+               title: "Must fill email field.",
                text: event.message,
                showConfirmButton: false,
                timer: 2500,
              });
-     } else {
+     } else if (name === "password" && value === "") {
           Swal.fire({
                position: "center-center",
                icon: "error",
-               title: "Must fill password field",
+               title: "Must fill password field.",
                text: event.message,
                showConfirmButton: false,
                timer: 2500,
