@@ -12,7 +12,7 @@ export default function PetsDiv({pets, open, setSelectedPetId}) {
             {pets && pets.map((pet) => {
 
                 return (
-                    <div >
+                    <div key={pet._id}>
                         <ShowPetsData 
                             key={pet._id}
                             _id={pet._id}
