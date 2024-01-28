@@ -67,7 +67,7 @@ export default function Map() {
                          <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                          <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
-                    <div>
+                    <div className='map-div'>
                          <MapArea 
                               userMarker={userMarker} 
                               ignoreClick={leftPanel == LeftPanel.PetsList} 

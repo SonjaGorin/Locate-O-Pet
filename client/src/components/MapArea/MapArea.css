@@ -11,3 +11,24 @@
 .mapboxgl-popup-content {
     text-align: center;
 }
+
+.map-container {
+    height: 700px;
+    width: 90%;
+    margin: 30px;
+    border: 1px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    border-radius: 0 5px 5px 0;
+}
+
+.sidebar {
+    background-color: rgb(35 55 75 / 90%);
+    color: #fff;
+    padding: 6px 12px;
+    font-family: monospace;
+    z-index: 1;
+    position: absolute;
+    margin: 12px 30px;
+    border-radius: 4px;
+}
