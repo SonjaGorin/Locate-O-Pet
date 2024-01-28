@@ -51,7 +51,11 @@ function initializeMarkers(map, pets, markers, selectedPetId) {
             draggable: false
         }).setLngLat({lng: pet.lng, lat: pet.lat})
         .setPopup(
-            new mapboxgl.Popup({ offset: 25 }) // add popups
+            new mapboxgl.Popup({ 
+                offset: 25,
+                closeButton: false,
+                closeOnClick: true 
+            }) // add popups
                 .setHTML(
                 `<h3>${pet.species}</h3>
                 <p><img class="pet-popup-img" src=${pet.img} ></img></p>`
