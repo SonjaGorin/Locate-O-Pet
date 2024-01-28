@@ -14,6 +14,7 @@ import LostPetForm from "../components/PetForms/LostPetForm";
 import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
 import PetsDiv from "../components/PetsDiv/PetsDiv";
+import FilterDiv from "../components/FilterDiv/FilterDiv";
 import Auth from "../utils/auth";
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -27,6 +28,7 @@ const LeftPanel = {
 	PetsList: 0,
 	LostPetForm: 1,
 	SeenPetForm: 2,
+
 }
 
 export default function Map() {
@@ -34,18 +36,22 @@ export default function Map() {
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
      // const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
+     const [ showButtons, setShowButtons ] = useState(true)
      const [ pets, setPets ] = useState([]);
      const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
+
      const petsFetched = (data) => {
           console.log("Fetched pets");
           console.log(data.allPets);
           setPets(data.allPets);
+          console.log(data)          
      }
 
-    console.log(isLoggedIn)
+     
+     
 
-     
-     
+//     console.log(isLoggedIn)
+
      const { loading, refetch } = useQuery(QUERY_ALLPETS, {onCompleted: petsFetched});
      
      if (loading) {
@@ -56,11 +62,12 @@ export default function Map() {
           <div className='page-height'>
                <div className='pet-form-map'>
                     <div className='form-div'>
+                         <FilterDiv open={leftPanel == LeftPanel.PetsList} />
                          <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} />
                          <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                          <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
-                    <div>
+                    <div className='map-div'>
                          <MapArea 
                               userMarker={userMarker} 
                               ignoreClick={leftPanel == LeftPanel.PetsList} 
@@ -68,8 +75,8 @@ export default function Map() {
                               pets={pets}/>
                     </div>
                </div>
-               {isLoggedIn && <button className='i-lost-pet-button btn btn-primary bg-red btn-lg' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>}
-               {isLoggedIn && <button className='i-saw-pet-button btn btn-primary btn-lg' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setUserMarker(null)}}>I saw a pet</button>}
+               {isLoggedIn && showButtons && <button  className='i-lost-pet-button btn btn-primary bg-red btn-lg' onClick={() => {setLeftPanel(LeftPanel.LostPetForm); setShowButtons(false)}} >I lost a pet</button>}
+               {isLoggedIn && showButtons && <button className='i-saw-pet-button btn btn-primary btn-lg' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setShowButtons(false); setUserMarker(null)}}>I saw a pet</button>}
           </div>
      );
 }

@@ -38,13 +38,9 @@ const router = createBrowserRouter([
                     element: <Map />,
                },
                { path: '/About', element: <About />, },
-               // { path: '/LostPets', element: <LostPets />, },
-               // { path: '/Spotted', element: <Spotted />, },
-               // { path: '/Post', element: <Post />, },
                { path: '/Contact', element: <Contact />, },
                { path: '/Login', element: <Login />, },
                { path: '/Register', element: <Register />, },
-               // { path: '/Logout', element: <Logout />, }
           ],
      },
 ]);

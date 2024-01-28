@@ -66,6 +66,15 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
             center: [lng, lat],
             zoom: zoom
     });
+    map.current.addControl(
+        new mapboxgl.GeolocateControl({
+        positionOptions: {
+        enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: false
+        })
+    )
     map.current
         .on('move', () => {
             setLng(map.current.getCenter().lng.toFixed(4));
@@ -73,6 +82,9 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
             setZoom(map.current.getZoom().toFixed(2));
         })
         .on('click', onClick);
+    
+
+    
     return map.current;
 }
 

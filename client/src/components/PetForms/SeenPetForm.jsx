@@ -79,7 +79,13 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
         setBreed("");
         setColours("");
         setMessage("");
-        setErrorMessage("Form successfully submitted!");
+        Swal.fire({
+            position: "center-center",
+            icon: "success",
+            title: "The new pet hass been added!",
+            showConfirmButton: false,
+            timer: 2500,
+          });
     };
 
     return (
