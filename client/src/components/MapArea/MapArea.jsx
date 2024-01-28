@@ -62,6 +62,7 @@ function initializeMarkers(map, pets, markers, selectedPetId) {
                 )
         )
         .addTo(map.current);
+
         marker.getElement().addEventListener("click", () => {
             document.getElementById(`pet_${pet._id}`).scrollIntoView({behavior: "smooth", block: "center", inline: 'center'});
         });
