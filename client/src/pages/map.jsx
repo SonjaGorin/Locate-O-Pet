@@ -31,6 +31,14 @@ const LeftPanel = {
 
 }
 
+
+function comparePets(pet1, pet2) {
+     const pet1CreatedAt = new Date(pet1.createdAt);
+     const pet2CreatedAt = new Date(pet2.createdAt);
+     if (pet1CreatedAt > pet2CreatedAt) return -1;
+     return 1;
+}
+
 export default function Map() {
      // console.log("Rendering Map");
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
@@ -43,8 +51,10 @@ export default function Map() {
      const petsFetched = (data) => {
           console.log("Fetched pets");
           console.log(data.allPets);
-          setPets(data.allPets);
-          console.log(data)          
+          var pets = [...data.allPets];
+          pets.sort(comparePets);
+          console.log(pets);
+          setPets(pets);   
      }
 
      
