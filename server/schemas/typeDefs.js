@@ -52,6 +52,7 @@ type Auth {
     me: User
     petById(_id: ID!): Pet
     allPets: [Pet]
+    userEmail(email: String!): Boolean
 }
 
 
