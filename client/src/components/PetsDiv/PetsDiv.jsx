@@ -1,7 +1,7 @@
 import ShowPetsData from "../ShowPetsData/ShowPetsData";
 import "./PetsDiv.css"
 
-export default function PetsDiv({pets, open}) {
+export default function PetsDiv({pets, open, setSelectedPetId}) {
     // console.log("Rendering PetsDiv");
     if (!open) {
         return (<div></div>);
@@ -14,14 +14,16 @@ export default function PetsDiv({pets, open}) {
                 return (
                     <div >
                         <ShowPetsData 
-                            key={pet.key} 
+                            key={pet._id}
+                            _id={pet._id}
                             species={pet.species} 
                             breed={pet.breed}
                             colours={pet.colours} 
                             message={pet.message}
                             status={pet.status}
                             img={pet.img}
-                            sex={pet.sex}/>
+                            sex={pet.sex}
+                            setSelectedPetId={setSelectedPetId}/>
                     </div>
                 )
             })} 

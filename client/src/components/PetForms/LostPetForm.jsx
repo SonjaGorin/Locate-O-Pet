@@ -84,9 +84,9 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
         Swal.fire({
             position: "center-center",
             icon: "success",
-            title: "The new pet hass been added!",
+            title: "The new pet has been added!",
             showConfirmButton: false,
-            timer: 2500,
+            timer: 2000,
           });
     };
     
