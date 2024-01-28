@@ -20,7 +20,7 @@ function Login() {
                     <div className="row justify-content-center">
                          <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
                               <div className="mb-5">
-                                   <h4 className="text-center mb-4">Login</h4>
+                                   <h2 className="text-center mb-4 display-5">Login</h2>
                               </div>
                               <div className="card border border-light-subtle rounded-4">
                                    <div className="card-body p-3 p-md-4 p-xl-5">
