@@ -39,7 +39,7 @@ function markerSize(isSelected) {
 
 function initializeMarkers(map, pets, markers, selectedPetId) {
     if (!pets) return;
-    // console.log(markers.current);
+    if (!map.current) return;
     for (var marker of markers.current) {
         marker.remove();
     }
@@ -62,6 +62,9 @@ function initializeMarkers(map, pets, markers, selectedPetId) {
                 )
         )
         .addTo(map.current);
+        marker.getElement().addEventListener("click", () => {
+            document.getElementById(`pet_${pet._id}`).scrollIntoView({behavior: "smooth", block: "center", inline: 'center'});
+        });
         markers.current.push(marker);
         return marker;
     })} 
@@ -144,6 +147,7 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets, 
 
     useEffect(() => {
         initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), pets);
+        initializeMarkers(map, pets, markers, selectedPetId);
     });
     
     initializeMarkers(map, pets, markers, selectedPetId);

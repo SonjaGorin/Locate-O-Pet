@@ -42,36 +42,17 @@ function comparePets(pet1, pet2) {
 export default function Map() {
      // console.log("Rendering Map");
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
-     // const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
      const [ showButtons, setShowButtons ] = useState(true)
-     const [ pets, setPets ] = useState([]);
      const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
      const [selectedPetId, setSelectedPetId] = useState();
 
-     const petsFetched = (data) => {
-          console.log("Fetched pets");
-          console.log(data.allPets);
-          var pets = [...data.allPets];
-          pets.sort(comparePets);
-          console.log(pets);
-          setPets(pets);
-          if (pets) {
-               setSelectedPetId();
-          }
-     }
-
-     
-     
-
-//     console.log(isLoggedIn)
-
-     const { loading, refetch } = useQuery(QUERY_ALLPETS, {onCompleted: petsFetched});
-     
+     const { data, loading, refetch } = useQuery(QUERY_ALLPETS);
      if (loading) {
           return <h2>Loading...</h2>;
      }
-
+     var pets = data.allPets ? [...data.allPets] : [];
+     pets.sort(comparePets);
      return (
           <div className='page-height'>
                <div className='pet-form-map'>
