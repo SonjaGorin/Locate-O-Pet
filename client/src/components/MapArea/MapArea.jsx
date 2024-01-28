@@ -31,7 +31,13 @@ function markerColor(pet) {
     }
 }
 
-function initializeMarkers(map, pets, markers) {
+function markerSize(isSelected) {
+    if (isSelected) {
+        return 1.5
+    }
+}
+
+function initializeMarkers(map, pets, markers, selectedPetId) {
     if (!pets) return;
     // console.log(markers.current);
     for (var marker of markers.current) {
@@ -39,13 +45,17 @@ function initializeMarkers(map, pets, markers) {
     }
     markers.current = [];
     {pets.map((pet) => {
-
         var marker = new mapboxgl.Marker({
             color: markerColor(pet),
+            scale: markerSize(pet._id == selectedPetId),
             draggable: false
         }).setLngLat({lng: pet.lng, lat: pet.lat})
         .setPopup(
-            new mapboxgl.Popup({ offset: 25 }) // add popups
+            new mapboxgl.Popup({ 
+                offset: 25,
+                closeButton: false,
+                closeOnClick: true 
+            }) // add popups
                 .setHTML(
                 `<h3>${pet.species}</h3>
                 <p><img class="pet-popup-img" src=${pet.img} ></img></p>`
@@ -66,6 +76,15 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
             center: [lng, lat],
             zoom: zoom
     });
+    map.current.addControl(
+        new mapboxgl.GeolocateControl({
+        positionOptions: {
+        enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: false
+        })
+    )
     map.current
         .on('move', () => {
             setLng(map.current.getCenter().lng.toFixed(4));
@@ -73,6 +92,7 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
             setZoom(map.current.getZoom().toFixed(2));
         })
         .on('click', onClick);
+    
     return map.current;
 }
 
@@ -92,7 +112,7 @@ class ClickListener {
     }
 }
 
-export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets}) {
+export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets, selectedPetId}) {
     // console.log(`Rendering MapArea with ${pets}`);
     if (userMarker) {console.log(userMarker.getLngLat())};
     const mapContainer = useRef(null);
@@ -120,7 +140,7 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets})
         initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), pets);
     });
     
-    initializeMarkers(map, pets, markers);
+    initializeMarkers(map, pets, markers, selectedPetId);
     return(
         <div>
             <div className="sidebar">

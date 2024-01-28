@@ -63,3 +63,7 @@
 .back-color-seen {
  background-color: rgb(192, 238, 192);
 }
+
+.submit-bttn {
+    margin-top: 10px;
+}

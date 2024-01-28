@@ -79,13 +79,19 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
         setBreed("");
         setColours("");
         setMessage("");
-        setErrorMessage("Form successfully submitted!");
+        Swal.fire({
+            position: "center-center",
+            icon: "success",
+            title: "The new pet has been added!",
+            showConfirmButton: false,
+            timer: 2000,
+          });
     };
 
     return (
         <div className="form-div2 back-color-seen">
             <h1  className="sorry-greeting">We are so glad you saw someone's pet!</h1>
-            <h2  className="under-greeting">Please dedscribe them as best as possible.</h2>
+            <h2  className="under-greeting">Please describe them as best as possible.</h2>
             <form  className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
                     <label>Is the pet cat, dog or a bird?<span className="required-asterix">*</span></label>

@@ -81,7 +81,13 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
         setBreed("");
         setColours("");
         setMessage("");
-        console.log("Form successfully submitted!");
+        Swal.fire({
+            position: "center-center",
+            icon: "success",
+            title: "The new pet has been added!",
+            showConfirmButton: false,
+            timer: 2000,
+          });
     };
     
     return (
