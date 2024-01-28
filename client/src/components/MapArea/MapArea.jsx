@@ -78,12 +78,18 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
     });
     map.current.addControl(
         new mapboxgl.GeolocateControl({
-        positionOptions: {
-        enableHighAccuracy: true
-        },
-        trackUserLocation: true,
-        showUserHeading: false
+            positionOptions: {
+                maximumAge: Infinity,
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserLocation: true,
+            fitBoundsOptions: {maxZoom: 10},
+            showUserHeading: false
         })
+        .on('trackuserlocationstart', () => {
+            console.log('A trackuserlocationstart event has occurred.');
+        }) 
     )
     map.current
         .on('move', () => {
@@ -91,8 +97,8 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
             setLat(map.current.getCenter().lat.toFixed(4));
             setZoom(map.current.getZoom().toFixed(2));
         })
-        .on('click', onClick);
-    
+        .on('click', onClick)
+         
     return map.current;
 }
 
