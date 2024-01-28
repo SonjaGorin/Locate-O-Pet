@@ -9,3 +9,18 @@
     margin-top: 30px;
     border-radius: 5px 0 0 5px;
 }
+
+.filters-title {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.form-check {
+    margin: 5px 15px;
+}
