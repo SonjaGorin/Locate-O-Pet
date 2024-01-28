@@ -14,7 +14,6 @@ export default function PetsDiv({pets, open, setSelectedPetId}) {
                 return (
                     <div key={pet._id}>
                         <ShowPetsData 
-                            key={pet._id}
                             _id={pet._id}
                             species={pet.species} 
                             breed={pet.breed}
