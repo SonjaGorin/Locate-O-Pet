@@ -8,6 +8,7 @@
  * Date : 1/23/2024 11:30:54 AM
  *******************************************************************/
 import { useState, useEffect, useRef } from "react";
+import Modal from "react-modal";
 // import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from "@apollo/client";
 import Auth from "../../utils/auth";
@@ -31,6 +32,15 @@ export default function Registration() {
   const [isClicked, setIsClicked] = useState(false);
   const triggerRef = useRef(null);
   const [pageName, setPageName] = useState("index.jsx");
+  const [modalState, setModalState] = useState(false);
+
+  const openModal = () => {
+    setModalState(true);
+  };
+
+  const closeModal = () => {
+    setModalState(false);
+  };
 
   const emailValidation = /^([a-z0-9_.-]+)@([\da-z.-]+)\.([a-z.]{2,6})$/;
   const passwordValidation =
@@ -98,11 +108,10 @@ export default function Registration() {
   };
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault()
-     try {
-
-          const userData = data?.userEmail || {};
-          console.log(userData)
+    event.preventDefault();
+    try {
+      const userData = data?.userEmail || {};
+      console.log(userData);
 
       if (
         !emailValidation.test(formState.email) &&
@@ -148,14 +157,14 @@ export default function Registration() {
       }
 
       if (userData === true) {
-          Swal.fire({
-               position: "center-center",
-               icon: "error",
-               title: "User with this email already exists. Please choose another.",
-               text: event.message,
-               showConfirmButton: false,
-               timer: 2500,
-             });
+        Swal.fire({
+          position: "center-center",
+          icon: "error",
+          title: "User with this email already exists. Please choose another.",
+          text: event.message,
+          showConfirmButton: false,
+          timer: 2500,
+        });
       }
 
       const mutationResponse = await addUser({
@@ -229,7 +238,7 @@ export default function Registration() {
             <div className="form-floating mb-3">
               <input
                 className="form-control"
-                placeholder="******"
+                placeholder="*****"
                 name="password"
                 value={formState.password}
                 type="password"
@@ -266,7 +275,11 @@ export default function Registration() {
             />
             <label className="form-check-label text-secondary" htmlFor="iAgree">
               I agree to the{" "}
-              <a href="#!" className="link-primary text-decoration-none">
+              <a
+                href="#!"
+                className="link-primary text-decoration-none"
+                onClick={openModal}
+              >
                 terms and conditions
               </a>
             </label>
@@ -280,6 +293,34 @@ export default function Registration() {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={modalState}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+        style={{
+          overlay: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 1000
+          },
+          content: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '400px',
+            height: '200px',
+            backgroundColor: 'white'
+          }
+        }}
+      >
+        <h2>Hello, this is a popup!</h2>
+        <button onClick={closeModal}>Close</button>
+      </Modal>
     </Form>
   );
 }
