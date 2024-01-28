@@ -8,27 +8,27 @@ export default function FilterDiv({open}) {
     return (
         <div className="filter-div">
             <h1 className="filters-title">Filters</h1>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
-                <label class="form-check-label" for="exampleRadios1">
+            <div className="form-check">
+                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
+                <label className="form-check-label" htmlFor="exampleRadios1">
                     Show all pets
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-                <label class="form-check-label" for="exampleRadios2">
+            <div className="form-check">
+                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+                <label className="form-check-label" htmlFor="exampleRadios2">
                     Show only lost pets
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" />
-                <label class="form-check-label" for="exampleRadios3">
+            <div className="form-check">
+                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" />
+                <label className="form-check-label" htmlFor="exampleRadios3">
                     Show only seen pets
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
-                <label class="form-check-label" for="exampleRadios1">
+            <div className="form-check">
+                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
+                <label className="form-check-label" htmlFor="exampleRadios1">
                     Show my posts
                 </label>
             </div>
