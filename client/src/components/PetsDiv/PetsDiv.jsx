@@ -10,6 +10,7 @@ export default function PetsDiv({pets, open}) {
     return (
         <div className="all-pets-div">
             {pets && pets.map((pet) => {
+
                 return (
                     <div >
                         <ShowPetsData 
@@ -27,3 +28,12 @@ export default function PetsDiv({pets, open}) {
         </div>
     )
 }
+
+// data.sort(function(a,b) {
+//     const keyA = new Date(a.allPets[0]?.createdAt);
+//     const keyB = new Date(b.allPets[0]?.createdAt);
+//     if (a.allPets.length === 0 || b.allPets.length === 0) return -1;
+//     if (keyA < keyB) return -1;
+//     if (keyA > keyB) return 1;
+//     return 0
+// })

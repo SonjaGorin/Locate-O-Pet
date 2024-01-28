@@ -42,12 +42,14 @@ export default function Map() {
           console.log("Fetched pets");
           console.log(data.allPets);
           setPets(data.allPets);
+          console.log(data)          
      }
 
-    console.log(isLoggedIn)
+     
+     
 
-     
-     
+//     console.log(isLoggedIn)
+
      const { loading, refetch } = useQuery(QUERY_ALLPETS, {onCompleted: petsFetched});
      
      if (loading) {
