@@ -34,8 +34,10 @@ export default function Map() {
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
      // const [showSeenPetForm, setShowSeenPetForm] = useState(false);
      const [ userMarker, setUserMarker ] = useState();
+     const [ showButtons, setShowButtons ] = useState(true)
      const [ pets, setPets ] = useState([]);
      const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
+
      const petsFetched = (data) => {
           console.log("Fetched pets");
           console.log(data.allPets);
@@ -68,8 +70,8 @@ export default function Map() {
                               pets={pets}/>
                     </div>
                </div>
-               {isLoggedIn && <button className='i-lost-pet-button btn btn-primary bg-red btn-lg' onClick={() => {setLeftPanel(LeftPanel.LostPetForm)}} >I lost a pet</button>}
-               {isLoggedIn && <button className='i-saw-pet-button btn btn-primary btn-lg' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setUserMarker(null)}}>I saw a pet</button>}
+               {isLoggedIn && showButtons && <button  className='i-lost-pet-button btn btn-primary bg-red btn-lg' onClick={() => {setLeftPanel(LeftPanel.LostPetForm); setShowButtons(false)}} >I lost a pet</button>}
+               {isLoggedIn && showButtons && <button className='i-saw-pet-button btn btn-primary btn-lg' onClick={() => {setLeftPanel(LeftPanel.SeenPetForm); setShowButtons(false); setUserMarker(null)}}>I saw a pet</button>}
           </div>
      );
 }
