@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./PetForms.css"
+import { Container, Row, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 import { useMutation } from "@apollo/client";
 import UploadWidget from '../UploadWidget';
@@ -83,7 +85,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     };
     
     return (
-        <div className="form-div2">
+        <div className="form-div2 back-color-lost">
             <h1 className="sorry-greeting">We are sorry to hear that you lost your pet.</h1>
             <h2 className="under-greeting">Let's find them!</h2>
             <form className="form" onSubmit={handleFormSubmit}>
@@ -125,7 +127,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="message-input">
-                    <label>Would you like to add your contact information or anything else?<span className="required-asterix">*</span></label>
+                    <label>Would you like to add your contact info or anything else?<span className="required-asterix">*</span></label>
                     <textarea
                         value={message}
                         name="message"
@@ -150,7 +152,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                     </div>
                 )}
                 <div>
-                    <button type="submit" className="submit-bttn">
+                    <button type="submit" className="submit-bttn btn btn-primary btn-lg">
                         Submit
                     </button>
                 </div>

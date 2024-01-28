@@ -39,7 +39,15 @@ export default function Contact() {
   const handleClick = (event) => {
     event.preventDefault();
 
-    if (!(emailValidation.test(email)) && !(numberValidation.test(phone))) {
+    if (name === "" || email === "" || message === "") {
+     Swal.fire({
+          position: "center-center",
+          icon: "error",
+          title: "Must fill in required fields.",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+    } else if (!(emailValidation.test(email)) && !(numberValidation.test(phone))) {
       Swal.fire({
         position: "center-center",
         icon: "error",
