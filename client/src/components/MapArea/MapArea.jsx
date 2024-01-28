@@ -23,15 +23,17 @@ function addMarker(coordinates, currentMap) {
     return marker
 }
 
-function markerColor(pet) {
-    if (pet.status === "isLost") {
+function markerColor(pet, isSelected) {
+    if (isSelected) {
+        return "#FFFF00"
+    } else if (pet.status === "isLost") {
         return "#FF0000"
     } else {
         return "#008000"
     }
 }
 
-function initializeMarkers(map, pets, markers) {
+function initializeMarkers(map, pets, markers, selectedPetId) {
     if (!pets) return;
     // console.log(markers.current);
     for (var marker of markers.current) {
@@ -39,9 +41,8 @@ function initializeMarkers(map, pets, markers) {
     }
     markers.current = [];
     {pets.map((pet) => {
-
         var marker = new mapboxgl.Marker({
-            color: markerColor(pet),
+            color: markerColor(pet, pet._id == selectedPetId),
             draggable: false
         }).setLngLat({lng: pet.lng, lat: pet.lat})
         .setPopup(
@@ -83,8 +84,6 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
         })
         .on('click', onClick);
     
-
-    
     return map.current;
 }
 
@@ -104,7 +103,7 @@ class ClickListener {
     }
 }
 
-export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets}) {
+export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets, selectedPetId}) {
     // console.log(`Rendering MapArea with ${pets}`);
     if (userMarker) {console.log(userMarker.getLngLat())};
     const mapContainer = useRef(null);
@@ -132,7 +131,7 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets})
         initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), pets);
     });
     
-    initializeMarkers(map, pets, markers);
+    initializeMarkers(map, pets, markers, selectedPetId);
     return(
         <div>
             <div className="sidebar">

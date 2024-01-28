@@ -14,8 +14,11 @@ export default function PetPostCard(pet) {
         throw new Error(`Unexpected pet status ${pet.status}`)
     }
     const className = `pet-post-card ${subclass}`
+    const onMouseOver = () => {pet.setSelectedPetId(pet._id)}
+    const onMouseOut = () => {pet.setSelectedPetId()}
+
     return (
-    <div className={className}>
+    <div className={className} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
             <h2 className="card-text">{speciesText} {pet.species}</h2>
             <h2 className="card-text">Breed: {pet.breed}</h2>
             <h2 className="card-text">Colour: {pet.colours}</h2>
