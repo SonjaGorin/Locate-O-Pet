@@ -23,13 +23,17 @@ function addMarker(coordinates, currentMap) {
     return marker
 }
 
-function markerColor(pet, isSelected) {
-    if (isSelected) {
-        return "#FFFF00"
-    } else if (pet.status === "isLost") {
+function markerColor(pet) {
+    if (pet.status === "isLost") {
         return "#FF0000"
     } else {
         return "#008000"
+    }
+}
+
+function markerSize(isSelected) {
+    if (isSelected) {
+        return 1.5
     }
 }
 
@@ -42,7 +46,8 @@ function initializeMarkers(map, pets, markers, selectedPetId) {
     markers.current = [];
     {pets.map((pet) => {
         var marker = new mapboxgl.Marker({
-            color: markerColor(pet, pet._id == selectedPetId),
+            color: markerColor(pet),
+            scale: markerSize(pet._id == selectedPetId),
             draggable: false
         }).setLngLat({lng: pet.lng, lat: pet.lat})
         .setPopup(
