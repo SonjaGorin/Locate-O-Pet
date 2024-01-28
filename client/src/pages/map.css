@@ -28,3 +28,7 @@
 .form-div-seen {
     width: 20%;
 }
+
+.form-div {
+    display: flex;
+}
