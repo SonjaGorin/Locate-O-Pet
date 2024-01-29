@@ -15,6 +15,7 @@ import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
 import PetsDiv from "../components/PetsDiv/PetsDiv";
 import FilterDiv from "../components/FilterDiv/FilterDiv";
+import UserPosts from "../components/UserPosts/UserPosts";
 import Auth from "../utils/auth";
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -28,6 +29,7 @@ const LeftPanel = {
 	PetsList: 0,
 	LostPetForm: 1,
 	SeenPetForm: 2,
+     UserPosts: 3,
 
 }
 
@@ -57,6 +59,7 @@ export default function Map() {
           <div className='page-height'>
                <div className='pet-form-map'>
                     <div className='form-div'>
+                         <UserPosts open={leftPanel == LeftPanel.UserPosts}/>
                          <FilterDiv open={leftPanel == LeftPanel.PetsList} />
                          <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} setSelectedPetId={setSelectedPetId}/>
                          <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
