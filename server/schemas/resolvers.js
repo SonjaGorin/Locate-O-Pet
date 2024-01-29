@@ -34,7 +34,7 @@ const resolvers = {
       try {
         const pets = (await Pet.find().populate("user")).map((pet) => {
           pet = pet.toObject();
-          if (pet.user._id && String(pet.user._id) == context.user._id) {
+          if (pet.user._id && String(pet.user._id) == context?.user?._id) {
             console.log("setting addedByMe")
             pet.addedByMe = true
           }
