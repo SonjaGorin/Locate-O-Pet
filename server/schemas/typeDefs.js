@@ -21,11 +21,12 @@ type Pet {
     colours: [String],
     message: String,
     status: String,
+    addedByMe: Boolean,
     img: String,
     lng: Float,
     lat: Float,
     user: User
-
+    
 }
 
 input petArgs {

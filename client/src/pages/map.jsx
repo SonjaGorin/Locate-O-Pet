@@ -51,7 +51,7 @@ const PetFilterFunctions = [
      (pet) => true,
      (pet) => pet.status === "isLost",
      (pet) => pet.status === "isSeen",
-     (pet) => pet.isAddedByMe,
+     (pet) => pet.addedByMe,
 ]
 
 export default function Map() {
@@ -78,13 +78,15 @@ export default function Map() {
      pets = pets.filter(PetFilterFunctions[petFilter]);
      console.log(pets)
 
+
+
      return (
           <div className='page-height'>
                <div className='pet-form-map'>
                     <div className='form-div'>
                          <FilterDiv 
                               open={leftPanel == LeftPanel.PetsList} 
-                              onOptionSelection={(optionName) => {console.log(optionName); setPetFilter(PetFilter[optionName])}}/>
+                              onOptionSelection={(optionName) => setPetFilter(PetFilter[optionName])}/>
                          <PetCards pets={pets} open={leftPanel == LeftPanel.PetsList} setSelectedPetId={setSelectedPetId}/>
                          <SeenPetForm 
                               open={leftPanel == LeftPanel.SeenPetForm} 

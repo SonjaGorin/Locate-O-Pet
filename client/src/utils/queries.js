@@ -72,6 +72,7 @@ export const QUERY_ALLPETS = gql`
       colours
       message
       status
+      addedByMe
       img
       lng
       lat
