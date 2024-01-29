@@ -11,25 +11,25 @@ export default function FilterDiv({open, onOptionSelection}) {
             <h1 className="filters-title">Filters</h1>
             <div className="form-check" onChange={(e) => onOptionSelection(e.target.value)}>
                 <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="all" defaultChecked/>
-                <label className="form-check-label" htmlFor="exampleRadios1">
+                <label className="form-check-label text-size" htmlFor="exampleRadios1">
                     Show all pets
                 </label>
             </div>
             <div className="form-check" onChange={(e) => onOptionSelection(e.target.value)}>
                 <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="onlyLost" />
-                <label className="form-check-label" htmlFor="exampleRadios2">
+                <label className="form-check-label text-size" htmlFor="exampleRadios2">
                     Show only lost pets
                 </label>
             </div>
             <div className="form-check" onChange={(e) => onOptionSelection(e.target.value)}>
                 <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="onlySeen" />
-                <label className="form-check-label" htmlFor="exampleRadios3">
+                <label className="form-check-label text-size" htmlFor="exampleRadios3">
                     Show only seen pets
                 </label>
             </div>
             <div className="form-check" onChange={(e) => onOptionSelection(e.target.value)}>
                 <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="onlyMine" />
-                <label className="form-check-label" htmlFor="exampleRadios4">
+                <label className="form-check-label text-size" htmlFor="exampleRadios4">
                     Show my posts
                 </label>
             </div>
