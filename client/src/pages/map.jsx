@@ -19,7 +19,6 @@ import Auth from "../utils/auth";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
-import { QUERY_ME } from "../utils/queries";
 
 import "./map.css"
 
@@ -31,7 +30,6 @@ const LeftPanel = {
 	SeenPetForm: 2,
      UserPosts: 3,
 }
-
 
 function comparePets(pet1, pet2) {
      const pet1CreatedAt = new Date(pet1.createdAt);
@@ -55,7 +53,6 @@ const PetFilterFunctions = [
 ]
 
 export default function Map() {
-     // console.log("Rendering Map");
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
      const [ userMarker, setUserMarker ] = useState();
      const [ showButtons, setShowButtons ] = useState(true)
@@ -65,20 +62,13 @@ export default function Map() {
 
      const { data, loading, refetch } = useQuery(QUERY_ALLPETS);
 
-     const { myPets, myPetsLoading } = useQuery(QUERY_ME);
-
-     if (loading || myPetsLoading) {
+     if (loading) {
           return (<div>Loading...</div>);
      }
-     const user = myPets?.me || {};
 
      var pets = data.allPets ? [...data.allPets] : [];
      pets.sort(comparePets);
-     console.log(pets)
      pets = pets.filter(PetFilterFunctions[petFilter]);
-     console.log(pets)
-
-
 
      return (
           <div className='page-height'>
