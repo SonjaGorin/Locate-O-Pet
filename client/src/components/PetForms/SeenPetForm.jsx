@@ -90,7 +90,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
 
     return (
         <div className="form-div2 back-color-seen">
-            <button className="close-seen-form-button">X</button>
+            <button className="close-seen-form-button" onClick={() => hideForm()}>X</button>
             <h1  className="sorry-greeting">We are so glad you saw someone's pet!</h1>
             <h2  className="under-greeting">Please describe them as best as possible.</h2>
             <form  className="form" onSubmit={handleFormSubmit}>
