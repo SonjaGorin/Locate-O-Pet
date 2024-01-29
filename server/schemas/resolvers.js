@@ -30,25 +30,14 @@ const resolvers = {
     },
 
     allPets: async (parent, args, context) => {
-      console.log(context.user)
       try {
         const pets = (await Pet.find().populate("user")).map((pet) => {
           pet = pet.toObject();
           if (pet.user._id && String(pet.user._id) == context?.user?._id) {
-            console.log("setting addedByMe")
             pet.addedByMe = true
           }
           return pet
         });
-        // for (var pet of pets) {
-        //   console.log(pet.user._id);
-        //   console.log(context.user._id);
-        //   console.log(String(pet.user._id));
-        //   if (pet.user._id && String(pet.user._id) == context.user._id) {
-        //     pet.addedByMe === true
-        //   }
-        // }
-        console.log(pets)
         return pets;
       } catch (err) {
         console.log(err)

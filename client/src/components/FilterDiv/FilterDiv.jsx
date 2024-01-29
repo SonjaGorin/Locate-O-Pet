@@ -5,7 +5,7 @@ export default function FilterDiv({open, onOptionSelection}) {
     if (!open) {
         return (<div></div>);
     }
-    console.log("Reloading FilterDiv");
+
     return (
         <div className="filter-div">
             <h1 className="filters-title">Filters</h1>
