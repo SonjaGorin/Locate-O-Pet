@@ -30,7 +30,7 @@ function Register(props) {
                                    </div>
                               </div>
                               <div className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-4">
-                                   <p className="m-0 text-secondary text-center">Already have an account? <Link to="/login" className="link-primary text-decoration-none">Sign in</Link></p>
+                                   <p className="m-0 text-secondary text-center">Already have an account? <Link to="/login" className="link-primary text-decoration-none">Log in</Link></p>
                               </div>
                          </div>
                     </div>

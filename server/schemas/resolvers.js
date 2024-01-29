@@ -13,10 +13,10 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      const user = User.findOne({ _id: context.user._id });
+      const user = User.findOne({ _id: context.user._id }).populate("petsLost").populate("petsSeen");
       return user;
     } catch (err) {
-console.log(err)
+      console.log(err)
     }
     },
 
@@ -30,9 +30,26 @@ console.log(err)
     },
 
     allPets: async (parent, args, context) => {
+      console.log(context.user)
       try {
-      const pets = await Pet.find().populate("user");
-      return pets;
+        const pets = (await Pet.find().populate("user")).map((pet) => {
+          pet = pet.toObject();
+          if (pet.user._id && String(pet.user._id) == context.user._id) {
+            console.log("setting addedByMe")
+            pet.addedByMe = true
+          }
+          return pet
+        });
+        // for (var pet of pets) {
+        //   console.log(pet.user._id);
+        //   console.log(context.user._id);
+        //   console.log(String(pet.user._id));
+        //   if (pet.user._id && String(pet.user._id) == context.user._id) {
+        //     pet.addedByMe === true
+        //   }
+        // }
+        console.log(pets)
+        return pets;
       } catch (err) {
         console.log(err)
       }
@@ -124,7 +141,8 @@ console.log(err)
         lat,
         user: context.user._id,
       });
-
+      console.log(petCreated)
+      console.log(input)
       const petAdded = await User.findOneAndUpdate(
         { _id: context.user._id },
         {

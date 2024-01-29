@@ -7,7 +7,6 @@ export const QUERY_ME = gql`
       name
       email
       password
-      role
       petsSeen {
         _id
         species
@@ -73,6 +72,7 @@ export const QUERY_ALLPETS = gql`
       colours
       message
       status
+      addedByMe
       img
       lng
       lat

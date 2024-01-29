@@ -39,7 +39,7 @@ function markerSize(isSelected) {
 
 function initializeMarkers(map, pets, markers, selectedPetId) {
     if (!pets) return;
-    // console.log(markers.current);
+    if (!map.current) return;
     for (var marker of markers.current) {
         marker.remove();
     }
@@ -62,6 +62,10 @@ function initializeMarkers(map, pets, markers, selectedPetId) {
                 )
         )
         .addTo(map.current);
+
+        marker.getElement().addEventListener("click", () => {
+            document.getElementById(`pet_${pet._id}`).scrollIntoView({behavior: "smooth", block: "center", inline: 'center'});
+        });
         markers.current.push(marker);
         return marker;
     })} 
@@ -78,12 +82,18 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
     });
     map.current.addControl(
         new mapboxgl.GeolocateControl({
-        positionOptions: {
-        enableHighAccuracy: true
-        },
-        trackUserLocation: true,
-        showUserHeading: false
+            positionOptions: {
+                maximumAge: Infinity,
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserLocation: true,
+            fitBoundsOptions: {maxZoom: 10},
+            showUserHeading: false
         })
+        .on('trackuserlocationstart', () => {
+            console.log('A trackuserlocationstart event has occurred.');
+        }) 
     )
     map.current
         .on('move', () => {
@@ -91,8 +101,8 @@ function initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoo
             setLat(map.current.getCenter().lat.toFixed(4));
             setZoom(map.current.getZoom().toFixed(2));
         })
-        .on('click', onClick);
-    
+        .on('click', onClick)
+         
     return map.current;
 }
 
@@ -138,6 +148,7 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets, 
 
     useEffect(() => {
         initializeMap(mapContainer, map, lat, setLat, lng, setLng, zoom, setZoom, clickListener.current.onClick.bind(clickListener.current), pets);
+        initializeMarkers(map, pets, markers, selectedPetId);
     });
     
     initializeMarkers(map, pets, markers, selectedPetId);

@@ -344,7 +344,7 @@ export default function Registration() {
             convallis, odio enim tincidunt felis, eget dictum risus enim non
             sem. 
           </p>
-          <button className="align-self-end align-self-center" onClick={closeModal}>
+          <button className="btn btn-primary btn-lg align-self-end align-self-center" onClick={closeModal}>
             Close
           </button>
         </div>
