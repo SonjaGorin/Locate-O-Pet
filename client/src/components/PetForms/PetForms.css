@@ -55,7 +55,12 @@
 
 .upload-img-bttn {
     width: 200px;
+    display: flex;
 }
+
+/* .upload-img-asterix {
+    color: red;
+} */
 
 .back-color-lost {
  background-color:  rgb(255, 214, 214);
@@ -79,4 +84,13 @@
     background-color: rgb(255, 214, 214);
     border-style: none;
     float: right;
+}
+
+.img-btn-asteriks {
+    display: flex;
+}
+
+.asterix {
+    color: red;
+    padding-left: 5px;
 }

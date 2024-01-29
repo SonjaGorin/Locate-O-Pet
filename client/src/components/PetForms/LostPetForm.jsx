@@ -69,6 +69,11 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
             return;
         }
 
+        if (!img) {
+            setErrorMessage("Please upload the image.");
+            return;
+        }
+
         try {
             await addLostPet({variables})
         } catch (error) {
@@ -144,9 +149,14 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         className="message-field"
                     />
                 </div>
-                <div className="upload-img-bttn">
-                    <UploadWidget onUpload={(src) => setImg(src)} />
-                    <img id="uploadedimage" name="image" src={img} />
+                <div className="img-btn-asteriks">
+                    <div className="upload-img-bttn">
+                        <UploadWidget onUpload={(src) => setImg(src)} />
+                        <img id="uploadedimage" name="image" src={img} />
+                    </div>
+                    <div>
+                        <h4 className="asterix">*</h4>
+                    </div>
                 </div>
                 {!userMarker &&
                 <div>
