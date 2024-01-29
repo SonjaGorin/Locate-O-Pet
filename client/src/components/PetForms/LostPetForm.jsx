@@ -92,6 +92,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     
     return (
         <div className="form-div2 back-color-lost">
+            <button className="close-lost-form-button">X</button>
             <h1 className="sorry-greeting">We are sorry to hear that you lost your pet.</h1>
             <h2 className="under-greeting">Let's find them!</h2>
             <form className="form" onSubmit={handleFormSubmit}>

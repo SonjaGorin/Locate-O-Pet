@@ -37,6 +37,7 @@
     font-size: 30px;
     text-align: center;
     font-weight: bold;
+    margin-top: 30px;
 }
 
 .under-greeting {
@@ -66,4 +67,16 @@
 
 .submit-bttn {
     margin-top: 10px;
+}
+
+.close-seen-form-button {
+    background-color: rgb(192, 238, 192);
+    border-style: none;
+    float: right;
+}
+
+.close-lost-form-button {
+    background-color: rgb(255, 214, 214);
+    border-style: none;
+    float: right;
 }
