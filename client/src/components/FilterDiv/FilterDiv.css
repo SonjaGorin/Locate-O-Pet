@@ -27,7 +27,7 @@
 
 @media screen and (max-width: 1250px) {
     .filter-div{
-        height: 210px;
+        height: 150px;
         width: 100%;
         border: 1px;
         border-style: solid;
@@ -40,5 +40,12 @@
 
     .text-size {
         font-size: 13px;
+    }
+
+    .filters-title {
+        font-size: 15px;
+        text-align: center;
+        font-weight: bold;
+        margin: 20px 0;
     }
   }
