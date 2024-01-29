@@ -7,7 +7,7 @@ export default function FilterDiv({open, onOptionSelection}) {
     }
 
     return (
-        <div className="filter-div">
+        <div className="filter-div d-flex flex-column align-items-center">
             <h1 className="filters-title">Filters</h1>
             <div className="form-check" onChange={(e) => onOptionSelection(e.target.value)}>
                 <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="all" defaultChecked/>
