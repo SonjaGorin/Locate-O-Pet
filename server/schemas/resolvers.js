@@ -13,10 +13,10 @@ const resolvers = {
         throw AuthenticationError;
       }
 
-      const user = User.findOne({ _id: context.user._id });
+      const user = User.findOne({ _id: context.user._id }).populate("petsLost").populate("petsSeen");
       return user;
     } catch (err) {
-console.log(err)
+      console.log(err)
     }
     },
 
@@ -124,7 +124,8 @@ console.log(err)
         lat,
         user: context.user._id,
       });
-
+      console.log(petCreated)
+      console.log(input)
       const petAdded = await User.findOneAndUpdate(
         { _id: context.user._id },
         {

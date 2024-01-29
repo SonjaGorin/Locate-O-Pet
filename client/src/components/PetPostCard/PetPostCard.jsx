@@ -1,6 +1,6 @@
 import "./PetPostCard.css"
 
-export default function PetPostCard(pet) {
+export default function PetPostCard({pet, setSelectedPetId}) {
     // console.log(pet.img)
     if (pet.status === "isLost") {
         var speciesText = "This is my lost";
@@ -16,8 +16,8 @@ export default function PetPostCard(pet) {
         throw new Error(`Unexpected pet status ${pet.status}`)
     }
     const className = `pet-post-card ${subclass}`
-    const onMouseOver = () => {pet.setSelectedPetId(pet._id)}
-    const onMouseOut = () => {pet.setSelectedPetId()}
+    const onMouseOver = () => {setSelectedPetId(pet._id)}
+    const onMouseOut = () => {setSelectedPetId()}
     
     const hidden = (field) => {
         return field ? '' : 'hidden'

@@ -7,7 +7,6 @@ export const QUERY_ME = gql`
       name
       email
       password
-      role
       petsSeen {
         _id
         species

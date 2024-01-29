@@ -13,13 +13,13 @@ import mapboxgl from 'mapbox-gl';
 import LostPetForm from "../components/PetForms/LostPetForm";
 import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
-import PetsDiv from "../components/PetsDiv/PetsDiv";
+import PetCards from "../components/PetCards/PetCards";
 import FilterDiv from "../components/FilterDiv/FilterDiv";
-import UserPosts from "../components/UserPosts/UserPosts";
 import Auth from "../utils/auth";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
+import { QUERY_ME } from "../utils/queries";
 
 import "./map.css"
 
@@ -50,18 +50,23 @@ export default function Map() {
      const [selectedPetId, setSelectedPetId] = useState();
 
      const { data, loading, refetch } = useQuery(QUERY_ALLPETS);
-     if (loading) {
-          return <h2>Loading...</h2>;
+
+     const { myPets, myPetsLoading } = useQuery(QUERY_ME);
+
+     if (loading || myPetsLoading) {
+          return (<div>Loading...</div>);
      }
+     const user = myPets?.me || {};
+
      var pets = data.allPets ? [...data.allPets] : [];
      pets.sort(comparePets);
+
      return (
           <div className='page-height'>
                <div className='pet-form-map'>
                     <div className='form-div'>
-                         <UserPosts open={leftPanel == LeftPanel.UserPosts}/>
                          <FilterDiv open={leftPanel == LeftPanel.PetsList} />
-                         <PetsDiv pets={pets} open={leftPanel == LeftPanel.PetsList} setSelectedPetId={setSelectedPetId}/>
+                         <PetCards pets={pets} open={leftPanel == LeftPanel.PetsList} setSelectedPetId={setSelectedPetId}/>
                          <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                          <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
                     </div>
