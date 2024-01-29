@@ -30,7 +30,6 @@ const LeftPanel = {
 	LostPetForm: 1,
 	SeenPetForm: 2,
      UserPosts: 3,
-
 }
 
 
@@ -41,6 +40,20 @@ function comparePets(pet1, pet2) {
      return 1;
 }
 
+const PetFilter = {
+	all: 0,
+	onlyLost: 1,
+	onlySeen: 2,
+     onlyMine: 3,
+}
+
+const PetFilterFunctions = [
+     (pet) => true,
+     (pet) => pet.status === "isLost",
+     (pet) => pet.status === "isSeen",
+     (pet) => pet.isAddedByMe,
+]
+
 export default function Map() {
      // console.log("Rendering Map");
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
@@ -48,6 +61,7 @@ export default function Map() {
      const [ showButtons, setShowButtons ] = useState(true)
      const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
      const [selectedPetId, setSelectedPetId] = useState();
+     const [petFilter, setPetFilter] = useState(PetFilter.all);
 
      const { data, loading, refetch } = useQuery(QUERY_ALLPETS);
 
@@ -60,15 +74,26 @@ export default function Map() {
 
      var pets = data.allPets ? [...data.allPets] : [];
      pets.sort(comparePets);
+     console.log(pets)
+     pets = pets.filter(PetFilterFunctions[petFilter]);
+     console.log(pets)
 
      return (
           <div className='page-height'>
                <div className='pet-form-map'>
                     <div className='form-div'>
-                         <FilterDiv open={leftPanel == LeftPanel.PetsList} />
+                         <FilterDiv 
+                              open={leftPanel == LeftPanel.PetsList} 
+                              onOptionSelection={(optionName) => {console.log(optionName); setPetFilter(PetFilter[optionName])}}/>
                          <PetCards pets={pets} open={leftPanel == LeftPanel.PetsList} setSelectedPetId={setSelectedPetId}/>
-                         <SeenPetForm open={leftPanel == LeftPanel.SeenPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
-                         <LostPetForm open={leftPanel == LeftPanel.LostPetForm} hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} userMarker={userMarker}/>
+                         <SeenPetForm 
+                              open={leftPanel == LeftPanel.SeenPetForm} 
+                              hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} 
+                              userMarker={userMarker}/>
+                         <LostPetForm 
+                              open={leftPanel == LeftPanel.LostPetForm} 
+                              hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} 
+                              userMarker={userMarker}/>
                     </div>
                     <div className='map-div'>
                          <MapArea 
