@@ -154,9 +154,6 @@ export default function MapArea ({userMarker, ignoreClick, setUserMarker, pets, 
     initializeMarkers(map, pets, markers, selectedPetId);
     return(
         <div>
-            <div className="sidebar">
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div>
             <div ref={mapContainer} className="map-container" />
         </div>
     )
