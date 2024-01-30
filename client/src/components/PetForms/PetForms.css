@@ -25,11 +25,14 @@
 
 .form-field {
     height: 30px;
-    margin-bottom: 15px;
 }
 
 .message-field {
     height: 80px;
+}
+
+.species-options,
+.sex-options {
     margin-bottom: 15px;
 }
 
@@ -57,10 +60,6 @@
     width: 200px;
     display: flex;
 }
-
-/* .upload-img-asterix {
-    color: red;
-} */
 
 .back-color-lost {
  background-color:  rgb(255, 214, 214);
@@ -93,4 +92,8 @@
 .asterix {
     color: red;
     padding-left: 5px;
+}
+
+.counter {
+    text-align: right;
 }

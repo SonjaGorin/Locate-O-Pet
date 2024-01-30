@@ -20,6 +20,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const [status, setStatus] = useState("isLost");
     const [img, setImg] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
+    const [count, setCount] = useState(0);
 
     const [ addLostPet ] = useMutation(ADD_LOSTPET);
 
@@ -28,6 +29,9 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
         const { name, value, src } = e.target;
+
+        setCount(value.length)
+        
         // making sure that the right set function is called depending on the input field user is typing in
         if (name === "species") {
             return setSpecies(value)
@@ -103,7 +107,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
             <form className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
                     <label>Is your pet cat, dog or a bird?<span className="required-asterix">*</span></label>
-                    <select className="form-field" name="species" onChange={handleInputChange} value={species}>
+                    <select className="form-field species-options" name="species" onChange={handleInputChange} value={species}>
                         <option onBlur={blurFunction}>Cat</option>
                         <option onBlur={blurFunction}>Dog</option>
                         <option onBlur={blurFunction}>Bird</option>
@@ -111,7 +115,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                 </div>
                 <div className="sex-input">
                     <label>Is your pet a girl or a boy?<span className="required-asterix">*</span></label>
-                    <select className="form-field" name="sex" onChange={handleInputChange} value={sex}>
+                    <select className="form-field sex-options" name="sex" onChange={handleInputChange} value={sex}>
                         <option onBlur={blurFunction}>girl</option>
                         <option onBlur={blurFunction}>boy</option>
                     </select>
@@ -127,6 +131,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         maxlength="40"
                     />
+                    <p className="counter">{count}/40</p>
                 </div>
                 <div className="colours-input">
                     <label>What colour is your pet?<span className="required-asterix">*</span></label>
@@ -139,6 +144,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         maxlength="40"
                     />
+                    <p className="counter">{count}/40</p>
                 </div>
                 <div className="message-input">
                     <label>Would you like to add your contact info or anything else?<span className="required-asterix">*</span></label>
@@ -151,6 +157,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         className="message-field"
                         maxlength="80"
                     />
+                    <p className="counter">{count}/80</p>
                 </div>
                 <div className="img-btn-asteriks">
                     <div className="upload-img-bttn">

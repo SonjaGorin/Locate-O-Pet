@@ -27,6 +27,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
         const { name, value, src } = e.target;
+        setCount(value.length)
         // making sure that the right set function is called depending on the input field user is typing in
         if (name === "species") {
             return setSpecies(value)
@@ -42,7 +43,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
             return setMessage(value)
         }
 
-        // setCount(e.target.value.maxLength)
+        
 
     }
 
@@ -100,7 +101,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
             <form  className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
                     <label>Is the pet cat, dog or a bird?<span className="required-asterix">*</span></label>
-                    <select className="form-field" name="species" onChange={handleInputChange} value={species}>
+                    <select className="form-field species-options" name="species" onChange={handleInputChange} value={species}>
                         <option onBlur={blurFunction}>Cat</option>
                         <option onBlur={blurFunction}>Dog</option>
                         <option onBlur={blurFunction}>Bird</option>
@@ -108,7 +109,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                 </div>
                 <div className="sex-input">
                     <label>Is the pet a girl or a boy?</label>
-                    <select className="form-field" name="sex" onChange={handleInputChange} value={sex}>
+                    <select className="form-field sex-options" name="sex" onChange={handleInputChange} value={sex}>
                         <option>I don't know</option>
                         <option>A girl</option>
                         <option>A boy</option>
@@ -124,6 +125,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         maxLength="40"
                     />
+                    <p className="counter">{count}/40</p>
                 </div>
                 <div className="colours-input">
                     <label>What colour is the pet?<span className="required-asterix">*</span></label>
@@ -136,6 +138,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         maxLength="40"
                     />
+                    <p className="counter">{count}/40</p>
                 </div>
                 <div className="message-input">
                     <label>Would you like to add anything else?</label>
@@ -149,9 +152,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         maxLength="80"
                         id="comment"
                     />
-                    {/* <div id="the-count_comment" style=""/>
-                    <span id="current_comment">0</span>
-                    <span id="maximum_comment"> / 80</span> */}
+                    <p className="counter">{count}/80</p>
                 </div>
                 <div className="upload-img-bttn">
                     <UploadWidget onUpload={(src) => setImg(src)}/>
