@@ -1,0 +1,35 @@
+.pet-popup-img {
+    height: 100px;
+    width: 100px;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+    max-height: 200px;
+}
+  
+.mapboxgl-popup-content {
+    text-align: center;
+}
+
+.map-container {
+    height: 700px;
+    width: 90%;
+    margin: 30px;
+    border: 1px;
+    border-style: solid;
+    border-color: rgb(212, 212, 212);
+    border-radius: 0 5px 5px 0;
+}
+
+@media screen and (max-width: 1250px) {
+    .map-container {
+        height: 400px;
+        width: 90%;
+        margin: 20px;
+        border: 1px;
+        border-style: solid;
+        border-color: rgb(212, 212, 212);
+        border-radius: 0 5px 5px 0;
+    }
+  }
