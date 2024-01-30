@@ -21,3 +21,15 @@
     border-color: rgb(212, 212, 212);
     border-radius: 0 5px 5px 0;
 }
+
+@media screen and (max-width: 1250px) {
+    .map-container {
+        height: 400px;
+        width: 90%;
+        margin: 20px;
+        border: 1px;
+        border-style: solid;
+        border-color: rgb(212, 212, 212);
+        border-radius: 0 5px 5px 0;
+    }
+  }

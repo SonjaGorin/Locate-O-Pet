@@ -5,8 +5,8 @@
 <p align="center" style="margin-top:25px; margin-bottom:50px;">
 	<a><img src="https://img.shields.io/static/v1.svg?label=npm&message=Express.js&color=blue"/></a>
 	<a><img src="https://img.shields.io/static/v1.svg?label=NodeJS&message=Environment&color=red"/></a>
-	<a><img src="https://img.shields.io/static/v1.svg?label=javascript&message=Language&color=red"/></a>
-	<a><img src="https://img.shields.io/static/v1.svg?label=React&message=Library&color=red"/></a>
+	<a><img src="https://img.shields.io/static/v1.svg?label=javascript&message=Language&color=green"/></a>
+	<a><img src="https://img.shields.io/static/v1.svg?label=React&message=Library&color=yellow"/></a>
 	<a><img src="https://img.shields.io/static/v1.svg?label=Vite&message=Library&color=blue"/></a>
 	<a><img src="https://img.shields.io/static/v1.svg?label=License&message=MIT&color=red"/></a>
 </p>
@@ -27,9 +27,13 @@
 
 ## Locate-O-Pet
 
-Description entered automatically by Lorem Ipsum. Aut, nobis quod earum, dolores accusamus modi libero possimus nam et aliquam non, blanditiis saepe. quod earum, dolores accusamus modi libero possimus nam et. Aut, nobis quod earum, dolores accusamus modi libero possimus nam et aliquam non, blanditiis saepe. quod earum, dolores accusamus modi libero possimus nam et.
+After long weeks in learning new skills, reading and working in our assignments, it all comes to this last project. This last project would be the opportunity to demnstrate our new skills, ready to either continue studying or seeking for a job. Once agian this is a group project, an opportunity to build a scalable MERN-stack single-page application that fulfills a real-world need, with a focus on data and user demand.
 
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus natus iure dolorum aperiam itaque? Ipsam ad quidem quo neque aliquam natus blanditiis totam. Rerum accusantium fugit, alias numquam tenetur nemo necessitatibus laudantium officiis. Reprehenderit dolor labore iusto ut minus fugiat tempora, expedita corrupti. Ab tenetur similique ipsa dolore odio earum aliquam animi ducimus optio quibusdam ipsam eos ipsum perferendis, perspiciatis quasi temporibus. Aliquam perspiciatis dolorum est expedita quo possimus, quas temporibus pariatur mollitia debitis. Ducimus sapiente impedit culpa eos alias voluptas minima corporis veniam commodi perspiciatis. At quaerat quas porro veritatis sapiente nihil fugit cumque voluptatum voluptatem recusandae alias nulla iusto, quam exercitationem, ipsa corrupti possimus eligendi repellendus!
+Have you ever lost something, anything? you wallet, you car keys? now you have it, now you don't! Imagine loosing your pet. Well, Locate-O-Pet is an application that will help you find your pet, by getting the community involved. You register, report where was the last time you have seen your pet, and other people would be able to notify seeing them.
+
+Pet owners would be able to register, put a picture of their pet, add warnings -if necesary, and place a pin in the map. The map-pin would show the pet image and contact number. Additional personal information can be added to their profiles.
+
+The application has been developed using MERN full stack web development. MERN stands for MongoDB, Express, React, Node, after the four key technologies that make up the stack. In MERN, Express and Node make up the middle (application) tier. Express.js is a server-side web framework, and Node.js is the popular and powerful JavaScript server platform. Hope you enjoy our application!
 
 Here is our product!
 
@@ -44,20 +48,17 @@ Here is our product!
 
 ## Installation
 
-The JATE (Just Another Text Editor) requires two tiers; Server and client. Each one requires their own independant dependancies. Please follow the instructions to install the JATE application
+The Locate-O-Pet requires -like any other MERN fullstack, two tiers; Server and client. Each one requires their own independant dependancies. Please follow the instructions to install the application
 
 |Name|Description |
 |---|---|
-|[Locate-O-Pet][mernportfolio]| Navigate to WOW React Portfolio github repo and clone application. |
-|[install-dependancies][]| Once main depandancies have been installed then run this script: `npm run install` |
-|[build-develop][] | Run script `npm run build`. This script will compile and create the application, it generates the `dist` folder with all components. |
-|[dev][] | Once application has been built we can run script `npm run dev` to execute application. |
+|[Locate-O-Pet][mernportfolio]| Navigate to Locate-O-Pet github repo and clone application. |
+|[install-dependancies][]| The application uses multiple depandancies -distributed alond the tiers. To install them, run this script: `npm run install` or `npm i` and node do the rest. |
+|[development][] | Once application has been built we can run script `npm run dev` to execute application. |
 
 [mernportfolio]: https://github.com/Jake66Martin/Locate-O-Pet
-[main-dependancies]: main-dependacies
 [install-dependancies]: install-dependacies
-[build-develop]: build-develop
-[dev]: start
+[development]: start
 
 ### List of application and developing dependencies
 
@@ -84,6 +85,8 @@ The JATE (Just Another Text Editor) requires two tiers; Server and client. Each 
 <p style="font:strong;">Application dependencies:</p>
 <div style="margin-left: 25px;">
 > @apollo/client - version 3.7.14<br/>
+> @cloudinary/react - version 1.4.0<br/>
+> @cloudinary/url-gen - version 1.8.0<br/>
 > bootstrap - version 5.2.3<br/>
 > graphql - version 16.6.0<br/>
 > jwt-decode - version 3.1.2<br/>
@@ -105,7 +108,43 @@ The JATE (Just Another Text Editor) requires two tiers; Server and client. Each 
 
 ## Application Usage
 
-Application usage entered automatically by Lorem Ipsum. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus natus iure dolorum aperiam itaque? Ipsam ad quidem quo neque aliquam natus blanditiis totam. Rerum accusantium fugit, alias numquam tenetur nemo necessitatibus laudantium officiis. Reprehenderit dolor labore iusto ut minus fugiat tempora, expedita corrupti. Ab tenetur similique ipsa dolore odio earum aliquam animi ducimus optio quibusdam ipsam eos ipsum perferendis, perspiciatis quasi temporibus. Aliquam perspiciatis dolorum est expedita quo possimus, quas temporibus pariatur mollitia debitis. Ducimus sapiente impedit culpa eos alias voluptas minima corporis veniam commodi perspiciatis. At quaerat quas porro veritatis sapiente nihil fugit cumque voluptatum voluptatem recusandae alias nulla iusto, quam exercitationem, ipsa corrupti possimus eligendi repellendus!
+Using Locate-O-Pet is very simple! Open application -phone or computer, sign in for a new profile, regiter your lost pet, add an image and your contact information. Let the community do the rest. For a regular user (not a lost pet owners), locate the pet you have spotted and report seeing the pet to the owner. User can call or post a note, including an image. All images are stored in Cloudinary, a cloud-based media management platform that enables users to upload, store, manage, manipulate, and deliver images and video for websites and apps.
+
+The application is published in Render -a cloud platform for deploying and managing applications, so there is no aditional requirement to get the application working.
+
+### Registering to Locate-O-Pet Database
+Even though you don't have to register to see lost pets, you do when you want to report a lost pet. The registration is simple. 
+
+<details style="margin=bottom:15px;"> 
+<summary>Registration form. (click on arrow to expand)</summary>
+<div style="margin-top: 15px;">
+	<img align="center" src="./client/images/LOP002.png">
+</div>
+</details>
+<br/>
+
+<ol>
+<li>Goto to the login screen</li>
+<li>Click on register link</li>
+<li>Provide your name or nick name</li>
+<li>Enter a valid email address</li>
+<li>Create a password - Password must be of 8 characters minimum. Must contain one of each lowercase, uppercase, digit, and special character.</li>
+<li>Register your lost pet</li>
+</ol>
+
+### Reporting a lost pet
+As a member of Locate-O-Pet database you can report a lost pet for the community to see. Reporting a lost pet is simple, from the map page (main page) select the "I lost a pet" or "I saw a pet" in case you want to report owner where you saw their pet.
+
+Note: you must register and be logged in, before you can report a pet.
+
+<details style="margin=bottom:15px;"> 
+<summary>Reporting a Lost Pet form. (click on arrow to expand)</summary>
+<div style="margin-top: 15px;">
+	<img align="center" src="./client/images/LOP004.png">
+</div>
+</details>
+<br/>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 </div>
@@ -132,7 +171,7 @@ You may find the application at: [https://github.com/Jake66Martin/Locate-O-Pet](
 
 MIT License
 
-Copyright (c) 2023 Readme-Bot
+Copyright (c) 2024 Locate-O-Pet
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
