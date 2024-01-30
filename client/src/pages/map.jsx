@@ -80,11 +80,11 @@ export default function Map() {
                          <PetCards pets={pets} open={leftPanel == LeftPanel.PetsList} setSelectedPetId={setSelectedPetId}/>
                          <SeenPetForm 
                               open={leftPanel == LeftPanel.SeenPetForm} 
-                              hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} 
+                              hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch(); setShowButtons(true);}} 
                               userMarker={userMarker}/>
                          <LostPetForm 
                               open={leftPanel == LeftPanel.LostPetForm} 
-                              hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch();}} 
+                              hideForm={() => {setLeftPanel(LeftPanel.PetsList); setUserMarker(null); refetch(); setShowButtons(true);}} 
                               userMarker={userMarker}/>
                     </div>
                     <div className='map-div'>

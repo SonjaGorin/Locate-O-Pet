@@ -20,6 +20,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
     const [status, setStatus] = useState("isSeen");
     const [img, setImg] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
+    const [count, setCount] = useState(0);
 
     const [ addSeenPet ] = useMutation(ADD_SEENPET);
 
@@ -40,6 +41,9 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
         } else {
             return setMessage(value)
         }
+
+        // setCount(e.target.value.maxLength)
+
     }
 
     const blurFunction = (e) => {
@@ -118,7 +122,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         name="breed"
                         onChange={handleInputChange}
                         type="text"
-                        maxlength="40"
+                        maxLength="40"
                     />
                 </div>
                 <div className="colours-input">
@@ -130,7 +134,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         onChange={handleInputChange}
                         onBlur={blurFunction}
                         type="text"
-                        maxlength="40"
+                        maxLength="40"
                     />
                 </div>
                 <div className="message-input">
@@ -142,8 +146,12 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         onBlur={blurFunction}
                         type="text"
                         className="message-field"
-                        maxlength="80"
+                        maxLength="80"
+                        id="comment"
                     />
+                    {/* <div id="the-count_comment" style=""/>
+                    <span id="current_comment">0</span>
+                    <span id="maximum_comment"> / 80</span> */}
                 </div>
                 <div className="upload-img-bttn">
                     <UploadWidget onUpload={(src) => setImg(src)}/>
