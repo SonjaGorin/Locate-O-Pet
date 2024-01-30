@@ -42,8 +42,8 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
     return field ? "" : "hidden";
   };
   return (
-    <>
-      {!isMobile ? (
+    // <>
+    //   {!isMobile ? (
         <div
           id={`pet_${pet._id}`}
           className={className}
@@ -63,33 +63,33 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
           <h2 className="card-text text-center">Message: {pet.message}</h2>
           <img className="card-img" src={pet.img} />
         </div>
-      ) : (
-        <div
-          id={`pet_${pet._id}`}
-          className={className}
-          onMouseOver={onMouseOver}
-          onMouseOut={onMouseOut}
-        >
-          <div className = "d-flex">
-            <div className = "w-50">
-              <h2 className="card-text text-center">
-                {speciesText} {pet.species}
-              </h2>
-              <h2 className="card-text text-center" hidden={!pet.breed}>
-                Breed: {pet.breed}
-              </h2>
-              <h2 className="card-text text-center">Colour: {pet.colours}</h2>
-              <h2 className="card-text text-center">
-                {sexText} {pet.sex}
-              </h2>
-              <h2 className="card-text text-center">Message: {pet.message}</h2>
-            </div>
-            <div className = "w-50">
-              <img className="card-img" src={pet.img} />
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+    //   // ) : (
+    //     <div
+    //       id={`pet_${pet._id}`}
+    //       className={className}
+    //       onMouseOver={onMouseOver}
+    //       onMouseOut={onMouseOut}
+    //     >
+    //       <div className = "d-flex">
+    //         <div className = "w-50">
+    //           <h2 className="card-text text-center">
+    //             {speciesText} {pet.species}
+    //           </h2>
+    //           <h2 className="card-text text-center" hidden={!pet.breed}>
+    //             Breed: {pet.breed}
+    //           </h2>
+    //           <h2 className="card-text text-center">Colour: {pet.colours}</h2>
+    //           <h2 className="card-text text-center">
+    //             {sexText} {pet.sex}
+    //           </h2>
+    //           <h2 className="card-text text-center">Message: {pet.message}</h2>
+    //         </div>
+    //         <div className = "w-50">
+    //           <img className="card-img" src={pet.img} />
+    //         </div>
+    //       </div>
+    //     </div>
+    //   )}
+    // </>
   );
 }
