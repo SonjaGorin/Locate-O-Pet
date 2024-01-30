@@ -93,7 +93,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
             title: "The new pet has been added!",
             showConfirmButton: false,
             timer: 2000,
-          });
+        });
     };
     
     return (
