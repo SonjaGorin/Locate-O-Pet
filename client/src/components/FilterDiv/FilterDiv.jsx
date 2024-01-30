@@ -2,7 +2,7 @@ import "./FilterDiv.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { useEffect, useState } from "react";
 
-export default function FilterDiv({ open, onOptionSelection }) {
+export default function FilterDiv({ open, onOptionSelection, showButtons, onClickLost, onClickSeen }) {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -25,8 +25,10 @@ export default function FilterDiv({ open, onOptionSelection }) {
     return (
         <>
             {!isMobile ? (
-                <div className="filter-div d-flex flex-column align-items-start">
-                    <h1 className="filters-title">Filters</h1>
+                <div className="filter-div d-flex flex-column">
+                    <div className="text-center">
+                        <h1 className="filters-title">Filters</h1>
+                    </div>
                     <div
                         className="form-check"
                         onChange={(e) => onOptionSelection(e.target.value)}
@@ -99,6 +101,26 @@ export default function FilterDiv({ open, onOptionSelection }) {
                         >
                             Show my posts
                         </label>
+                    </div>
+                    <div className="text-center">
+                        {showButtons && (
+                            <button
+                                    className="i-lost-pet-button btn btn-primary bg-red btn-lg"
+                                    onClick={onClickLost}
+                            >
+                                    I lost a pet
+                            </button>
+                        )}
+                    </div>
+                    <div className="text-center">
+                        {showButtons && (
+                            <button
+                                    className="i-saw-pet-button btn btn-primary btn-lg"
+                                    onClick={onClickSeen}
+                            >
+                                    I saw a pet
+                            </button>
+                        )}
                     </div>
                 </div>
             ) : (
@@ -177,6 +199,26 @@ export default function FilterDiv({ open, onOptionSelection }) {
                         >
                             Show my posts
                         </label>
+                    </div>
+                    <div className="text-center">
+                        {showButtons && (
+                            <button
+                                    className="i-lost-pet-button btn btn-primary bg-red btn-lg"
+                                    onClick={onClickLost}
+                            >
+                                    I lost a pet
+                            </button>
+                        )}
+                    </div>
+                    <div className="text-center">
+                        {showButtons && (
+                            <button
+                                    className="i-saw-pet-button btn btn-primary btn-lg"
+                                    onClick={onClickSeen}
+                            >
+                                    I saw a pet
+                            </button>
+                        )}
                     </div>
                 </div>
             )}

@@ -36,7 +36,7 @@ export default function PetPostCard({ pet, setSelectedPetId, refetch }) {
         throw new Error(`Unexpected pet status ${pet.status}`);
     }
 
-    const className = `pet-post-card text-center ${subclass}`;
+    const className = `pet-post-card ${subclass}`;
     const onMouseOver = () => {
         setSelectedPetId(pet._id);
     };
@@ -70,25 +70,27 @@ export default function PetPostCard({ pet, setSelectedPetId, refetch }) {
             onMouseOver={onMouseOver}
             onMouseOut={onMouseOut}
         >
-            <h2 className="card-text text-center">{speciesText} {pet.species}</h2>
-            <h2 className="card-text text-center" hidden={!pet.breed}>Breed: {pet.breed}</h2>
-            <h2 className="card-text text-center">Colour: {pet.colours}</h2>
-            <h2 className="card-text text-center">{sexText} {pet.sex}</h2>
-            <h2 className="card-text text-center" hidden={!pet.message}>Message: {pet.message}</h2>
+            <h2 className="card-text ">{speciesText} {pet.species}</h2>
+            <h2 className="card-text " hidden={!pet.breed}>Breed: {pet.breed}</h2>
+            <h2 className="card-text ">Colour: {pet.colours}</h2>
+            <h2 className="card-text ">{sexText} {pet.sex}</h2>
+            <h2 className="card-text " hidden={!pet.message}>Message: {pet.message}</h2>
             <img className="card-img" hidden={!pet.img} src={pet.img} />
-            {pet.addedByMe && (<button className="btn btn-primary btn-lg" 
-                                        onClick={() => {handleRemovePet(pet._id); 
-                                                        Swal.fire({
-                                                            position: "center-center",
-                                                            icon: "success",
-                                                            title: "Post has been deleted.",
-                                                            showConfirmButton: false,
-                                                            timer: 2000,
-                                                        });
-                                                        refetch();
-                                                }}>
-                                    Delete Post
-                                </button>)}
+            <div className="text-center">
+                {pet.addedByMe && (<button className="btn btn-primary btn-lg" 
+                                            onClick={() => {handleRemovePet(pet._id); 
+                                                            Swal.fire({
+                                                                position: "center-center",
+                                                                icon: "success",
+                                                                title: "Post has been deleted.",
+                                                                showConfirmButton: false,
+                                                                timer: 2000,
+                                                            });
+                                                            refetch();
+                                                    }}>
+                                        Delete Post
+                                    </button>)}
+            </div>
         </div>
     );
 }
