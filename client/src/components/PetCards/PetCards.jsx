@@ -1,7 +1,7 @@
 import PetPostCard from "../PetPostCard/PetPostCard";
 import "./PetCards.css"
 
-export default function PetCards({pets, open, setSelectedPetId}) {
+export default function PetCards({pets, open, setSelectedPetId, refetch}) {
     if (!open) {
         return (<div></div>);
     }
@@ -15,7 +15,8 @@ export default function PetCards({pets, open, setSelectedPetId}) {
                             <div>
                                 <PetPostCard 
                                     pet={pet}
-                                    setSelectedPetId={setSelectedPetId}/>
+                                    setSelectedPetId={setSelectedPetId}
+                                    refetch={refetch}/>
                             </div>
                         </div>
                     </div>

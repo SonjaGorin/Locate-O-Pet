@@ -110,6 +110,7 @@ export default function Map() {
                                         pets={pets}
                                         open={leftPanel == LeftPanel.PetsList}
                                         setSelectedPetId={setSelectedPetId}
+                                        c={refetch()}
                                    />
                                    <SeenPetForm
                                         open={leftPanel == LeftPanel.SeenPetForm}

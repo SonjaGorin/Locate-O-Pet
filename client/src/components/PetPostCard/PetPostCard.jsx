@@ -5,7 +5,7 @@ import { REMOVE_PET } from "../../utils/mutations";
 import Auth from '../../utils/auth';
 import Swal from 'sweetalert2';
 
-export default function PetPostCard({ pet, setSelectedPetId }) {
+export default function PetPostCard({ pet, setSelectedPetId, refetch }) {
 
     const [isMobile, setIsMobile] = useState(false);
     const [removePet] = useMutation(REMOVE_PET);
@@ -84,7 +84,8 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
                                                             title: "Post has been deleted.",
                                                             showConfirmButton: false,
                                                             timer: 2000,
-                                                         });
+                                                        });
+                                                        refetch();
                                                 }}>
                                     Delete Post
                                 </button>)}
