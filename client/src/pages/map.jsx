@@ -23,8 +23,7 @@ import { QUERY_ALLPETS } from "../utils/queries";
 
 import "./map.css";
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg";
+mapboxgl.accessToken = process.env.MAP_TOKEN
 
 const LeftPanel = {
   PetsList: 0,
