@@ -125,6 +125,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         onChange={handleInputChange}
                         onBlur={blurFunction}
                         type="text"
+                        maxlength="40"
                     />
                 </div>
                 <div className="colours-input">
@@ -136,6 +137,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         onChange={handleInputChange}
                         onBlur={blurFunction}
                         type="text"
+                        maxlength="40"
                     />
                 </div>
                 <div className="message-input">
@@ -147,6 +149,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         onBlur={blurFunction}
                         type="text"
                         className="message-field"
+                        maxlength="80"
                     />
                 </div>
                 <div className="img-btn-asteriks">
