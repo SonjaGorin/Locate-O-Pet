@@ -1,8 +1,10 @@
 import "./PetPostCard.css";
 import { useEffect, useState } from "react";
+import Auth from "../../utils/auth";
 
 export default function PetPostCard({ pet, setSelectedPetId }) {
     const [isMobile, setIsMobile] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
 
     useEffect(() => {
         const handleResize = () => {
@@ -30,7 +32,7 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
         throw new Error(`Unexpected pet status ${pet.status}`);
     }
 
-    const className = `pet-post-card ${subclass}`;
+    const className = `pet-post-card text-center ${subclass}`;
     const onMouseOver = () => {
         setSelectedPetId(pet._id);
     };
@@ -55,6 +57,7 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
             <h2 className="card-text text-center">{sexText} {pet.sex}</h2>
             <h2 className="card-text text-center" hidden={!pet.message}>Message: {pet.message}</h2>
             <img className="card-img" hidden={!pet.img} src={pet.img} />
+            {isLoggedIn && (<button className="btn btn-primary btn-lg">Delete Post</button>)}
         </div>
     );
 }
