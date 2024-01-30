@@ -2,21 +2,9 @@
     min-height: 900px;
 }
 
-.i-lost-pet-button {
-    position: fixed;
-    bottom: 140px;
-    right: 40px;
-    background-color: rgb(226, 0, 0) !important;
-    border-color:  rgb(124, 0, 0) !important;
-}
 
-.i-saw-pet-button {
-    position: fixed;
-    bottom: 80px;
-    right: 40px;
-    background-color: rgb(0, 100, 0) !important;
-    border-color: rgb(0, 71, 0) !important;
-}
+
+
 
 .form-div {
     width: 40%;
