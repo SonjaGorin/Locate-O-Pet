@@ -1,9 +1,14 @@
 import "./PetPostCard.css";
 import { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { REMOVE_PET } from "../../utils/mutations";
+import Auth from '../../utils/auth';
+import Swal from 'sweetalert2';
 
 export default function PetPostCard({ pet, setSelectedPetId }) {
 
     const [isMobile, setIsMobile] = useState(false);
+    const [removePet] = useMutation(REMOVE_PET);
 
     useEffect(() => {
         const handleResize = () => {
@@ -43,6 +48,21 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
         return field ? "" : "hidden";
     };
 
+    const handleRemovePet = async (id) => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+        console.log({ id });
+        if (!token) {
+            return false;
+        }
+        try {
+            const { data } = await removePet({
+              variables: { id }
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     return (
         <div
             id={`pet_${pet._id}`}
@@ -56,7 +76,18 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
             <h2 className="card-text text-center">{sexText} {pet.sex}</h2>
             <h2 className="card-text text-center" hidden={!pet.message}>Message: {pet.message}</h2>
             <img className="card-img" hidden={!pet.img} src={pet.img} />
-            {pet.addedByMe && (<button className="btn btn-primary btn-lg">Delete Post</button>)}
+            {pet.addedByMe && (<button className="btn btn-primary btn-lg" 
+                                        onClick={() => {handleRemovePet(pet._id); 
+                                                        Swal.fire({
+                                                            position: "center-center",
+                                                            icon: "success",
+                                                            title: "Post has been deleted.",
+                                                            showConfirmButton: false,
+                                                            timer: 2000,
+                                                         });
+                                                }}>
+                                    Delete Post
+                                </button>)}
         </div>
     );
 }

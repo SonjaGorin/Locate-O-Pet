@@ -94,7 +94,6 @@ export default function Map() {
                               <div className="form-div">
                                    <FilterDiv
                                         open={leftPanel == LeftPanel.PetsList}
-                                        // showDelete={setShowDeleteBtn(true)}
                                         onOptionSelection={(optionName) => {
                                              if (optionName === "onlyMine" && !isLoggedIn) {
                                                   Swal.fire({
