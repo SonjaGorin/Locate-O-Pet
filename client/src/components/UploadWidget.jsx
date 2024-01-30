@@ -18,8 +18,8 @@ const UploadWidget = ({onUpload}) => {
      useEffect(() => {
           cloudinaryRef.current = window.cloudinary;
           widgetRef.current = cloudinaryRef.current.createUploadWidget({
-               cloudName: process.env.CLOUD_NAME,
-               uploadPreset: process.env.UPLOAD_PRESET
+               cloudName: 'dbjovbbrj',
+               uploadPreset: 'l9cr83zg'
           }, function (error, result) {
                if (!error && result && result.event === "success") {
                     onUpload(result.info.secure_url);
