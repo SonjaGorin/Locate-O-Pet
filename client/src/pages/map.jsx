@@ -66,16 +66,16 @@ export default function Map() {
      const { data, loading, refetch } = useQuery(QUERY_ALLPETS);
 
      useEffect(() => {
-     const handleResize = () => {
-          setIsMobile(window.innerWidth <= 1250);
-     };
+          const handleResize = () => {
+               setIsMobile(window.innerWidth <= 1250);
+          };
 
-     window.addEventListener("resize", handleResize);
-     handleResize();
+          window.addEventListener("resize", handleResize);
+          handleResize();
 
-     return () => {
-          window.removeEventListener("resize", handleResize);
-     };
+          return () => {
+               window.removeEventListener("resize", handleResize);
+          };
      }, []);
 
      if (loading) {
@@ -94,6 +94,7 @@ export default function Map() {
                               <div className="form-div">
                                    <FilterDiv
                                         open={leftPanel == LeftPanel.PetsList}
+                                        // showDelete={setShowDeleteBtn(true)}
                                         onOptionSelection={(optionName) => {
                                              if (optionName === "onlyMine" && !isLoggedIn) {
                                                   Swal.fire({

@@ -1,10 +1,9 @@
 import "./PetPostCard.css";
 import { useEffect, useState } from "react";
-import Auth from "../../utils/auth";
 
 export default function PetPostCard({ pet, setSelectedPetId }) {
+
     const [isMobile, setIsMobile] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
 
     useEffect(() => {
         const handleResize = () => {
@@ -57,7 +56,7 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
             <h2 className="card-text text-center">{sexText} {pet.sex}</h2>
             <h2 className="card-text text-center" hidden={!pet.message}>Message: {pet.message}</h2>
             <img className="card-img" hidden={!pet.img} src={pet.img} />
-            {isLoggedIn && (<button className="btn btn-primary btn-lg">Delete Post</button>)}
+            {pet.addedByMe && (<button className="btn btn-primary btn-lg">Delete Post</button>)}
         </div>
     );
 }
