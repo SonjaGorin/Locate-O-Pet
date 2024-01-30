@@ -158,13 +158,15 @@ export default function Map() {
       ) : (
         <div className="page-height">
           <div className="pet-form-map d-flex flex-column">
-            <div className="form-div2">
+            <div className="form-div2 d-flex">
+              <div>
               <FilterDiv
                 open={leftPanel == LeftPanel.PetsList}
                 onOptionSelection={(optionName) =>
                   setPetFilter(PetFilter[optionName])
                 }
               />
+              </div>
               <PetCards
                 pets={pets}
                 open={leftPanel == LeftPanel.PetsList}

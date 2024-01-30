@@ -104,8 +104,7 @@ export default function FilterDiv({ open, onOptionSelection }) {
       ) : (
         <div className="filter-div d-flex flex-column align-items-center">
           <h1 className="filters-title">Filters</h1>
-          <div className = "d-flex">
-            <div className="w-50">
+          
               <div
                 className="form-check"
                 onChange={(e) => onOptionSelection(e.target.value)}
@@ -143,8 +142,8 @@ export default function FilterDiv({ open, onOptionSelection }) {
                   Show only lost pets
                 </label>
               </div>
-            </div>
-            <div className="w-50">
+            
+            
               <div
                 className="form-check"
                 onChange={(e) => onOptionSelection(e.target.value)}
@@ -181,8 +180,8 @@ export default function FilterDiv({ open, onOptionSelection }) {
                   Show my posts
                 </label>
               </div>
-            </div>
-          </div>
+           
+          
         </div>
       )}
     </>
