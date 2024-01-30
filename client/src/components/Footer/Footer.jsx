@@ -3,7 +3,7 @@ import './Footer.css'
 function Footer() {
   
     return (
-      <footer className="bg-primary d-flex justify-content-center align-items-center text-white footer-height">
+      <footer className="bg-primary d-flex justify-content-center align-items-center text-white footer-height text-size">
       Carleton University Coding Bootcamp © Copyright 2024
       </footer>
     );
