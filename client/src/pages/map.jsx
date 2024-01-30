@@ -55,6 +55,7 @@ const PetFilterFunctions = [
 ];
 
 export default function Map() {
+     console.log("Rerendering map")
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
      const [userMarker, setUserMarker] = useState();
      const [showButtons, setShowButtons] = useState(true);
@@ -97,7 +98,7 @@ export default function Map() {
      var pets = data.allPets ? [...data.allPets] : [];
      pets.sort(comparePets);
      pets = pets.filter(PetFilterFunctions[petFilter]);
-
+     console.log(pets);
      return (
           <>
                {!isMobile ? (

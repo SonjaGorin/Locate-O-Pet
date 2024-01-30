@@ -48,7 +48,7 @@ export default function PetPostCard({ pet, setSelectedPetId, refetch }) {
         return field ? "" : "hidden";
     };
 
-    const handleRemovePet = async (id) => {
+    const handleRemovePet = async (id, refetch) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         console.log({ id });
         if (!token) {
@@ -58,6 +58,7 @@ export default function PetPostCard({ pet, setSelectedPetId, refetch }) {
             const { data } = await removePet({
               variables: { id }
             });
+            refetch();
         } catch (err) {
             console.error(err);
         }
@@ -78,7 +79,8 @@ export default function PetPostCard({ pet, setSelectedPetId, refetch }) {
             <img className="card-img" hidden={!pet.img} src={pet.img} />
             <div className="text-center">
                 {pet.addedByMe && (<button className="btn btn-primary btn-lg" 
-                                            onClick={() => {handleRemovePet(pet._id); 
+                                            onClick={() => {
+                                                            handleRemovePet(pet._id, refetch); 
                                                             Swal.fire({
                                                                 position: "center-center",
                                                                 icon: "success",
@@ -86,7 +88,6 @@ export default function PetPostCard({ pet, setSelectedPetId, refetch }) {
                                                                 showConfirmButton: false,
                                                                 timer: 2000,
                                                             });
-                                                            refetch();
                                                     }}>
                                         Delete Post
                                     </button>)}
