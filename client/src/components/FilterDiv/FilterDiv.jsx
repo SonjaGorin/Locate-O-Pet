@@ -25,7 +25,7 @@ export default function FilterDiv({ open, onOptionSelection }) {
   return (
     <>
       {!isMobile ? (
-        <div className="filter-div d-flex flex-column align-items-center">
+        <div className="filter-div d-flex flex-column align-items-start">
           <h1 className="filters-title">Filters</h1>
           <div
             className="form-check"
