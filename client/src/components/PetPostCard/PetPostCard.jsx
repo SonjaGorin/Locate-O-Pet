@@ -10,8 +10,6 @@ export default function PetPostCard({pet, setSelectedPetId}) {
         var speciesText = "I saw a";
         var subclass = "background-green";
         var sexText = "A girl or a boy?"
-    } else if (pet.status === "isSeen" && pet.breed === "") {
-
     } else {
         throw new Error(`Unexpected pet status ${pet.status}`)
     }
@@ -28,8 +26,8 @@ export default function PetPostCard({pet, setSelectedPetId}) {
             <h2 className="card-text" hidden={!pet.breed} >Breed: {pet.breed}</h2>
             <h2 className="card-text">Colour: {pet.colours}</h2>
             <h2 className="card-text">{sexText} {pet.sex}</h2>
-            <h2 className="card-text">Message: {pet.message}</h2>
-            <img className="card-img" src={pet.img}/>
+            <h2 className="card-text" hidden={!pet.message}>Message: {pet.message}</h2>
+            <img className="card-img" hidden={!pet.img} src={pet.img}/>
         </div>
     )
 }

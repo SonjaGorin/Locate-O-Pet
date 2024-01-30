@@ -62,7 +62,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
 
         const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng, status, img }};
 
-        if (!species || !colours || !message) {
+        if (!species || !colours) {
             setErrorMessage("Please fill up all fields.");
             return;
         }
@@ -132,7 +132,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                     />
                 </div>
                 <div className="message-input">
-                    <label>Would you like to add anything else?<span className="required-asterix">*</span></label>
+                    <label>Would you like to add anything else?</label>
                     <textarea
                         value={message}
                         name="message"
