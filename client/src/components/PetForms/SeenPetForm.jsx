@@ -20,12 +20,14 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
     const [status, setStatus] = useState("isSeen");
     const [img, setImg] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
+    const [count, setCount] = useState(0);
 
     const [ addSeenPet ] = useMutation(ADD_SEENPET);
 
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
         const { name, value, src } = e.target;
+        setCount(value.length)
         // making sure that the right set function is called depending on the input field user is typing in
         if (name === "species") {
             return setSpecies(value)
@@ -40,6 +42,9 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
         } else {
             return setMessage(value)
         }
+
+        
+
     }
 
     const blurFunction = (e) => {
@@ -62,7 +67,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
 
         const variables = { input: {species, sex, breed, colours, message, lat: userMarker.getLngLat().lat, lng: userMarker.getLngLat().lng, status, img }};
 
-        if (!species || !colours || !message) {
+        if (!species || !colours) {
             setErrorMessage("Please fill up all fields.");
             return;
         }
@@ -90,12 +95,13 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
 
     return (
         <div className="form-div2 back-color-seen">
+            <button className="close-seen-form-button" onClick={() => hideForm()}>X</button>
             <h1  className="sorry-greeting">We are so glad you saw someone's pet!</h1>
             <h2  className="under-greeting">Please describe them as best as possible.</h2>
             <form  className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
                     <label>Is the pet cat, dog or a bird?<span className="required-asterix">*</span></label>
-                    <select className="form-field" name="species" onChange={handleInputChange} value={species}>
+                    <select className="form-field species-options" name="species" onChange={handleInputChange} value={species}>
                         <option onBlur={blurFunction}>Cat</option>
                         <option onBlur={blurFunction}>Dog</option>
                         <option onBlur={blurFunction}>Bird</option>
@@ -103,7 +109,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                 </div>
                 <div className="sex-input">
                     <label>Is the pet a girl or a boy?</label>
-                    <select className="form-field" name="sex" onChange={handleInputChange} value={sex}>
+                    <select className="form-field sex-options" name="sex" onChange={handleInputChange} value={sex}>
                         <option>I don't know</option>
                         <option>A girl</option>
                         <option>A boy</option>
@@ -117,7 +123,9 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         name="breed"
                         onChange={handleInputChange}
                         type="text"
+                        maxLength="40"
                     />
+                    <p className="counter">{count}/40</p>
                 </div>
                 <div className="colours-input">
                     <label>What colour is the pet?<span className="required-asterix">*</span></label>
@@ -128,10 +136,12 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         onChange={handleInputChange}
                         onBlur={blurFunction}
                         type="text"
+                        maxLength="40"
                     />
+                    <p className="counter">{count}/40</p>
                 </div>
                 <div className="message-input">
-                    <label>Would you like to add anything else?<span className="required-asterix">*</span></label>
+                    <label>Would you like to add anything else?</label>
                     <textarea
                         value={message}
                         name="message"
@@ -139,7 +149,10 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         onBlur={blurFunction}
                         type="text"
                         className="message-field"
+                        maxLength="80"
+                        id="comment"
                     />
+                    <p className="counter">{count}/80</p>
                 </div>
                 <div className="upload-img-bttn">
                     <UploadWidget onUpload={(src) => setImg(src)}/>

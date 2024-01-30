@@ -108,6 +108,7 @@ export default function Map() {
                   setLeftPanel(LeftPanel.PetsList);
                   setUserMarker(null);
                   refetch();
+                  setShowButtons(true);
                 }}
                 userMarker={userMarker}
               />
@@ -117,6 +118,7 @@ export default function Map() {
                   setLeftPanel(LeftPanel.PetsList);
                   setUserMarker(null);
                   refetch();
+                  setShowButtons(true);
                 }}
                 userMarker={userMarker}
               />
@@ -178,6 +180,7 @@ export default function Map() {
                   setLeftPanel(LeftPanel.PetsList);
                   setUserMarker(null);
                   refetch();
+                  setShowButtons(true);
                 }}
                 userMarker={userMarker}
               />
@@ -187,6 +190,7 @@ export default function Map() {
                   setLeftPanel(LeftPanel.PetsList);
                   setUserMarker(null);
                   refetch();
+                  setShowButtons(true);
                 }}
                 userMarker={userMarker}
               />

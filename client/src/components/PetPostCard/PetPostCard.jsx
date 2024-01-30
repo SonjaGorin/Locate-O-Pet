@@ -60,8 +60,8 @@ export default function PetPostCard({ pet, setSelectedPetId }) {
           <h2 className="card-text text-center">
             {sexText} {pet.sex}
           </h2>
-          <h2 className="card-text text-center">Message: {pet.message}</h2>
-          <img className="card-img" src={pet.img} />
+          <h2 className="card-text text-center" hidden={!pet.message}>Message: {pet.message}</h2>
+          <img className="card-img" hidden={!pet.img} src={pet.img} />
         </div>
     //   // ) : (
     //     <div

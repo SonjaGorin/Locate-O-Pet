@@ -22,8 +22,6 @@ const UploadWidget = ({onUpload}) => {
                uploadPreset: 'l9cr83zg'
           }, function (error, result) {
                if (!error && result && result.event === "success") {
-                    console.log("Done! Here is the image info: ", result.info);
-                    console.log(result.info.secure_url);
                     onUpload(result.info.secure_url);
                }
           })
@@ -31,7 +29,7 @@ const UploadWidget = ({onUpload}) => {
      }, [])
 
      return (
-          <Button className="btn btn-primary" onClick={() => { widgetRef.current.open() }}>Upload Image</Button>
+          <Button className="btn btn-primary upload-img-btn" onClick={() => { widgetRef.current.open() }}>Upload Image</Button>
      )
 
 }

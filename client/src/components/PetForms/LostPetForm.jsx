@@ -20,6 +20,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const [status, setStatus] = useState("isLost");
     const [img, setImg] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
+    const [count, setCount] = useState(0);
 
     const [ addLostPet ] = useMutation(ADD_LOSTPET);
 
@@ -28,6 +29,9 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
         const { name, value, src } = e.target;
+
+        setCount(value.length)
+        
         // making sure that the right set function is called depending on the input field user is typing in
         if (name === "species") {
             return setSpecies(value)
@@ -69,6 +73,11 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
             return;
         }
 
+        if (!img) {
+            setErrorMessage("Please upload the image.");
+            return;
+        }
+
         try {
             await addLostPet({variables})
         } catch (error) {
@@ -92,12 +101,13 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     
     return (
         <div className="form-div2 back-color-lost">
+            <button className="close-lost-form-button" onClick={() => hideForm()}>X</button>
             <h1 className="sorry-greeting">We are sorry to hear that you lost your pet.</h1>
             <h2 className="under-greeting">Let's find them!</h2>
             <form className="form" onSubmit={handleFormSubmit}>
                 <div className="species-input">
                     <label>Is your pet cat, dog or a bird?<span className="required-asterix">*</span></label>
-                    <select className="form-field" name="species" onChange={handleInputChange} value={species}>
+                    <select className="form-field species-options" name="species" onChange={handleInputChange} value={species}>
                         <option onBlur={blurFunction}>Cat</option>
                         <option onBlur={blurFunction}>Dog</option>
                         <option onBlur={blurFunction}>Bird</option>
@@ -105,7 +115,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                 </div>
                 <div className="sex-input">
                     <label>Is your pet a girl or a boy?<span className="required-asterix">*</span></label>
-                    <select className="form-field" name="sex" onChange={handleInputChange} value={sex}>
+                    <select className="form-field sex-options" name="sex" onChange={handleInputChange} value={sex}>
                         <option onBlur={blurFunction}>girl</option>
                         <option onBlur={blurFunction}>boy</option>
                     </select>
@@ -119,7 +129,9 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         onChange={handleInputChange}
                         onBlur={blurFunction}
                         type="text"
+                        maxlength="40"
                     />
+                    <p className="counter">{count}/40</p>
                 </div>
                 <div className="colours-input">
                     <label>What colour is your pet?<span className="required-asterix">*</span></label>
@@ -130,7 +142,9 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         onChange={handleInputChange}
                         onBlur={blurFunction}
                         type="text"
+                        maxlength="40"
                     />
+                    <p className="counter">{count}/40</p>
                 </div>
                 <div className="message-input">
                     <label>Would you like to add your contact info or anything else?<span className="required-asterix">*</span></label>
@@ -141,11 +155,18 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         onBlur={blurFunction}
                         type="text"
                         className="message-field"
+                        maxlength="80"
                     />
+                    <p className="counter">{count}/80</p>
                 </div>
-                <div className="upload-img-bttn">
-                    <UploadWidget onUpload={(src) => setImg(src)} />
-                    <img id="uploadedimage" name="image" src={img} />
+                <div className="img-btn-asteriks">
+                    <div className="upload-img-bttn">
+                        <UploadWidget onUpload={(src) => setImg(src)} />
+                        <img id="uploadedimage" name="image" src={img} />
+                    </div>
+                    <div>
+                        <h4 className="asterix">*</h4>
+                    </div>
                 </div>
                 {!userMarker &&
                 <div>

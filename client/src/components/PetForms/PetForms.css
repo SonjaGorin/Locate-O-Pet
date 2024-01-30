@@ -25,11 +25,14 @@
 
 .form-field {
     height: 30px;
-    margin-bottom: 15px;
 }
 
 .message-field {
     height: 80px;
+}
+
+.species-options,
+.sex-options {
     margin-bottom: 15px;
 }
 
@@ -37,6 +40,7 @@
     font-size: 30px;
     text-align: center;
     font-weight: bold;
+    margin-top: 30px;
 }
 
 .under-greeting {
@@ -54,6 +58,7 @@
 
 .upload-img-bttn {
     width: 200px;
+    display: flex;
 }
 
 .back-color-lost {
@@ -66,4 +71,30 @@
 
 .submit-bttn {
     margin-top: 10px;
+}
+
+.close-seen-form-button {
+    background-color: rgb(192, 238, 192);
+    border-style: none;
+    float: right;
+}
+
+.close-lost-form-button {
+    background-color: rgb(255, 214, 214);
+    border-style: none;
+    float: right;
+}
+
+.img-btn-asteriks {
+    display: flex;
+}
+
+.asterix {
+    color: red;
+    padding-left: 5px;
+}
+
+.counter {
+    text-align: right;
+    margin: 0;
 }
