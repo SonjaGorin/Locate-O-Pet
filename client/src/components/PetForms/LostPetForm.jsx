@@ -20,7 +20,6 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const [status, setStatus] = useState("isLost");
     const [img, setImg] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
-    const [count, setCount] = useState(0);
 
     const [ addLostPet ] = useMutation(ADD_LOSTPET);
 
@@ -29,8 +28,6 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
     const handleInputChange = (e) => {
         // Getting the value and name of the input which triggered the change
         const { name, value, src } = e.target;
-
-        setCount(value.length)
         
         // making sure that the right set function is called depending on the input field user is typing in
         if (name === "species") {
@@ -96,7 +93,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
             title: "The new pet has been added!",
             showConfirmButton: false,
             timer: 2000,
-          });
+        });
     };
     
     return (
@@ -131,7 +128,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         maxlength="40"
                     />
-                    <p className="counter">{count}/40</p>
+                    <p className="counter">{breed.length}/40</p>
                 </div>
                 <div className="colours-input">
                     <label>What colour is your pet?<span className="required-asterix">*</span></label>
@@ -144,7 +141,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         maxlength="40"
                     />
-                    <p className="counter">{count}/40</p>
+                    <p className="counter">{colours.length}/40</p>
                 </div>
                 <div className="message-input">
                     <label>Would you like to add your contact info or anything else?<span className="required-asterix">*</span></label>
@@ -157,7 +154,7 @@ export default function LostSeenPetForm({open, hideForm, userMarker}) {
                         className="message-field"
                         maxlength="80"
                     />
-                    <p className="counter">{count}/80</p>
+                    <p className="counter">{message.length}/80</p>
                 </div>
                 <div className="img-btn-asteriks">
                     <div className="upload-img-bttn">

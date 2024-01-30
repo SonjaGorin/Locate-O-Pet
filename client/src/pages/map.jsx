@@ -16,6 +16,7 @@ import MapArea from "../components/MapArea/MapArea";
 import PetCards from "../components/PetCards/PetCards";
 import FilterDiv from "../components/FilterDiv/FilterDiv";
 import Auth from "../utils/auth";
+import Swal from 'sweetalert2';
 
 import { useQuery } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
@@ -92,10 +93,18 @@ export default function Map() {
           <div className="pet-form-map">
             <div className="form-div">
               <FilterDiv
-                open={leftPanel == LeftPanel.PetsList}
-                onOptionSelection={(optionName) =>
-                  setPetFilter(PetFilter[optionName])
-                }
+                    open={leftPanel == LeftPanel.PetsList}
+                    onOptionSelection={(optionName) => {
+                         if (optionName === "onlyMine" && !isLoggedIn) {
+                              Swal.fire({
+                                   position: "center-center",
+                                   icon: "error",
+                                   title: "Please log in to see your posts.",
+                                   showConfirmButton: true,
+                              });
+                         }
+                         setPetFilter(PetFilter[optionName])
+                    }}
               />
               <PetCards
                 pets={pets}
