@@ -148,28 +148,16 @@ export default function Map() {
                                         userMarker={userMarker}
                                    />
                               </div>
-                         <div className="map-div">
-                              <MapArea
-                                   userMarker={userMarker}
-                                   ignoreClick={leftPanel == LeftPanel.PetsList}
-                                   setUserMarker={setUserMarker}
-                                   pets={pets}
-                                   selectedPetId={selectedPetId}
-                              />
+                              <div className="map-div">
+                                   <MapArea
+                                        userMarker={userMarker}
+                                        ignoreClick={leftPanel == LeftPanel.PetsList}
+                                        setUserMarker={setUserMarker}
+                                        pets={pets}
+                                        selectedPetId={selectedPetId}
+                                   />
+                              </div>
                          </div>
-                         </div>
-                              {/* {isLoggedIn && showButtons && (
-                                   <button
-                                        className="i-saw-pet-button btn btn-primary btn-lg"
-                                        onClick={() => {
-                                             setLeftPanel(LeftPanel.SeenPetForm);
-                                             setShowButtons(false);
-                                             setUserMarker(null);
-                                        }}
-                                   >
-                                        I saw a pet
-                                   </button>
-                              )} */}
                     </div>
                ) : (
                     <div className="page-height">
@@ -189,6 +177,9 @@ export default function Map() {
                                                   }
                                                   setPetFilter(PetFilter[optionName])
                                              }}
+                                             showButtons={showButtons && isLoggedIn}
+                                             onClickLost={lostFormButtonsOnClick}
+                                             onClickSeen={seenFormButtonsOnClick}
                                         />
                                    </div>
                                         <PetCards
@@ -228,18 +219,6 @@ export default function Map() {
                                    />
                               </div>
                          </div>
-                         {/* {isLoggedIn && showButtons && (
-                              <button
-                                   className="i-saw-pet-button btn btn-primary btn-lg"
-                                   onClick={() => {
-                                        setLeftPanel(LeftPanel.SeenPetForm);
-                                        setShowButtons(false);
-                                        setUserMarker(null);
-                                   }}
-                              >
-                                   I saw a pet
-                              </button>
-                         )} */}
                     </div>
                )}
           </>

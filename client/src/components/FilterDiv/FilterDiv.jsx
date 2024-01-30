@@ -200,14 +200,26 @@ export default function FilterDiv({ open, onOptionSelection, showButtons, onClic
                             Show my posts
                         </label>
                     </div>
-                    {showButtons && (
-                                   <button
-                                        className="i-lost-pet-button btn btn-primary bg-red btn-lg"
-                                        onClick={onClick}
-                                   >
-                                        I lost a pet
-                                   </button>
-                    )}
+                    <div className="text-center">
+                        {showButtons && (
+                            <button
+                                    className="i-lost-pet-button btn btn-primary bg-red btn-lg"
+                                    onClick={onClickLost}
+                            >
+                                    I lost a pet
+                            </button>
+                        )}
+                    </div>
+                    <div className="text-center">
+                        {showButtons && (
+                            <button
+                                    className="i-saw-pet-button btn btn-primary btn-lg"
+                                    onClick={onClickSeen}
+                            >
+                                    I saw a pet
+                            </button>
+                        )}
+                    </div>
                 </div>
             )}
         </>
