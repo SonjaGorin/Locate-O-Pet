@@ -173,9 +173,17 @@ export default function Map() {
               <div>
               <FilterDiv
                 open={leftPanel == LeftPanel.PetsList}
-                onOptionSelection={(optionName) =>
-                  setPetFilter(PetFilter[optionName])
-                }
+                onOptionSelection={(optionName) => {
+                    if (optionName === "onlyMine" && !isLoggedIn) {
+                         Swal.fire({
+                              position: "center-center",
+                              icon: "error",
+                              title: "Please log in to see your posts.",
+                              showConfirmButton: true,
+                         });
+                    }
+                    setPetFilter(PetFilter[optionName])
+               }}
               />
               </div>
               <PetCards
