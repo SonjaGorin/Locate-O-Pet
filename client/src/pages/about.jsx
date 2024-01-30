@@ -9,7 +9,6 @@
  *******************************************************************/
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import UploadWidget from "../components/UploadWidget.jsx";
 import "./about.css";
 
 export default function About() {
@@ -22,7 +21,7 @@ export default function About() {
               <img
                 className="img-fluid rounded"
                 loading="lazy"
-                src="../images/doggie.webp"
+                src="./doggie.webp"
                 alt=""
               />
             </div>
