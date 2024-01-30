@@ -37,6 +37,15 @@ function markerSize(isSelected) {
     }
 }
 
+function popupImg(pet) {
+    if (pet.img === "") {
+        return `<h3>${pet.species}</h3>`
+    } else {
+        return `<h3>${pet.species}</h3>
+        <p><img class="pet-popup-img" src=${pet.img} ></img></p>`
+    }
+}
+
 function initializeMarkers(map, pets, markers, selectedPetId) {
     if (!pets) return;
     if (!map.current) return;
@@ -55,11 +64,8 @@ function initializeMarkers(map, pets, markers, selectedPetId) {
                 offset: 25,
                 closeButton: false,
                 closeOnClick: true 
-            }) // add popups
-                .setHTML(
-                `<h3>${pet.species}</h3>
-                <p><img class="pet-popup-img" src=${pet.img} ></img></p>`
-                )
+            })
+                .setHTML(popupImg(pet))
         )
         .addTo(map.current);
 

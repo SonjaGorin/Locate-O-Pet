@@ -55,190 +55,199 @@ const PetFilterFunctions = [
 ];
 
 export default function Map() {
-  const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
-  const [userMarker, setUserMarker] = useState();
-  const [showButtons, setShowButtons] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
-  const [selectedPetId, setSelectedPetId] = useState();
-  const [petFilter, setPetFilter] = useState(PetFilter.all);
-  const [isMobile, setIsMobile] = useState(false);
+     const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
+     const [userMarker, setUserMarker] = useState();
+     const [showButtons, setShowButtons] = useState(true);
+     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn());
+     const [selectedPetId, setSelectedPetId] = useState();
+     const [petFilter, setPetFilter] = useState(PetFilter.all);
+     const [isMobile, setIsMobile] = useState(false);
 
-  const { data, loading, refetch } = useQuery(QUERY_ALLPETS);
+     const { data, loading, refetch } = useQuery(QUERY_ALLPETS);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1250);
-    };
+     useEffect(() => {
+          const handleResize = () => {
+               setIsMobile(window.innerWidth <= 1250);
+          };
 
-    window.addEventListener("resize", handleResize);
-    handleResize();
+          window.addEventListener("resize", handleResize);
+          handleResize();
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+          return () => {
+               window.removeEventListener("resize", handleResize);
+          };
+     }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+     if (loading) {
+          return <div>Loading...</div>;
+     }
 
-  var pets = data.allPets ? [...data.allPets] : [];
-  pets.sort(comparePets);
-  pets = pets.filter(PetFilterFunctions[petFilter]);
+     var pets = data.allPets ? [...data.allPets] : [];
+     pets.sort(comparePets);
+     pets = pets.filter(PetFilterFunctions[petFilter]);
 
-  return (
-    <>
-      {!isMobile ? (
-        <div className="page-height">
-          <div className="pet-form-map">
-            <div className="form-div">
-              <FilterDiv
-                    open={leftPanel == LeftPanel.PetsList}
-                    onOptionSelection={(optionName) => {
-                         if (optionName === "onlyMine" && !isLoggedIn) {
-                              Swal.fire({
-                                   position: "center-center",
-                                   icon: "error",
-                                   title: "Please log in to see your posts.",
-                                   showConfirmButton: true,
-                              });
-                         }
-                         setPetFilter(PetFilter[optionName])
-                    }}
-              />
-              <PetCards
-                pets={pets}
-                open={leftPanel == LeftPanel.PetsList}
-                setSelectedPetId={setSelectedPetId}
-              />
-              <SeenPetForm
-                open={leftPanel == LeftPanel.SeenPetForm}
-                hideForm={() => {
-                  setLeftPanel(LeftPanel.PetsList);
-                  setUserMarker(null);
-                  refetch();
-                  setShowButtons(true);
-                }}
-                userMarker={userMarker}
-              />
-              <LostPetForm
-                open={leftPanel == LeftPanel.LostPetForm}
-                hideForm={() => {
-                  setLeftPanel(LeftPanel.PetsList);
-                  setUserMarker(null);
-                  refetch();
-                  setShowButtons(true);
-                }}
-                userMarker={userMarker}
-              />
-            </div>
-            <div className="map-div">
-              <MapArea
-                userMarker={userMarker}
-                ignoreClick={leftPanel == LeftPanel.PetsList}
-                setUserMarker={setUserMarker}
-                pets={pets}
-                selectedPetId={selectedPetId}
-              />
-            </div>
-          </div>
-          {isLoggedIn && showButtons && (
-            <button
-              className="i-lost-pet-button btn btn-primary bg-red btn-lg"
-              onClick={() => {
-                setLeftPanel(LeftPanel.LostPetForm);
-                setShowButtons(false);
-              }}
-            >
-              I lost a pet
-            </button>
-          )}
-          {isLoggedIn && showButtons && (
-            <button
-              className="i-saw-pet-button btn btn-primary btn-lg"
-              onClick={() => {
-                setLeftPanel(LeftPanel.SeenPetForm);
-                setShowButtons(false);
-                setUserMarker(null);
-              }}
-            >
-              I saw a pet
-            </button>
-          )}
-        </div>
-      ) : (
-        <div className="page-height">
-          <div className="pet-form-map d-flex flex-column">
-            <div className="form-div2 d-flex">
-              <div>
-              <FilterDiv
-                open={leftPanel == LeftPanel.PetsList}
-                onOptionSelection={(optionName) =>
-                  setPetFilter(PetFilter[optionName])
-                }
-              />
-              </div>
-              <PetCards
-                pets={pets}
-                open={leftPanel == LeftPanel.PetsList}
-                setSelectedPetId={setSelectedPetId}
-              />
-              <SeenPetForm
-                open={leftPanel == LeftPanel.SeenPetForm}
-                hideForm={() => {
-                  setLeftPanel(LeftPanel.PetsList);
-                  setUserMarker(null);
-                  refetch();
-                  setShowButtons(true);
-                }}
-                userMarker={userMarker}
-              />
-              <LostPetForm
-                open={leftPanel == LeftPanel.LostPetForm}
-                hideForm={() => {
-                  setLeftPanel(LeftPanel.PetsList);
-                  setUserMarker(null);
-                  refetch();
-                  setShowButtons(true);
-                }}
-                userMarker={userMarker}
-              />
-            </div>
-            <div className="map-div2">
-              <MapArea
-                userMarker={userMarker}
-                ignoreClick={leftPanel == LeftPanel.PetsList}
-                setUserMarker={setUserMarker}
-                pets={pets}
-                selectedPetId={selectedPetId}
-              />
-            </div>
-          </div>
-          {isLoggedIn && showButtons && (
-            <button
-              className="i-lost-pet-button btn btn-primary bg-red btn-lg"
-              onClick={() => {
-                setLeftPanel(LeftPanel.LostPetForm);
-                setShowButtons(false);
-              }}
-            >
-              I lost a pet
-            </button>
-          )}
-          {isLoggedIn && showButtons && (
-            <button
-              className="i-saw-pet-button btn btn-primary btn-lg"
-              onClick={() => {
-                setLeftPanel(LeftPanel.SeenPetForm);
-                setShowButtons(false);
-                setUserMarker(null);
-              }}
-            >
-              I saw a pet
-            </button>
-          )}
-        </div>
-      )}
-    </>
-  );
+     return (
+          <>
+               {!isMobile ? (
+                    <div className="page-height">
+                         <div className="pet-form-map">
+                              <div className="form-div">
+                                   <FilterDiv
+                                        open={leftPanel == LeftPanel.PetsList}
+                                        onOptionSelection={(optionName) => {
+                                             if (optionName === "onlyMine" && !isLoggedIn) {
+                                                  Swal.fire({
+                                                       position: "center-center",
+                                                       icon: "error",
+                                                       title: "Please log in to see your posts.",
+                                                       showConfirmButton: true,
+                                                  });
+                                             }
+                                             setPetFilter(PetFilter[optionName])
+                                        }}
+                                   />
+                                   <PetCards
+                                        pets={pets}
+                                        open={leftPanel == LeftPanel.PetsList}
+                                        setSelectedPetId={setSelectedPetId}
+                                        c={refetch()}
+                                   />
+                                   <SeenPetForm
+                                        open={leftPanel == LeftPanel.SeenPetForm}
+                                        hideForm={() => {
+                                             setLeftPanel(LeftPanel.PetsList);
+                                             setUserMarker(null);
+                                             refetch();
+                                             setShowButtons(true);
+                                        }}
+                                        userMarker={userMarker}
+                                   />
+                                   <LostPetForm
+                                        open={leftPanel == LeftPanel.LostPetForm}
+                                        hideForm={() => {
+                                             setLeftPanel(LeftPanel.PetsList);
+                                             setUserMarker(null);
+                                             refetch();
+                                             setShowButtons(true);
+                                        }}
+                                        userMarker={userMarker}
+                                   />
+                              </div>
+                         <div className="map-div">
+                              <MapArea
+                                   userMarker={userMarker}
+                                   ignoreClick={leftPanel == LeftPanel.PetsList}
+                                   setUserMarker={setUserMarker}
+                                   pets={pets}
+                                   selectedPetId={selectedPetId}
+                              />
+                         </div>
+                         </div>
+                              {isLoggedIn && showButtons && (
+                                   <button
+                                        className="i-lost-pet-button btn btn-primary bg-red btn-lg"
+                                        onClick={() => {
+                                             setLeftPanel(LeftPanel.LostPetForm);
+                                             setShowButtons(false);
+                                        }}
+                                   >
+                                        I lost a pet
+                                   </button>
+                              )}
+                              {isLoggedIn && showButtons && (
+                                   <button
+                                        className="i-saw-pet-button btn btn-primary btn-lg"
+                                        onClick={() => {
+                                             setLeftPanel(LeftPanel.SeenPetForm);
+                                             setShowButtons(false);
+                                             setUserMarker(null);
+                                        }}
+                                   >
+                                        I saw a pet
+                                   </button>
+                              )}
+                    </div>
+               ) : (
+                    <div className="page-height">
+                         <div className="pet-form-map d-flex flex-column">
+                              <div className="form-div2 d-flex">
+                                   <div>
+                                        <FilterDiv
+                                             open={leftPanel == LeftPanel.PetsList}
+                                             onOptionSelection={(optionName) => {
+                                                  if (optionName === "onlyMine" && !isLoggedIn) {
+                                                       Swal.fire({
+                                                            position: "center-center",
+                                                            icon: "error",
+                                                            title: "Please log in to see your posts.",
+                                                            showConfirmButton: true,
+                                                       });
+                                                  }
+                                                  setPetFilter(PetFilter[optionName])
+                                             }}
+                                        />
+                                   </div>
+                                        <PetCards
+                                             pets={pets}
+                                             open={leftPanel == LeftPanel.PetsList}
+                                             setSelectedPetId={setSelectedPetId}
+                                        />
+                                        <SeenPetForm
+                                             open={leftPanel == LeftPanel.SeenPetForm}
+                                             hideForm={() => {
+                                                  setLeftPanel(LeftPanel.PetsList);
+                                                  setUserMarker(null);
+                                                  refetch();
+                                                  setShowButtons(true);
+                                             }}
+                                             userMarker={userMarker}
+                                        />
+                                        <LostPetForm
+                                             open={leftPanel == LeftPanel.LostPetForm}
+                                             hideForm={() => {
+                                                  setLeftPanel(LeftPanel.PetsList);
+                                                  setUserMarker(null);
+                                                  refetch();
+                                                  setShowButtons(true);
+                                                  }}
+                                             userMarker={userMarker}
+                                        />
+                              </div>
+                              <div className="map-div2">
+                                   <MapArea
+                                        userMarker={userMarker}
+                                        ignoreClick={leftPanel == LeftPanel.PetsList}
+                                        setUserMarker={setUserMarker}
+                                        pets={pets}
+                                        selectedPetId={selectedPetId}
+                                   />
+                              </div>
+                         </div>
+                         {isLoggedIn && showButtons && (
+                              <button
+                                   className="i-lost-pet-button btn btn-primary bg-red btn-lg"
+                                   onClick={() => {
+                                        setLeftPanel(LeftPanel.LostPetForm);
+                                        setShowButtons(false);
+                                   }}
+                              >
+                                   I lost a pet
+                              </button>
+                         )}
+                         {isLoggedIn && showButtons && (
+                              <button
+                                   className="i-saw-pet-button btn btn-primary btn-lg"
+                                   onClick={() => {
+                                        setLeftPanel(LeftPanel.SeenPetForm);
+                                        setShowButtons(false);
+                                        setUserMarker(null);
+                                   }}
+                              >
+                                   I saw a pet
+                              </button>
+                         )}
+                    </div>
+               )}
+          </>
+     );
 }
