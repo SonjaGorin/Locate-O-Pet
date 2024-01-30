@@ -55,6 +55,7 @@ const PetFilterFunctions = [
 ];
 
 export default function Map() {
+     console.log("Rerendering map")
      const [leftPanel, setLeftPanel] = useState(LeftPanel.PetsList);
      const [userMarker, setUserMarker] = useState();
      const [showButtons, setShowButtons] = useState(true);
@@ -82,10 +83,22 @@ export default function Map() {
           return <div>Loading...</div>;
      }
 
+     function lostFormButtonsOnClick() {
+          setLeftPanel(LeftPanel.LostPetForm);
+          setShowButtons(false);
+          setUserMarker(null);
+     }
+
+     function seenFormButtonsOnClick() {
+          setLeftPanel(LeftPanel.SeenPetForm);
+          setShowButtons(false);
+          setUserMarker(null);
+     }
+
      var pets = data.allPets ? [...data.allPets] : [];
      pets.sort(comparePets);
      pets = pets.filter(PetFilterFunctions[petFilter]);
-
+     console.log(pets);
      return (
           <>
                {!isMobile ? (
@@ -105,12 +118,15 @@ export default function Map() {
                                              }
                                              setPetFilter(PetFilter[optionName])
                                         }}
+                                        showButtons={showButtons && isLoggedIn}
+                                        onClickLost={lostFormButtonsOnClick}
+                                        onClickSeen={seenFormButtonsOnClick}
                                    />
                                    <PetCards
                                         pets={pets}
                                         open={leftPanel == LeftPanel.PetsList}
                                         setSelectedPetId={setSelectedPetId}
-                                        c={refetch()}
+                                        refetch={refetch}
                                    />
                                    <SeenPetForm
                                         open={leftPanel == LeftPanel.SeenPetForm}
@@ -133,39 +149,16 @@ export default function Map() {
                                         userMarker={userMarker}
                                    />
                               </div>
-                         <div className="map-div">
-                              <MapArea
-                                   userMarker={userMarker}
-                                   ignoreClick={leftPanel == LeftPanel.PetsList}
-                                   setUserMarker={setUserMarker}
-                                   pets={pets}
-                                   selectedPetId={selectedPetId}
-                              />
+                              <div className="map-div">
+                                   <MapArea
+                                        userMarker={userMarker}
+                                        ignoreClick={leftPanel == LeftPanel.PetsList}
+                                        setUserMarker={setUserMarker}
+                                        pets={pets}
+                                        selectedPetId={selectedPetId}
+                                   />
+                              </div>
                          </div>
-                         </div>
-                              {isLoggedIn && showButtons && (
-                                   <button
-                                        className="i-lost-pet-button btn btn-primary bg-red btn-lg"
-                                        onClick={() => {
-                                             setLeftPanel(LeftPanel.LostPetForm);
-                                             setShowButtons(false);
-                                        }}
-                                   >
-                                        I lost a pet
-                                   </button>
-                              )}
-                              {isLoggedIn && showButtons && (
-                                   <button
-                                        className="i-saw-pet-button btn btn-primary btn-lg"
-                                        onClick={() => {
-                                             setLeftPanel(LeftPanel.SeenPetForm);
-                                             setShowButtons(false);
-                                             setUserMarker(null);
-                                        }}
-                                   >
-                                        I saw a pet
-                                   </button>
-                              )}
                     </div>
                ) : (
                     <div className="page-height">
@@ -185,12 +178,16 @@ export default function Map() {
                                                   }
                                                   setPetFilter(PetFilter[optionName])
                                              }}
+                                             showButtons={showButtons && isLoggedIn}
+                                             onClickLost={lostFormButtonsOnClick}
+                                             onClickSeen={seenFormButtonsOnClick}
                                         />
                                    </div>
                                         <PetCards
                                              pets={pets}
                                              open={leftPanel == LeftPanel.PetsList}
                                              setSelectedPetId={setSelectedPetId}
+                                             refetch={refetch}
                                         />
                                         <SeenPetForm
                                              open={leftPanel == LeftPanel.SeenPetForm}
@@ -223,29 +220,6 @@ export default function Map() {
                                    />
                               </div>
                          </div>
-                         {isLoggedIn && showButtons && (
-                              <button
-                                   className="i-lost-pet-button btn btn-primary bg-red btn-lg"
-                                   onClick={() => {
-                                        setLeftPanel(LeftPanel.LostPetForm);
-                                        setShowButtons(false);
-                                   }}
-                              >
-                                   I lost a pet
-                              </button>
-                         )}
-                         {isLoggedIn && showButtons && (
-                              <button
-                                   className="i-saw-pet-button btn btn-primary btn-lg"
-                                   onClick={() => {
-                                        setLeftPanel(LeftPanel.SeenPetForm);
-                                        setShowButtons(false);
-                                        setUserMarker(null);
-                                   }}
-                              >
-                                   I saw a pet
-                              </button>
-                         )}
                     </div>
                )}
           </>

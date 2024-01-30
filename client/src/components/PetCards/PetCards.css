@@ -11,7 +11,7 @@
 
 @media screen and (max-width: 1250px) {
     .all-pets-div{
-        height: 340px;
+    height: 340px;
     width: 100%;
     border: 1px;
     border-style: solid;
