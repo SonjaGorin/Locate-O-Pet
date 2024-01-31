@@ -10,55 +10,44 @@
           "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
           "preview": "vite preview"
      },
+
+     "browserslist": [
+          ">0.2%",
+          "not dead",
+          "not op_mini all"
+     ],
+
      "dependencies": {
           "@apollo/client": "^3.7.14",
+          "@babel/core": "^7.23.9",
+          "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+          "@babel/preset-react": "^7.23.3",
           "@cloudinary/react": "^1.4.0",
           "@cloudinary/url-gen": "^1.8.0",
+          "@vitejs/plugin-react": "^4.2.1",
+          "babel-preset-env": "^1.7.0",
           "bootstrap": "^5.2.3",
+          "dotenv": "^16.4.1",
           "graphql": "^16.6.0",
           "jwt-decode": "^3.1.2",
           "mapbox-gl": "^3.1.0",
-          "phone": "^3.1.42",
           "react": "^18.2.0",
           "react-bootstrap": "^2.7.4",
           "react-dom": "^18.2.0",
           "react-modal": "^3.16.1",
           "react-router-dom": "^6.11.2",
           "react-scripts": "^4.0.3",
-          "sweetalert2": "^11.10.4"
+          "sweetalert2": "^11.10.4",
+          "vite": "^5.0.8"
      },
      "devDependencies": {
-          "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
           "@types/react": "^18.2.43",
           "@types/react-dom": "^18.2.17",
-          "@vitejs/plugin-react": "^4.2.1",
           "eslint-plugin-react": "^7.33.2",
           "eslint-plugin-react-hooks": "^4.6.0",
-          "eslint-plugin-react-refresh": "^0.4.5",
-          "vite": "^5.0.8",
-          "vite-plugin-pwa": "^0.17.5"
+          "eslint-plugin-react-refresh": "^0.4.5"
      },
-     "eslintConfig": {
-          "extends": [
-               "react-app"
-          ]
-     },
-     "browserslist": {
-          "production": [
-               ">0.2%",
-               "not dead",
-               "not op_mini all",
-               "not safari < 10",
-               "not chrome < 51",
-               "not android < 5",
-               "not ie < 12"
-          ],
-          "development": [
-               "last 1 chrome version",
-               "last 1 firefox version",
-               "last 1 safari version"
-          ]
-     },
-     "author": "Mapbox",
+    
+    
      "license": "MIT"
 }
