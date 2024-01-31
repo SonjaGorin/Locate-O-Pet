@@ -8,8 +8,8 @@
  * Date : 1/22/2024 9:05:01 PM
  *******************************************************************/
 // import '../App.css';
-import { useEffect, useState } from "react";
 import mapboxgl from "mapbox-gl";
+import { useEffect, useState } from "react";
 import LostPetForm from "../components/PetForms/LostPetForm";
 import SeenPetForm from "../components/PetForms/SeenPetForm";
 import MapArea from "../components/MapArea/MapArea";
@@ -18,13 +18,18 @@ import FilterDiv from "../components/FilterDiv/FilterDiv";
 import Auth from "../utils/auth";
 import Swal from 'sweetalert2';
 
+
+
 import { useQuery } from "@apollo/client";
 import { QUERY_ALLPETS } from "../utils/queries";
 
 import "./map.css";
 
-mapboxgl.accessToken = "pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg";
- // process.env.MAP_TOKEN
+
+
+mapboxgl.accessToken = import.meta.env.VITE_MAP_BOX
+// console.log(mapboxgl.accessToken = import.meta.env.VITE_MAP_BOX)
+ 
 
 const LeftPanel = {
   PetsList: 0,

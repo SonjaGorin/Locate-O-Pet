@@ -7,11 +7,11 @@
  * Filename: main.jsx
  * Date : 1/14/2024 17:03:48 PM
  *******************************************************************/
-import React from 'react';
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import App from './App.jsx'
+
 
 import About from './pages/about.jsx'
 import Map from './pages/map.jsx'
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
      {
           path: '/',
           element: <App />,
-          errorElement: <Error />,
+          // errorElement: <Error />,
           children: [
                {
                     index: true,
