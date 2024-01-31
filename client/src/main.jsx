@@ -15,12 +15,10 @@ import App from './App.jsx'
 
 import About from './pages/about.jsx'
 import Map from './pages/map.jsx'
-// import LostPets from './pages/lostpets.jsx'
-// import Spotted from './pages/spotted.jsx'
-// import Post from './pages/post.jsx'
 import Contact from './pages/contact.jsx'
 import Login from './pages/login.jsx'
 import Register from './pages/register.jsx'
+import Error from "./pages/error.jsx"
 
 import './main.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
