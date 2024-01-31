@@ -125,7 +125,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         maxLength="40"
                     />
-                    <p className="counter">{count}/40</p>
+                    <p className="counter">{breed.length}/40</p>
                 </div>
                 <div className="colours-input">
                     <label>What colour is the pet?<span className="required-asterix">*</span></label>
@@ -138,7 +138,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         type="text"
                         maxLength="40"
                     />
-                    <p className="counter">{count}/40</p>
+                    <p className="counter">{colours.length}/40</p>
                 </div>
                 <div className="message-input">
                     <label>Would you like to add anything else?</label>
@@ -152,7 +152,7 @@ export default function SeenPetForm({open, hideForm, userMarker}) {
                         maxLength="80"
                         id="comment"
                     />
-                    <p className="counter">{count}/80</p>
+                    <p className="counter">{message.length}/80</p>
                 </div>
                 <div className="upload-img-bttn">
                     <UploadWidget onUpload={(src) => setImg(src)}/>

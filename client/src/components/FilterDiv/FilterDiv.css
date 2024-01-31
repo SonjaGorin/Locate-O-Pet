@@ -13,7 +13,21 @@
 .filters-title {
     font-size: 30px;
     font-weight: bold;
-    margin: 20px 45px;
+    margin-top: 20px;
+}
+
+.i-lost-pet-button {
+    width: 200px;
+    margin-top: 20px;
+    background-color: rgb(226, 0, 0) !important;
+    border-color:  rgb(124, 0, 0) !important;
+}
+
+.i-saw-pet-button {
+    width: 200px;
+    margin-top: 20px;
+    background-color: rgb(0, 100, 0) !important;
+    border-color: rgb(0, 71, 0) !important;
 }
 
 .form-check-label {

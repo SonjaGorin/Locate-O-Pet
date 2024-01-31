@@ -7,20 +7,18 @@
  * Filename: main.jsx
  * Date : 1/14/2024 17:03:48 PM
  *******************************************************************/
-import React from 'react';
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import App from './App.jsx'
 
+
 import About from './pages/about.jsx'
 import Map from './pages/map.jsx'
-// import LostPets from './pages/lostpets.jsx'
-// import Spotted from './pages/spotted.jsx'
-// import Post from './pages/post.jsx'
 import Contact from './pages/contact.jsx'
 import Login from './pages/login.jsx'
 import Register from './pages/register.jsx'
+import Error from "./pages/error.jsx"
 
 import './main.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -31,7 +29,7 @@ const router = createBrowserRouter([
      {
           path: '/',
           element: <App />,
-          errorElement: <Error />,
+          // errorElement: <Error />,
           children: [
                {
                     index: true,

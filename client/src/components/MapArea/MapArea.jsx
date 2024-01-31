@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import "./MapArea.css"
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ3NvbmphIiwiYSI6ImNscm9kZ3RheDFoMGoybG9mZGZiNGphOG4ifQ.xYb4Ch19HGpuJpK2BXQ3tg';
+mapboxgl.accessToken = import.meta.env.VITE_MAP_BOX
 
 function addMarkerOnClick (map, userMarker, setUserMarker, event) {
     var coordinates = event.lngLat;
